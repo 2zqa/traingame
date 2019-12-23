@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://TileSets/Ground.tres" type="TileSet" id=1]
 [ext_resource path="res://TileSets/Objects.tres" type="TileSet" id=2]
+[ext_resource path="res://Scenes/SideMenu.tscn" type="PackedScene" id=3]
 
 [node name="World" type="Node2D"]
 
@@ -14,4 +15,6 @@ tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 2, 0, 5, 2, 0, 
 tile_set = ExtResource( 2 )
 format = 1
 tile_data = PoolIntArray( 4, 1, 0, 196612, 0, 0, 262144, 2, 0, 262145, 2, 0, 262146, 2, 0, 262148, 0, 0, 262154, 2, 0, 262155, 2, 0, 327684, 0, 0, 393220, 0, 0, 458756, 0, 0, 524292, 0, 0, 589828, 0, 0, 655364, 0, 0, 720900, 0, 0 )
+
+[node name="SideMenu" parent="." instance=ExtResource( 3 )]
 
