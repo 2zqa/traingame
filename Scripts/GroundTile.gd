@@ -1,9 +1,9 @@
 class_name GroundTile
 
-# Add properties
 export(String) var name_id
+export(int) var texture_id
 
-# Override virtual methods
-func _init(name_id: String):
+func _init(name_id: String, texture_id: int):
     self.name_id = name_id
+    self.texture_id = texture_id
 
