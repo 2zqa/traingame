@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://images/menu_background.png" type="Texture" id=1]
+
+[node name="GroundSelector" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+margin_left = 152.9
+margin_top = 46.0
+margin_right = 443.9
+margin_bottom = 357.05
+texture = ExtResource( 1 )
+region_rect = Rect2( 0, 0, 74, 74 )
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
