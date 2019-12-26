@@ -1,6 +1,6 @@
 extends Control
 
-const GroundTileSelectorPopup = preload("res://Scenes/GroundTileSelectorPopup.tscn")
+const GroundTileSelectorPopup = preload("res://Scenes/SideMenu/GroundTileSelectorPopup.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

@@ -35,14 +35,21 @@ func get_ground_tile_from_texture_id(texture_id: int) -> GroundTile:
 
 # Object tiles
 var OBJECT_EMPTY := _register_object_tile(ObjectTile.new("object_empty", -1))
+#warning-ignore:unused_class_variable
 var RAIL_STRAIGHT := _register_object_tile(ObjectTile.new("rail_straight", 0))
+#warning-ignore:unused_class_variable
 var RAIL_CORNER := _register_object_tile(ObjectTile.new("rail_corner", 1))
 
 # Ground tiles
 var GRASS := _register_ground_tile(GroundTile.new("grass", 0))
+#warning-ignore:unused_class_variable
 var SAND := _register_ground_tile(GroundTile.new("sand", 1))
+#warning-ignore:unused_class_variable
 var GRAVEL := _register_ground_tile(GroundTile.new("gravel", 2))
+#warning-ignore:unused_class_variable
 var SNOW := _register_ground_tile(GroundTile.new("snow", 3))
+#warning-ignore:unused_class_variable
 var DIRT := _register_ground_tile(GroundTile.new("dirt", 4))
+#warning-ignore:unused_class_variable
 var WATER := _register_ground_tile(GroundTile.new("water", 5))
 

@@ -1,8 +1,10 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Scenes/SideMenu.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/SideMenu/SideMenu.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/PopupBackground.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/GroundTileSelectorButton.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/SideMenu/GroundTileSelectorButton.tscn" type="PackedScene" id=3]
+
+
 
 [node name="SideMenu" type="Control"]
 margin_left = 8.0
