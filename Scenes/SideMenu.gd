@@ -12,6 +12,5 @@ func _ready() -> void:
 
 
 func _on_SelectGroundButton_pressed() -> void:
-    print("Hi")
     var popup = GroundTileSelectorPopup.instance()
     self.add_child(popup)
