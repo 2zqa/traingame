@@ -1,8 +1,10 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scenes/GroundTileSelectorPopup.gd" type="Script" id=1]
-[ext_resource path="res://images/menu_background.png" type="Texture" id=2]
+[ext_resource path="res://Images/menu_background.png" type="Texture" id=2]
 [ext_resource path="res://TileSets/Ground.tres" type="TileSet" id=3]
+
+
 
 
 
