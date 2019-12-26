@@ -2,12 +2,6 @@
 
 [ext_resource path="res://Images/tilesheet_ground.png" type="Texture" id=1]
 
-
-
-
-
-
-
 [resource]
 0/name = "ground_grass"
 0/texture = ExtResource( 1 )
@@ -59,4 +53,14 @@
 4/navigation_offset = Vector2( 0, 0 )
 4/shapes = [  ]
 4/z_index = 0
+5/name = "ground_water"
+5/texture = ExtResource( 1 )
+5/tex_offset = Vector2( 0, 0 )
+5/modulate = Color( 1, 1, 1, 1 )
+5/region = Rect2( 128, 64, 64, 64 )
+5/tile_mode = 0
+5/occluder_offset = Vector2( 0, 0 )
+5/navigation_offset = Vector2( 0, 0 )
+5/shapes = [  ]
+5/z_index = 0
 

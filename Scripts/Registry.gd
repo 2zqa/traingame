@@ -44,5 +44,5 @@ var SAND := _register_ground_tile(GroundTile.new("sand", 1))
 var GRAVEL := _register_ground_tile(GroundTile.new("gravel", 2))
 var SNOW := _register_ground_tile(GroundTile.new("snow", 3))
 var DIRT := _register_ground_tile(GroundTile.new("dirt", 4))
-
+var WATER := _register_ground_tile(GroundTile.new("water", 5))
 
