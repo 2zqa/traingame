@@ -1,4 +1,4 @@
-extends ColorRect
+extends Control
 
 const GroundTileSelectorPopup = preload("res://Scenes/GroundTileSelectorPopup.tscn")
 
