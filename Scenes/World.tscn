@@ -21,3 +21,4 @@ zoom = Vector2( 2, 2 )
 
 [node name="SideMenu" parent="." instance=ExtResource( 4 )]
 
+[connection signal="option_selected" from="SideMenu" to="." method="_on_SideMenu_option_selected"]

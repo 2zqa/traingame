@@ -10,7 +10,7 @@ func _input(event: InputEvent) -> void:
     if not self.visible:
         return
 
-    if event is InputEventMouseButton and event.is_pressed():
+    if event is InputEventMouseButton and not event.is_pressed():
         var tilemap_grounds: TileMap = $GroundTileMap
         var mouse_tile_pos = tilemap_grounds.world_to_map(tilemap_grounds.make_input_local(event).position)
         var texture_id = tilemap_grounds.get_cellv(mouse_tile_pos)

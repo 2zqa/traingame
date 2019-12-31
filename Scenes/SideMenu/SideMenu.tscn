@@ -4,8 +4,6 @@
 [ext_resource path="res://Scenes/PopupBackground.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/SideMenu/GroundTileSelectorButton.tscn" type="PackedScene" id=3]
 
-
-
 [node name="SideMenu" type="Control"]
 margin_left = 8.0
 margin_top = 8.0
@@ -28,3 +26,4 @@ margin_bottom = 80.0
 
 [node name="GroundTileSelectorButton" parent="NinePatchRect/GridContainer" instance=ExtResource( 3 )]
 
+[connection signal="tile_selected" from="NinePatchRect/GridContainer/GroundTileSelectorButton" to="." method="_on_GroundTileSelectorButton_tile_selected"]

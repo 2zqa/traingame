@@ -1,6 +1,9 @@
 extends Control
 
-const GroundTileSelectorPopup = preload("res://Scenes/SideMenu/GroundTileSelectorPopup.tscn")
+# Fired when the selected object is changed
+# Object is currently always a GroundTile, but this will change in the future
+signal option_selected  
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -11,6 +14,6 @@ func _ready() -> void:
 #    pass
 
 
-func _on_SelectGroundButton_pressed() -> void:
-    var popup = GroundTileSelectorPopup.instance()
-    self.add_child(popup)
+
+func _on_GroundTileSelectorButton_tile_selected(tile: GroundTile):
+    emit_signal("option_selected", tile)
