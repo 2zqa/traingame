@@ -14,8 +14,8 @@ func _object_key_for(tile: ObjectTile) -> Array:
 
 # Registers an object tile from the Objects tile set, so that it can be found using get_object_tile_from_*
 func _register_object_tile_with_auto_rotation(tile: ObjectTile) -> ObjectTile:
-    for rotation_tile in tile.all_rotations():
-        _texture_itff_to_object_tile[_object_key_for(tile)] = tile
+    for rotated_tile in tile.all_rotations():
+        _texture_itff_to_object_tile[_object_key_for(rotated_tile)] = rotated_tile
     
     return tile
 
