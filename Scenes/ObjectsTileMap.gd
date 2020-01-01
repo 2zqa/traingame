@@ -21,5 +21,5 @@ func get_tile(tile_position: Vector2) -> ObjectTile:
 
 
 # Gets the tile coordinate from the given mouse coordinate
-func mouse_to_tile_pos(mouse: InputEventMouse) -> Vector2:
+func mouse_event_to_tile_pos(mouse: InputEventMouse) -> Vector2:
     return self.world_to_map(self.make_input_local(mouse).position)
