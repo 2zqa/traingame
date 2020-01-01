@@ -10,7 +10,14 @@ func set_tile(tile_position: Vector2, tile: ObjectTile) -> void:
 
 # Gets the tile at the given position
 func get_tile(tile_position: Vector2) -> ObjectTile:
-    return Global.Registry.get_object_tile_from_texture_id(self.get_cellv(tile_position))
+    var tile_x = tile_position.x
+    var tile_y = tile_position.y
+    
+    var x_flipped = self.is_cell_x_flipped(tile_x, tile_y)
+    var y_flipped = self.is_cell_y_flipped(tile_x, tile_y)
+    var transposed = self.is_cell_transposed(tile_x, tile_y)
+    var texture_id = self.get_cell(tile_x, tile_y)
+    return Global.Registry.get_object_tile_from_texture(texture_id, transposed, x_flipped, y_flipped)
 
 
 # Gets the tile coordinate from the given mouse coordinate
