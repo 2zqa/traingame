@@ -3,7 +3,7 @@ extends Node2D
 const ObjectsTileMap = preload("res://Scenes/ObjectsTileMap.gd")
 const GroundTileMap = preload("res://Scenes/GroundTileMap.gd")
 
-var selected_option: GroundTile
+var selected_option  # GroundTile or ObjectTile
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -12,8 +12,12 @@ func _ready() -> void:
 func place(canvas_position: Vector2) -> void:
     if self.selected_option is GroundTile:
         var tilemap_grounds: GroundTileMap = $GroundTileMap
-        var ground_pos = tilemap_grounds.mouse_viewport_to_tile_pos(canvas_position)
+        var ground_pos = tilemap_grounds.viewport_pos_to_tile_pos(canvas_position)
         tilemap_grounds.set_tile(ground_pos, self.selected_option)
+    if self.selected_option is ObjectTile:
+        var tilemap_objects: ObjectsTileMap = $ObjectsTileMap
+        var ground_pos = tilemap_objects.viewport_pos_to_tile_pos(canvas_position)
+        tilemap_objects.set_tile(ground_pos, self.selected_option)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -33,5 +37,5 @@ func _unhandled_input(event: InputEvent) -> void:
         self.get_tree().set_input_as_handled()
     
 
-func _on_SideMenu_option_selected(selected_option: GroundTile):
+func _on_SideMenu_option_selected(selected_option):
     self.selected_option = selected_option

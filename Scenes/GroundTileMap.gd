@@ -13,10 +13,11 @@ func get_tile(tile_position: Vector2) -> GroundTile:
     return Global.Registry.get_ground_tile_from_texture_id(self.get_cellv(tile_position))
 
 
-# Gets the tile coordinate from the given mouse coordinate
+# Gets the tile coordinate from the given mouse event
 func mouse_event_to_tile_pos(mouse: InputEventMouse) -> Vector2:
     return self.world_to_map(self.make_input_local(mouse).position)
 
-# Gets the tile coordinate form the given viewport mouse position
-func mouse_viewport_to_tile_pos(mouse_position: Vector2) -> Vector2:
-    return self.world_to_map(self.make_canvas_position_local(mouse_position))
+
+# Gets the tile coordinate from the given viewport coordinate
+func viewport_pos_to_tile_pos(position: Vector2) -> Vector2:
+    return self.world_to_map(self.make_canvas_position_local(position))

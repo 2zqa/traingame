@@ -4,7 +4,7 @@
 [ext_resource path="res://Scenes/PopupBackground.tscn" type="PackedScene" id=2]
 [ext_resource path="res://TileSets/Ground.tres" type="TileSet" id=3]
 
-[node name="GroundSelector" type="Popup"]
+[node name="GroundTileSelectorPopup" type="Popup"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0

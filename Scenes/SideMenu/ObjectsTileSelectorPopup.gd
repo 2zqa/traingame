@@ -18,7 +18,10 @@ func _input(event: InputEvent) -> void:
             emit_signal("cancelled")
             self.hide()
         else:
-            var tile = Global.Registry.get_object_tile_from_texture_id(texture_id)
+            var transposed = tilemap_objects.is_cell_transposed(mouse_tile_pos.x, mouse_tile_pos.y)
+            var x_flipped = tilemap_objects.is_cell_x_flipped(mouse_tile_pos.x, mouse_tile_pos.y)
+            var y_flipped = tilemap_objects.is_cell_y_flipped(mouse_tile_pos.x, mouse_tile_pos.y)
+            var tile = Global.Registry.get_object_tile_from_texture(texture_id, transposed, x_flipped, y_flipped)
             emit_signal("tile_selected", tile)
             self.hide()
         self.get_tree().set_input_as_handled()

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/SideMenu/SideMenu.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/PopupBackground.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/SideMenu/GroundTileSelectorButton.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/SideMenu/ObjectsTileSelectorButton.tscn" type="PackedScene" id=4]
 
 [node name="SideMenu" type="Control"]
 margin_left = 8.0
@@ -18,12 +19,17 @@ margin_right = 96.0
 margin_bottom = 189.0
 region_rect = Rect2( 0, 0, 72, 72 )
 
-[node name="GridContainer" type="GridContainer" parent="NinePatchRect"]
+[node name="GroundTileSelectorButton" parent="NinePatchRect" instance=ExtResource( 3 )]
 margin_left = 16.0
 margin_top = 16.0
-margin_right = 80.0
-margin_bottom = 80.0
+margin_right = 16.0
+margin_bottom = 16.0
 
-[node name="GroundTileSelectorButton" parent="NinePatchRect/GridContainer" instance=ExtResource( 3 )]
+[node name="ObjectsTileSelectorButton" parent="NinePatchRect" instance=ExtResource( 4 )]
+margin_left = 16.0
+margin_top = 100.0
+margin_right = 16.0
+margin_bottom = 16.0
 
-[connection signal="tile_selected" from="NinePatchRect/GridContainer/GroundTileSelectorButton" to="." method="_on_GroundTileSelectorButton_tile_selected"]
+[connection signal="tile_selected" from="NinePatchRect/GroundTileSelectorButton" to="." method="_on_GroundTileSelectorButton_tile_selected"]
+[connection signal="tile_selected" from="NinePatchRect/ObjectsTileSelectorButton" to="." method="_on_ObjectsTileSelectorButton_tile_selected"]

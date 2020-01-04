@@ -1,7 +1,7 @@
 extends Control
 
 # Fired when the selected object is changed
-# Object is currently always a GroundTile, but this will change in the future
+# Object is a GroundTile or an ObjectTile.
 signal option_selected  
 
 
@@ -16,4 +16,8 @@ func _ready() -> void:
 
 
 func _on_GroundTileSelectorButton_tile_selected(tile: GroundTile):
+    emit_signal("option_selected", tile)
+
+
+func _on_ObjectsTileSelectorButton_tile_selected(tile: ObjectTile):
     emit_signal("option_selected", tile)
