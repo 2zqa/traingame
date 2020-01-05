@@ -3,6 +3,7 @@ extends Control
 signal tile_selected  # Supplies one argument of type GroundTile
 
 const GroundTile = preload("res://Scripts/GroundTile.gd")
+const SingleTileDisplay = preload("res://Scenes/SideMenu/SideMenu.gd")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -13,9 +14,10 @@ func _input(event: InputEvent) -> void:
     if not (event is InputEventMouseButton) or event.is_pressed():
         return  # Ignore anything that is not a click release
 
-    var tilemap_grounds: TileMap = $TileMap
-    var mouse_tile_pos = tilemap_grounds.world_to_map(tilemap_grounds.make_input_local(event).position)
-    if mouse_tile_pos != Vector2(0, 0):
+    var display: SingleTileDisplay = $Display
+    var local_mouse_pos = display.make_input_local(event).position
+    if local_mouse_pos.x < 0 or local_mouse_pos.y < 0\
+            or local_mouse_pos.x > display.size.x or local_mouse_pos.y > display.size.y:
         return  # Clicked outside the button
 
     # Open popup
@@ -28,7 +30,8 @@ func _input(event: InputEvent) -> void:
 
 func _on_GroundSelector_tile_selected(tile: GroundTile) -> void:
     # Update UI
-    $TileMap.set_cell(0, 0, tile.texture_id)
+    var display : SingleTileDisplay = $Display
+    display.tile_id = tile.texture_id
 
     # Forward
     emit_signal("tile_selected", tile)

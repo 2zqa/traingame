@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/SingleTileDisplay.gd" type="Script" id=1]
+[ext_resource path="res://TileSets/Ground.tres" type="TileSet" id=2]
+
+[node name="SingleTileDisplay" type="Node2D"]
+script = ExtResource( 1 )
+tile_set = ExtResource( 2 )
+tile_id = 2
+
