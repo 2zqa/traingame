@@ -3,6 +3,8 @@ tool
 
 extends Node2D
 
+var TYPE_NAME = "SingleTileDisplay"  # Used by other classes for type checks
+
 export(TileSet) var tile_set: TileSet setget _set_tile_set
 export(Vector2) var size: Vector2 = Vector2(64, 64) setget _set_size
 export(int) var tile_id setget _set_tile_id
@@ -10,27 +12,39 @@ export(bool) var transposed setget _set_transposed
 export(bool) var x_flipped setget _set_x_flipped
 export(bool) var y_flipped setget _set_y_flipped
 
-func _set_tile_set(value: TileSet):
+func is_canvas_position_inside(position: Vector2) -> bool:
+    # Returns true if the given position falls inside the rectangular area where this tile draws.
+    return self.is_local_position_inside(self.make_canvas_position_local(position))
+
+func is_local_position_inside(position: Vector2) -> bool:
+    # Returns true if the given position falls inside the rectangular area where this tile draws.
+    if position.x < 0 or position.y < 0:
+        return false
+    if position.x > self.size.x or position.y > self.size.y:
+        return false
+    return true
+
+func _set_tile_set(value: TileSet) -> void:
     tile_set = value
     self.update()
     
-func _set_size(value: Vector2):
+func _set_size(value: Vector2) -> void:
     size = value
     self.update()
 
-func _set_tile_id(value: int):
+func _set_tile_id(value: int) -> void:
     tile_id = value
     self.update()
 
-func _set_transposed(value: bool):
+func _set_transposed(value: bool) -> void:
     transposed = value
     self.update()
 
-func _set_x_flipped(value: bool):
+func _set_x_flipped(value: bool) -> void:
     x_flipped = value
     self.update()
     
-func _set_y_flipped(value: bool):
+func _set_y_flipped(value: bool) -> void:
     y_flipped = value
     self.update()
 
@@ -42,7 +56,7 @@ func _draw():
 
     var texture = tile_set.tile_get_texture(tile_id)
     var texture_region = tile_set.tile_get_region(tile_id)
-    var draw_region = Rect2(self.position, self.size)
+    var draw_region = Rect2(Vector2(0, 0), self.size)
     if self.x_flipped:
         draw_region.size.x = -draw_region.size.x
     if self.y_flipped:

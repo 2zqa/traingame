@@ -31,7 +31,8 @@ func _unhandled_input(event: InputEvent) -> void:
         var tile = tilemap_objects.get_tile(tilemap_objects.mouse_event_to_tile_pos(event))
         print(tile.name_id, " ", tile.rotation)
     
-    if event is InputEventMouseButton or event is InputEventScreenDrag\
+    if (event is InputEventMouseButton and not event.is_pressed()) \
+            or event is InputEventScreenDrag\
             or (event is InputEventMouseMotion and event.get_button_mask() != 0):
         place(event.position)
         self.get_tree().set_input_as_handled()
