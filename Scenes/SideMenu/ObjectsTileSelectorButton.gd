@@ -10,7 +10,7 @@ func _ready() -> void:
     pass
 
 # Handles selection of tiles
-func _input(event: InputEvent) -> void:  
+func _unhandled_input(event: InputEvent) -> void:  
     if not (event is InputEventMouseButton) or event.is_pressed():
         return  # Ignore anything that is not a click release
 
