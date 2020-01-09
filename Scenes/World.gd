@@ -26,12 +26,12 @@ func _process(delta: float) -> void:
          
     
 func _unhandled_input(event: InputEvent) -> void:
-    if event is InputEventMouseButton and not event.is_pressed():
+    if Global.Mouse.is_left_released(event):
         var tilemap_objects: ObjectsTileMap = $ObjectsTileMap
         var tile = tilemap_objects.get_tile(tilemap_objects.mouse_event_to_tile_pos(event))
         print(tile.name_id, " ", tile.rotation)
     
-    if (event is InputEventMouseButton and not event.is_pressed()) \
+    if (Global.Mouse.is_left_released(event)) \
             or event is InputEventScreenDrag\
             or (event is InputEventMouseMotion and event.get_button_mask() != 0):
         place(event.position)
