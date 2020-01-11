@@ -11,11 +11,11 @@ func _ready() -> void:
 
 func place(canvas_position: Vector2) -> void:
     if self.selected_option is GroundTile:
-        var tilemap_grounds: GroundTileMap = $GroundTileMap
+        var tilemap_grounds: GroundTileMap = $World/GroundTileMap
         var ground_pos = tilemap_grounds.viewport_pos_to_tile_pos(canvas_position)
         tilemap_grounds.set_tile(ground_pos, self.selected_option)
     if self.selected_option is ObjectTile:
-        var tilemap_objects: ObjectsTileMap = $ObjectsTileMap
+        var tilemap_objects: ObjectsTileMap = $World/ObjectsTileMap
         var ground_pos = tilemap_objects.viewport_pos_to_tile_pos(canvas_position)
         tilemap_objects.set_tile(ground_pos, self.selected_option)
 
@@ -27,7 +27,7 @@ func _process(delta: float) -> void:
     
 func _unhandled_input(event: InputEvent) -> void:
     if Global.Mouse.is_left_released(event):
-        var tilemap_objects: ObjectsTileMap = $ObjectsTileMap
+        var tilemap_objects: ObjectsTileMap = $World/ObjectsTileMap
         var tile = tilemap_objects.get_tile(tilemap_objects.mouse_event_to_tile_pos(event))
         print(tile.name_id, " ", tile.rotation)
     
