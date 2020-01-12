@@ -12,14 +12,9 @@ __meta__ = {
 }
 
 [node name="GroundTileSelectorPopup" parent="." instance=ExtResource( 2 )]
-visible = false
 
 [node name="Display" parent="." instance=ExtResource( 3 )]
 tile_set = ExtResource( 4 )
-size = Vector2( 64, 64 )
 tile_id = 0
-transposed = false
-x_flipped = false
-y_flipped = false
 
 [connection signal="tile_selected" from="GroundTileSelectorPopup" to="." method="_on_GroundSelector_tile_selected"]

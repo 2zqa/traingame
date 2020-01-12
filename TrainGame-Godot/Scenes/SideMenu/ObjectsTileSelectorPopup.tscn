@@ -16,188 +16,97 @@ script = ExtResource( 1 )
 
 [node name="PopupBackground" parent="." instance=ExtResource( 2 )]
 margin_top = -1.0
-margin_right = 342.0
-margin_bottom = 499.0
+margin_right = 230.0
+margin_bottom = 329.0
 
-[node name="HorizontalRail" parent="." instance=ExtResource( 3 )]
-position = Vector2( 16, 16 )
-size = Vector2( 64, 64 )
+[node name="RailHorizontal" parent="." instance=ExtResource( 3 )]
+position = Vector2( 20, 20 )
 tile_id = 0
-transposed = false
-x_flipped = false
-y_flipped = false
 
-[node name="VerticalRail" parent="." instance=ExtResource( 3 )]
-position = Vector2( 16, 96 )
-size = Vector2( 64, 64 )
+[node name="RailVertical" parent="." instance=ExtResource( 3 )]
+position = Vector2( 20, 70 )
 tile_id = 16
-transposed = false
-x_flipped = false
-y_flipped = false
 
-[node name="Corner1Rail" parent="." instance=ExtResource( 3 )]
-position = Vector2( 96, 16 )
-size = Vector2( 64, 64 )
+[node name="RailCorner1" parent="." instance=ExtResource( 3 )]
+position = Vector2( 70, 20 )
 tile_id = 15
-transposed = false
-x_flipped = false
-y_flipped = false
 
-[node name="Corner2Rail" parent="." instance=ExtResource( 3 )]
-position = Vector2( 96, 95 )
-size = Vector2( 64, 64 )
+[node name="RailCorner2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 70, 70 )
 tile_id = 14
-transposed = false
-x_flipped = false
-y_flipped = false
 
-[node name="Corner3Rail" parent="." instance=ExtResource( 3 )]
-position = Vector2( 176, 16 )
-size = Vector2( 64, 64 )
+[node name="RailCorner3" parent="." instance=ExtResource( 3 )]
+position = Vector2( 120, 20 )
 tile_id = 13
-transposed = false
-x_flipped = false
-y_flipped = false
 
-[node name="Corner4Rail" parent="." instance=ExtResource( 3 )]
-position = Vector2( 176, 96 )
-size = Vector2( 64, 64 )
+[node name="RailCorner4" parent="." instance=ExtResource( 3 )]
+position = Vector2( 120, 70 )
 tile_id = 1
-transposed = false
-x_flipped = false
-y_flipped = false
 
-[node name="SmallSpringTree" parent="." instance=ExtResource( 3 )]
-position = Vector2( 256, 16 )
-size = Vector2( 64, 64 )
+[node name="TreeSmall" parent="." instance=ExtResource( 3 )]
+position = Vector2( 170, 20 )
 tile_id = 28
-transposed = false
-x_flipped = false
-y_flipped = false
 
-[node name="SpringTree" parent="." instance=ExtResource( 3 )]
-position = Vector2( 256, 96 )
-size = Vector2( 64, 64 )
+[node name="Tree" parent="." instance=ExtResource( 3 )]
+position = Vector2( 170, 70 )
 tile_id = 21
-transposed = false
-x_flipped = false
-y_flipped = false
 
-[node name="LargeSpringTree" parent="." instance=ExtResource( 3 )]
-position = Vector2( 256, 186 )
-size = Vector2( 64, 64 )
+[node name="TreeLarge" parent="." instance=ExtResource( 3 )]
+position = Vector2( 170, 120 )
 tile_id = 17
-transposed = false
-x_flipped = false
-y_flipped = false
 
-[node name="AutumnTreeSmall" parent="." instance=ExtResource( 3 )]
-position = Vector2( 256, 256 )
-size = Vector2( 64, 64 )
+[node name="TreeAutumnSnall" parent="." instance=ExtResource( 3 )]
+position = Vector2( 170, 170 )
 tile_id = 24
-transposed = false
-x_flipped = false
-y_flipped = false
 
-[node name="AutumnTree" parent="." instance=ExtResource( 3 )]
-position = Vector2( 256, 336 )
-size = Vector2( 64, 64 )
+[node name="TreeAutumn" parent="." instance=ExtResource( 3 )]
+position = Vector2( 170, 220 )
 tile_id = 23
-transposed = false
-x_flipped = false
-y_flipped = false
 
-[node name="LargeAutumnTree2" parent="." instance=ExtResource( 3 )]
-position = Vector2( 256, 406 )
-size = Vector2( 64, 64 )
+[node name="TreeAutumnLarge" parent="." instance=ExtResource( 3 )]
+position = Vector2( 170, 270 )
 tile_id = 19
-transposed = false
-x_flipped = false
-y_flipped = false
 
-[node name="VerticalRoad" parent="." instance=ExtResource( 3 )]
-position = Vector2( 16, 176 )
-size = Vector2( 64, 64 )
+[node name="RoadVertical" parent="." instance=ExtResource( 3 )]
+position = Vector2( 20, 120 )
 tile_id = 4
-transposed = false
-x_flipped = false
-y_flipped = false
 
-[node name="HorizontalRoad" parent="." instance=ExtResource( 3 )]
-position = Vector2( 16, 256 )
-size = Vector2( 64, 64 )
+[node name="RoadHorizontal" parent="." instance=ExtResource( 3 )]
+position = Vector2( 20, 170 )
 tile_id = 3
-transposed = false
-x_flipped = false
-y_flipped = false
 
 [node name="Corner1Road" parent="." instance=ExtResource( 3 )]
-position = Vector2( 96, 176 )
-size = Vector2( 64, 64 )
+position = Vector2( 70, 120 )
 tile_id = 9
-transposed = false
-x_flipped = false
-y_flipped = false
 
 [node name="Corner2Road" parent="." instance=ExtResource( 3 )]
-position = Vector2( 176, 176 )
-size = Vector2( 64, 64 )
+position = Vector2( 120, 120 )
 tile_id = 12
-transposed = false
-x_flipped = false
-y_flipped = false
 
 [node name="Corner3Road" parent="." instance=ExtResource( 3 )]
-position = Vector2( 176, 256 )
-size = Vector2( 64, 64 )
+position = Vector2( 120, 170 )
 tile_id = 7
-transposed = false
-x_flipped = false
-y_flipped = false
 
 [node name="Corner4Road" parent="." instance=ExtResource( 3 )]
-position = Vector2( 96, 256 )
-size = Vector2( 64, 64 )
+position = Vector2( 70, 170 )
 tile_id = 11
-transposed = false
-x_flipped = false
-y_flipped = false
 
 [node name="CrossingRoad" parent="." instance=ExtResource( 3 )]
-position = Vector2( 16, 336 )
-size = Vector2( 64, 64 )
+position = Vector2( 20, 220 )
 tile_id = 2
-transposed = false
-x_flipped = false
-y_flipped = false
 
 [node name="T1Road" parent="." instance=ExtResource( 3 )]
-position = Vector2( 96, 336 )
-size = Vector2( 64, 64 )
-transposed = false
-x_flipped = false
-y_flipped = false
+position = Vector2( 70, 220 )
 
 [node name="T2Road" parent="." instance=ExtResource( 3 )]
-position = Vector2( 176, 336 )
-size = Vector2( 64, 64 )
+position = Vector2( 120, 220 )
 tile_id = 6
-transposed = false
-x_flipped = false
-y_flipped = false
 
 [node name="T3Road" parent="." instance=ExtResource( 3 )]
-position = Vector2( 176, 416 )
-size = Vector2( 64, 64 )
+position = Vector2( 120, 270 )
 tile_id = 5
-transposed = false
-x_flipped = false
-y_flipped = false
 
 [node name="T4Road" parent="." instance=ExtResource( 3 )]
-position = Vector2( 96, 416 )
-size = Vector2( 64, 64 )
+position = Vector2( 70, 270 )
 tile_id = 8
-transposed = false
-x_flipped = false
-y_flipped = false
+
