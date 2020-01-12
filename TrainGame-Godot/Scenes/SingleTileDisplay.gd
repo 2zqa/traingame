@@ -57,6 +57,18 @@ func _draw():
     var texture = tile_set.tile_get_texture(tile_id)
     var texture_region = tile_set.tile_get_region(tile_id)
     var draw_region = Rect2(Vector2(0, 0), self.size)
+    
+    var aspect_ratio = self.size.x / self.size.y
+    var texture_aspect_ratio = texture_region.size.x / texture_region.size.y
+    if texture_aspect_ratio < aspect_ratio:
+        # Boxes left and right: add margins left and right
+        var draw_region_width = self.size.y * texture_aspect_ratio
+        draw_region = Rect2(Vector2((self.size.x - draw_region_width) / 2, 0), Vector2(draw_region_width, self.size.y))
+    else:
+        # Boxes above and below
+        var draw_region_height = self.size.x / texture_aspect_ratio
+        draw_region = Rect2(Vector2(0, (self.size.y - draw_region_height) / 2), Vector2(self.size.x, draw_region_height))
+    
     if self.x_flipped:
         draw_region.size.x = -draw_region.size.x
     if self.y_flipped:
