@@ -50,6 +50,19 @@ var ROAD_CROSSING := _register_object_tile_with_auto_rotation(ObjectTile.new("ro
 #warning-ignore:unused_class_variable
 var ROAD_T := _register_object_tile_with_auto_rotation(ObjectTile.new("road_t", [5, 6, 8, 10]))
 
+#warning-ignore:unused_class_variable
+var SPRING_TREE_SMALL := _register_object_tile_with_auto_rotation(ObjectTile.new("spring_tree_small", [28, 28, 28, 28]))
+#warning-ignore:unused_class_variable
+var SPRING_TREE := _register_object_tile_with_auto_rotation(ObjectTile.new("spring_tree", [21, 21, 21, 21]))
+#warning-ignore:unused_class_variable
+var SPRING_TREE_LARGE := _register_object_tile_with_auto_rotation(ObjectTile.new("spring_tree_large", [17, 17, 17, 17]))
+#warning-ignore:unused_class_variable
+var AUTUMN_TREE_SMALL := _register_object_tile_with_auto_rotation(ObjectTile.new("autumn_tree_small", [24, 24, 24, 24]))
+#warning-ignore:unused_class_variable
+var AUTUMN_TREE := _register_object_tile_with_auto_rotation(ObjectTile.new("autumn_tree", [23, 23, 23, 23]))
+#warning-ignore:unused_class_variable
+var AUTUMN_TREE_LARGE := _register_object_tile_with_auto_rotation(ObjectTile.new("autumn_tree_large", [19, 19, 19, 19]))
+
 # Ground tiles
 var GRASS := _register_ground_tile(GroundTile.new("grass", 0))
 #warning-ignore:unused_class_variable
