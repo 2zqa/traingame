@@ -8,31 +8,25 @@ enum Rotation {
 }
 
 export(String) var name_id
-export(int) var texture_id
 export(Rotation) var rotation
+var texture_ids: Array
 
-func _init(name_id: String, texture_id: int, rotation: int = Rotation.NONE):
+func _init(name_id: String, texture_ids: Array, rotation: int = Rotation.NONE):
+    if texture_ids.size() != 4:
+        push_error("texture_ids.size() must be 4, was " + str(texture_ids.size()))
     self.name_id = name_id
-    self.texture_id = texture_id
+    self.texture_ids = texture_ids
     self.rotation = rotation
 
-func is_texture_transposed() -> bool:
-    # Returns true if the texture should be transposed when drawn.
-    return self.rotation == Rotation.CLOCKWISE or self.rotation == Rotation.COUNTER_CLOCKWISE
+# Gets the texture id for the current rotation.
+func get_texture_id() -> int:
+    return self.texture_ids[self.rotation]
 
-func is_texture_x_flipped() -> bool:
-    # Returns true if the texture should be flipped in the x direction when drawn.
-    return self.rotation == Rotation.CLOCKWISE or self.rotation == Rotation.HALF
-
-func is_texture_y_flipped() -> bool:
-    # Returns true if the texture should be flipped in the ydirection when drawn.
-    return self.rotation == Rotation.HALF or self.rotation == Rotation.COUNTER_CLOCKWISE
-
+# Gets a tile with the given rotation. Does not modify this tile.
 func with_rotation(rotation: int) -> ObjectTile:
-    # Gets a tile with the given rotation. Does not modify this tile.
     if rotation == self.rotation:
         return self
-    return get_script().new(self.name_id, self.texture_id, rotation)
+    return get_script().new(self.name_id, self.texture_ids, rotation)
 
 func all_rotations() -> Array:
     return [self.with_rotation(Rotation.NONE), self.with_rotation(Rotation.CLOCKWISE),

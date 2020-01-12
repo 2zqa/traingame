@@ -6,7 +6,7 @@ const ObjectTile = preload("res://Scripts/ObjectTile.gd")
 # Sets the tile at the given position
 func set_tile(tile_position: Vector2, tile: ObjectTile) -> void:
     # Make sure to remove existing tile(s)
-    var texture_size = self._get_texture_size(tile.texture_id)
+    var texture_size = self._get_texture_size(tile.get_texture_id())
     var texture_tile_size = Vector2(texture_size.x / self.cell_size.x, texture_size.y / self.cell_size.y)
     for dx in range(texture_tile_size.x):
         for dy in range(texture_tile_size.y):
@@ -16,7 +16,7 @@ func set_tile(tile_position: Vector2, tile: ObjectTile) -> void:
                 self.set_cell(existing_tile_result[0], existing_tile_result[1], -1)       
     
     # Set a new tile
-    self.set_cellv(tile_position, tile.texture_id, tile.is_texture_x_flipped(), tile.is_texture_y_flipped(), tile.is_texture_transposed())
+    self.set_cellv(tile_position, tile.get_texture_id())
         
 # Gets the tile at the given position
 func get_tile(tile_position: Vector2) -> ObjectTile:
@@ -26,10 +26,7 @@ func get_tile(tile_position: Vector2) -> ObjectTile:
     tile_x = result[0]
     tile_y = result[1]
     var texture_id = result[2]
-    var x_flipped = self.is_cell_x_flipped(tile_x, tile_y)
-    var y_flipped = self.is_cell_y_flipped(tile_x, tile_y)
-    var transposed = self.is_cell_transposed(tile_x, tile_y)
-    return Global.Registry.get_object_tile_from_texture(texture_id, transposed, x_flipped, y_flipped)
+    return Global.Registry.get_object_tile_from_texture_id(texture_id)
 
 func _get_texture_size(texture_id: int) -> Vector2:
     return self.tile_set.tile_get_region(texture_id).size

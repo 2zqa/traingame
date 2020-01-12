@@ -31,10 +31,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func _on_ObjectsTileSelectorPopup_tile_selected(tile: ObjectTile) -> void:
     # Update UI
     var display : SingleTileDisplay = $Display
-    display.tile_id = tile.texture_id
-    display.transposed = tile.is_texture_transposed()
-    display.x_flipped = tile.is_texture_x_flipped()
-    display.y_flipped = tile.is_texture_y_flipped()
+    display.tile_id = tile.get_texture_id()
 
     # Forward
     emit_signal("tile_selected", tile)

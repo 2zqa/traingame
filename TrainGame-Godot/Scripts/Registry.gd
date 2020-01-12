@@ -1,21 +1,14 @@
 const ObjectTile = preload("res://Scripts/ObjectTile.gd")
 const GroundTile = preload("res://Scripts/GroundTile.gd")
 
-var _texture_itff_to_object_tile := {}
+var _texture_id_to_object_tile := {}
 var _texture_id_to_ground_tile := {}
 
-
-func _object_key(texture_id: int, transposed: bool, x_flipped: bool, y_flipped: bool) -> Array:
-    return [texture_id, transposed, x_flipped, y_flipped]
-
-func _object_key_for(tile: ObjectTile) -> Array:
-    return _object_key(tile.texture_id, tile.is_texture_transposed(),
-               tile.is_texture_x_flipped(), tile.is_texture_y_flipped())
 
 # Registers an object tile from the Objects tile set, so that it can be found using get_object_tile_from_*
 func _register_object_tile_with_auto_rotation(tile: ObjectTile) -> ObjectTile:
     for rotated_tile in tile.all_rotations():
-        _texture_itff_to_object_tile[_object_key_for(rotated_tile)] = rotated_tile
+        _texture_id_to_object_tile[rotated_tile.get_texture_id()] = rotated_tile
     
     return tile
 
@@ -27,8 +20,8 @@ func _register_ground_tile(tile: GroundTile) -> GroundTile:
 
 
 # Gets the object tile from the given texture id, or OBJECT_EMPTY if not found.
-func get_object_tile_from_texture(texture_id: int, transposed: bool, x_flipped: bool, y_flipped: bool) -> ObjectTile:
-    var object_tile = _texture_itff_to_object_tile.get(_object_key(texture_id, transposed, x_flipped, y_flipped))
+func get_object_tile_from_texture_id(texture_id: int) -> ObjectTile:
+    var object_tile = _texture_id_to_object_tile.get(texture_id)
     if object_tile == null:
         return OBJECT_EMPTY
     return object_tile
@@ -43,11 +36,19 @@ func get_ground_tile_from_texture_id(texture_id: int) -> GroundTile:
     
 
 # Object tiles
-var OBJECT_EMPTY := _register_object_tile_with_auto_rotation(ObjectTile.new("object_empty", -1))
+var OBJECT_EMPTY := _register_object_tile_with_auto_rotation(ObjectTile.new("object_empty", [-1, -1, -1, -1]))
 #warning-ignore:unused_class_variable
-var RAIL_STRAIGHT := _register_object_tile_with_auto_rotation(ObjectTile.new("rail_straight", 0))
+var RAIL_STRAIGHT := _register_object_tile_with_auto_rotation(ObjectTile.new("rail_straight", [0, 16, 0, 16]))
 #warning-ignore:unused_class_variable
-var RAIL_CORNER := _register_object_tile_with_auto_rotation(ObjectTile.new("rail_corner", 1))
+var RAIL_CORNER := _register_object_tile_with_auto_rotation(ObjectTile.new("rail_corner", [1, 13, 14, 15]))
+#warning-ignore:unused_class_variable
+var ROAD_STRAIGHT := _register_object_tile_with_auto_rotation(ObjectTile.new("road_straight", [4, 3, 4, 3]))
+#warning-ignore:unused_class_variable
+var ROAD_CORNER := _register_object_tile_with_auto_rotation(ObjectTile.new("road_corner", [7, 9, 11, 12]))
+#warning-ignore:unused_class_variable
+var ROAD_CROSSING := _register_object_tile_with_auto_rotation(ObjectTile.new("road_crossing", [2, 2, 2, 2]))
+#warning-ignore:unused_class_variable
+var ROAD_T := _register_object_tile_with_auto_rotation(ObjectTile.new("road_t", [5, 6, 8, 10]))
 
 # Ground tiles
 var GRASS := _register_ground_tile(GroundTile.new("grass", 0))

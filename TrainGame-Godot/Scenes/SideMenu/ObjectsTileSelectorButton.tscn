@@ -13,10 +13,6 @@ __meta__ = {
 [node name="ObjectsTileSelectorPopup" parent="." instance=ExtResource( 2 )]
 
 [node name="Display" parent="." instance=ExtResource( 3 )]
-size = Vector2( 64, 64 )
 tile_id = 1
-transposed = false
-x_flipped = false
-y_flipped = false
 
 [connection signal="tile_selected" from="ObjectsTileSelectorPopup" to="." method="_on_ObjectsTileSelectorPopup_tile_selected"]

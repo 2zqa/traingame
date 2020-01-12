@@ -24,10 +24,7 @@ func _input(event: InputEvent) -> void:
 
         # Found a match!
         var tile_id = tile_display.tile_id
-        var transposed = tile_display.transposed
-        var x_flipped = tile_display.x_flipped
-        var y_flipped = tile_display.y_flipped
-        var object_tile = Global.Registry.get_object_tile_from_texture(tile_id, transposed, x_flipped, y_flipped)
+        var object_tile = Global.Registry.get_object_tile_from_texture_id(tile_id)
         self.get_tree().set_input_as_handled()
         emit_signal("tile_selected", object_tile)
         self.hide()
