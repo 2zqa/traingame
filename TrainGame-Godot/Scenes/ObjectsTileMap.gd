@@ -6,12 +6,11 @@ const ObjectTile = preload("res://Scripts/ObjectTile.gd")
 # Sets the tile at the given position
 func set_tile(tile_position: Vector2, tile: ObjectTile) -> void:
     # Make sure to remove existing tile(s)
-    var texture_size = self._get_texture_size(tile.get_texture_id())
-    var texture_tile_size = Vector2(texture_size.x / self.cell_size.x, texture_size.y / self.cell_size.y)
-    for dx in range(texture_tile_size.x):
-        for dy in range(texture_tile_size.y):
+    var texture_shape = tile.get_rectangular_shape()
+    for dx in range(texture_shape.position.x / self.cell_size.x, texture_shape.end.x / self.cell_size.x):
+        for dy in range(texture_shape.position.y / self.cell_size.y, texture_shape.end.y / self.cell_size.y):
             var existing_tile_result = self._search_texture(tile_position.x + dx, tile_position.y + dy)
-            if existing_tile_result[2] != -1:
+            if existing_tile_result[2] != Global.Registry.OBJECT_EMPTY:
                 # Found existing tile, remove
                 self.set_cell(existing_tile_result[0], existing_tile_result[1], -1)       
     
@@ -25,24 +24,29 @@ func get_tile(tile_position: Vector2) -> ObjectTile:
     var result = self._search_texture(tile_x, tile_y)
     tile_x = result[0]
     tile_y = result[1]
-    var texture_id = result[2]
+    return result[2]
+
+func _get_tile_no_search(tile_x: int, tile_y: int) -> ObjectTile:
+    var texture_id = self.get_cell(tile_x, tile_y)
     return Global.Registry.get_object_tile_from_texture_id(texture_id)
 
-func _get_texture_size(texture_id: int) -> Vector2:
-    return self.tile_set.tile_get_region(texture_id).size
 
 # Searches for a tile that reaches this tile nearby. Returns [tile_x, tile_y, texture_id].
 func _search_texture(tile_x: int, tile_y: int) -> Array:
     for dx in [0, -1, -2]:
         for dy in [0, -1, -2]:
-            var texture_id = self.get_cell(tile_x + dx, tile_y + dy)
-            if texture_id == -1:
-                continue  # Continue searching
-            var texture_size = self._get_texture_size(texture_id)
-            if dx * -self.cell_size.x >= texture_size.x or dy * -self.cell_size.y >= texture_size.y:
+            var object_tile = _get_tile_no_search(tile_x + dx, tile_y + dy)
+            if object_tile.equals(Global.Registry.OBJECT_EMPTY):
+                continue
+
+            var shape = object_tile.get_rectangular_shape()
+            var dx_texture = dx * -self.cell_size.x
+            var dy_texture = dy * -self.cell_size.y
+            if dx_texture < shape.position.x or dy_texture < shape.position.y or\
+                   dx_texture >= shape.end.x or dy_texture >= shape.end.y:
                 continue  # Outside texture
-            return [tile_x + dx, tile_y + dy, texture_id]
-    return [tile_x, tile_y, -1]
+            return [tile_x + dx, tile_y + dy, object_tile]
+    return [tile_x, tile_y, Global.Registry.OBJECT_EMPTY]
 
 # Gets the tile coordinate from the given mouse event
 func mouse_event_to_tile_pos(mouse: InputEventMouse) -> Vector2:

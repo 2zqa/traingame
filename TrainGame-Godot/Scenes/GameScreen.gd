@@ -70,6 +70,8 @@ func _unhandled_input(event: InputEvent) -> void:
             Global.Mouse.is_left_released(event):
         # Finger released, clear previous position
         self._previous_touch_pos.erase(Global.Mouse.get_pointer_id(event))
+        var objects = $World/ObjectsTileMap
+        print(objects.get_tile(objects.mouse_event_to_tile_pos(event)).name_id)
     
 
 func _on_SideMenu_option_selected(selected_option):
