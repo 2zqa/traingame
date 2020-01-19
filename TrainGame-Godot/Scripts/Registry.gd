@@ -7,7 +7,7 @@ var _texture_id_to_ground_tile := {}
 
 
 # Registers an object tile from the Objects tile set, so that it can be found using get_object_tile_from_*
-func _register_object_tile_with_auto_rotation(tile: ObjectTile) -> ObjectTile:
+func _register_object_tile(tile: ObjectTile) -> ObjectTile:
     for rotated_tile in tile.all_rotations():
         _texture_id_to_object_tile[rotated_tile.get_texture_id()] = rotated_tile
     
@@ -37,32 +37,35 @@ func get_ground_tile_from_texture_id(texture_id: int) -> GroundTile:
     
 
 # Object tiles
-var OBJECT_EMPTY := _register_object_tile_with_auto_rotation(ObjectTile.new("object_empty", [-1, -1, -1, -1]))
+var OBJECT_EMPTY := _register_object_tile(ObjectTile.new("object_empty", [-1, -1, -1, -1]))
 #warning-ignore:unused_class_variable
-var RAIL_STRAIGHT := _register_object_tile_with_auto_rotation(ObjectTile.new("rail_straight", [0, 16, 0, 16]))
+var RAIL_STRAIGHT := _register_object_tile(ObjectTile.new("rail_straight", [0, 16, 0, 16]))
 #warning-ignore:unused_class_variable
-var RAIL_CORNER := _register_object_tile_with_auto_rotation(ObjectTile.new("rail_corner", [1, 14, 15, 13], "XXX XOX XX."))
+var RAIL_CORNER := _register_object_tile(ObjectTile.new("rail_corner", [1, 14, 15, 13], "XXX XOX XX."))
 #warning-ignore:unused_class_variable
-var ROAD_STRAIGHT := _register_object_tile_with_auto_rotation(ObjectTile.new("road_straight", [4, 3, 4, 3], "XXX"))
+var ROAD_STRAIGHT := _register_object_tile(ObjectTile.new("road_straight", [4, 3, 4, 3], "XOX"))
 #warning-ignore:unused_class_variable
-var ROAD_CORNER := _register_object_tile_with_auto_rotation(ObjectTile.new("road_corner", [7, 9, 11, 12], "XXX XXX XXX"))
+var ROAD_CORNER := _register_object_tile(ObjectTile.new("road_corner", [7, 9, 11, 12], "XXX XOX XXX"))
 #warning-ignore:unused_class_variable
-var ROAD_CROSSING := _register_object_tile_with_auto_rotation(ObjectTile.new("road_crossing", [2, 2, 2, 2], "XXX XXX XXX"))
+var ROAD_CROSSING := _register_object_tile(ObjectTile.new("road_crossing", [2, 2, 2, 2], "XXX XOX XXX"))
 #warning-ignore:unused_class_variable
-var ROAD_T := _register_object_tile_with_auto_rotation(ObjectTile.new("road_t", [5, 6, 8, 10], "XXX XXX XXX"))
+var ROAD_T := _register_object_tile(ObjectTile.new("road_t", [5, 6, 8, 10], "XXX XOX XXX"))
+#warning-ignore:unused_class_variable
+var RAIL_CROSSING_ROAD := _register_object_tile(ObjectTile.new("rail_crossing_road", [36, 35, 36, 35], "XOX"))
+
 
 #warning-ignore:unused_class_variable
-var SPRING_TREE_SMALL := _register_object_tile_with_auto_rotation(ObjectTile.new("spring_tree_small", [28, 28, 28, 28]))
+var SPRING_TREE_SMALL := _register_object_tile(ObjectTile.new("spring_tree_small", [28, 28, 28, 28]))
 #warning-ignore:unused_class_variable
-var SPRING_TREE := _register_object_tile_with_auto_rotation(ObjectTile.new("spring_tree", [21, 21, 21, 21]))
+var SPRING_TREE := _register_object_tile(ObjectTile.new("spring_tree", [21, 21, 21, 21]))
 #warning-ignore:unused_class_variable
-var SPRING_TREE_LARGE := _register_object_tile_with_auto_rotation(ObjectTile.new("spring_tree_large", [17, 17, 17, 17]))
+var SPRING_TREE_LARGE := _register_object_tile(ObjectTile.new("spring_tree_large", [17, 17, 17, 17]))
 #warning-ignore:unused_class_variable
-var AUTUMN_TREE_SMALL := _register_object_tile_with_auto_rotation(ObjectTile.new("autumn_tree_small", [24, 24, 24, 24]))
+var AUTUMN_TREE_SMALL := _register_object_tile(ObjectTile.new("autumn_tree_small", [24, 24, 24, 24]))
 #warning-ignore:unused_class_variable
-var AUTUMN_TREE := _register_object_tile_with_auto_rotation(ObjectTile.new("autumn_tree", [23, 23, 23, 23]))
+var AUTUMN_TREE := _register_object_tile(ObjectTile.new("autumn_tree", [23, 23, 23, 23]))
 #warning-ignore:unused_class_variable
-var AUTUMN_TREE_LARGE := _register_object_tile_with_auto_rotation(ObjectTile.new("autumn_tree_large", [19, 19, 19, 19]))
+var AUTUMN_TREE_LARGE := _register_object_tile(ObjectTile.new("autumn_tree_large", [19, 19, 19, 19]))
 
 # Ground tiles
 var GRASS := _register_ground_tile(GroundTile.new("grass", 0))

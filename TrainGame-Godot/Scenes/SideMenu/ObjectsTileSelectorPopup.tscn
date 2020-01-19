@@ -16,7 +16,7 @@ script = ExtResource( 1 )
 
 [node name="PopupBackground" parent="." instance=ExtResource( 2 )]
 margin_top = -1.0
-margin_right = 230.0
+margin_right = 270.0
 margin_bottom = 329.0
 
 [node name="RailHorizontal" parent="." instance=ExtResource( 3 )]
@@ -55,16 +55,16 @@ tile_id = 21
 position = Vector2( 170, 120 )
 tile_id = 17
 
-[node name="TreeAutumnSnall" parent="." instance=ExtResource( 3 )]
-position = Vector2( 170, 170 )
+[node name="TreeAutumnSmall" parent="." instance=ExtResource( 3 )]
+position = Vector2( 220, 20 )
 tile_id = 24
 
 [node name="TreeAutumn" parent="." instance=ExtResource( 3 )]
-position = Vector2( 170, 220 )
+position = Vector2( 220, 70 )
 tile_id = 23
 
 [node name="TreeAutumnLarge" parent="." instance=ExtResource( 3 )]
-position = Vector2( 170, 270 )
+position = Vector2( 220, 120 )
 tile_id = 19
 
 [node name="RoadVertical" parent="." instance=ExtResource( 3 )]
@@ -75,38 +75,46 @@ tile_id = 4
 position = Vector2( 20, 170 )
 tile_id = 3
 
-[node name="Corner1Road" parent="." instance=ExtResource( 3 )]
+[node name="RoadCorner1" parent="." instance=ExtResource( 3 )]
 position = Vector2( 70, 120 )
 tile_id = 9
 
-[node name="Corner2Road" parent="." instance=ExtResource( 3 )]
+[node name="RoadCorner2" parent="." instance=ExtResource( 3 )]
 position = Vector2( 120, 120 )
 tile_id = 12
 
-[node name="Corner3Road" parent="." instance=ExtResource( 3 )]
+[node name="RoadCorner3" parent="." instance=ExtResource( 3 )]
 position = Vector2( 120, 170 )
 tile_id = 7
 
-[node name="Corner4Road" parent="." instance=ExtResource( 3 )]
+[node name="RoadCorner4" parent="." instance=ExtResource( 3 )]
 position = Vector2( 70, 170 )
 tile_id = 11
 
-[node name="CrossingRoad" parent="." instance=ExtResource( 3 )]
+[node name="RailCrossingRoadHorizontal" parent="." instance=ExtResource( 3 )]
 position = Vector2( 20, 220 )
-tile_id = 2
+tile_id = 36
 
-[node name="T1Road" parent="." instance=ExtResource( 3 )]
+[node name="RailCrossingRoadVertical" parent="." instance=ExtResource( 3 )]
+position = Vector2( 20, 270 )
+tile_id = 35
+
+[node name="RoadT1" parent="." instance=ExtResource( 3 )]
 position = Vector2( 70, 220 )
 
-[node name="T2Road" parent="." instance=ExtResource( 3 )]
+[node name="RoadT2" parent="." instance=ExtResource( 3 )]
 position = Vector2( 120, 220 )
 tile_id = 6
 
-[node name="T3Road" parent="." instance=ExtResource( 3 )]
+[node name="RoadT3" parent="." instance=ExtResource( 3 )]
 position = Vector2( 120, 270 )
 tile_id = 5
 
-[node name="T4Road" parent="." instance=ExtResource( 3 )]
+[node name="RoadT4" parent="." instance=ExtResource( 3 )]
 position = Vector2( 70, 270 )
 tile_id = 8
+
+[node name="RoadCrossing" parent="." instance=ExtResource( 3 )]
+position = Vector2( 170, 270 )
+tile_id = 2
 
