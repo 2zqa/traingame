@@ -1,5 +1,6 @@
 const ObjectTile = preload("res://Scripts/ObjectTile.gd")
 const GroundTile = preload("res://Scripts/GroundTile.gd")
+const TileCollision = preload("res://Scripts/TileCollision.gd")
 
 var _texture_id_to_object_tile := {}
 var _texture_id_to_ground_tile := {}
@@ -40,15 +41,15 @@ var OBJECT_EMPTY := _register_object_tile_with_auto_rotation(ObjectTile.new("obj
 #warning-ignore:unused_class_variable
 var RAIL_STRAIGHT := _register_object_tile_with_auto_rotation(ObjectTile.new("rail_straight", [0, 16, 0, 16]))
 #warning-ignore:unused_class_variable
-var RAIL_CORNER := _register_object_tile_with_auto_rotation(ObjectTile.new("rail_corner", [1, 13, 14, 15]))
+var RAIL_CORNER := _register_object_tile_with_auto_rotation(ObjectTile.new("rail_corner", [1, 14, 15, 13], "XXX XOX XX."))
 #warning-ignore:unused_class_variable
-var ROAD_STRAIGHT := _register_object_tile_with_auto_rotation(ObjectTile.new("road_straight", [4, 3, 4, 3]))
+var ROAD_STRAIGHT := _register_object_tile_with_auto_rotation(ObjectTile.new("road_straight", [4, 3, 4, 3], "XXX"))
 #warning-ignore:unused_class_variable
-var ROAD_CORNER := _register_object_tile_with_auto_rotation(ObjectTile.new("road_corner", [7, 9, 11, 12]))
+var ROAD_CORNER := _register_object_tile_with_auto_rotation(ObjectTile.new("road_corner", [7, 9, 11, 12], "XXX XXX XXX"))
 #warning-ignore:unused_class_variable
-var ROAD_CROSSING := _register_object_tile_with_auto_rotation(ObjectTile.new("road_crossing", [2, 2, 2, 2]))
+var ROAD_CROSSING := _register_object_tile_with_auto_rotation(ObjectTile.new("road_crossing", [2, 2, 2, 2], "XXX XXX XXX"))
 #warning-ignore:unused_class_variable
-var ROAD_T := _register_object_tile_with_auto_rotation(ObjectTile.new("road_t", [5, 6, 8, 10]))
+var ROAD_T := _register_object_tile_with_auto_rotation(ObjectTile.new("road_t", [5, 6, 8, 10], "XXX XXX XXX"))
 
 #warning-ignore:unused_class_variable
 var SPRING_TREE_SMALL := _register_object_tile_with_auto_rotation(ObjectTile.new("spring_tree_small", [28, 28, 28, 28]))

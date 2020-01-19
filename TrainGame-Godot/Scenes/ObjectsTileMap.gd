@@ -6,13 +6,11 @@ const ObjectTile = preload("res://Scripts/ObjectTile.gd")
 # Sets the tile at the given position
 func set_tile(tile_position: Vector2, tile: ObjectTile) -> void:
     # Make sure to remove existing tile(s)
-    var texture_shape = tile.get_rectangular_shape()
-    for dx in range(texture_shape.position.x / self.cell_size.x, texture_shape.end.x / self.cell_size.x):
-        for dy in range(texture_shape.position.y / self.cell_size.y, texture_shape.end.y / self.cell_size.y):
-            var existing_tile_result = self._search_texture(tile_position.x + dx, tile_position.y + dy)
-            if existing_tile_result[2] != Global.Registry.OBJECT_EMPTY:
-                # Found existing tile, remove
-                self.set_cell(existing_tile_result[0], existing_tile_result[1], -1)       
+    for delta in tile.get_occupied_tile_positions():
+        var existing_tile_result = self._search_texture(tile_position.x + delta.x, tile_position.y + delta.y)
+        if existing_tile_result[2] != Global.Registry.OBJECT_EMPTY:
+            # Found existing tile, remove
+            self.set_cell(existing_tile_result[0], existing_tile_result[1], -1)       
     
     # Set a new tile
     self.set_cellv(tile_position, tile.get_texture_id())
@@ -33,23 +31,19 @@ func _get_tile_no_search(tile_x: int, tile_y: int) -> ObjectTile:
 
 # Searches for a tile that reaches this tile nearby. Returns [tile_x, tile_y, texture_id].
 func _search_texture(tile_x: int, tile_y: int) -> Array:
-    for dx in [0, -1, -2]:
-        for dy in [0, -1, -2]:
+    for dx in [1, 0, -1, -2]:
+        for dy in [1, 0, -1, -2]:
             var object_tile = _get_tile_no_search(tile_x + dx, tile_y + dy)
             if object_tile.equals(Global.Registry.OBJECT_EMPTY):
                 continue
 
-            var shape = object_tile.get_rectangular_shape()
-            var dx_texture = dx * -self.cell_size.x
-            var dy_texture = dy * -self.cell_size.y
-            if dx_texture < shape.position.x or dy_texture < shape.position.y or\
-                   dx_texture >= shape.end.x or dy_texture >= shape.end.y:
+            if not object_tile.collides(-dx, -dy):
                 continue  # Outside texture
             return [tile_x + dx, tile_y + dy, object_tile]
     return [tile_x, tile_y, Global.Registry.OBJECT_EMPTY]
 
 # Gets the tile coordinate from the given mouse event
-func mouse_event_to_tile_pos(mouse: InputEventMouse) -> Vector2:
+func mouse_event_to_tile_pos(mouse: InputEvent) -> Vector2:
     return self.world_to_map(self.make_input_local(mouse).position)
 
 

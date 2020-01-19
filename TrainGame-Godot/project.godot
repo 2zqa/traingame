@@ -18,10 +18,16 @@ _global_script_classes=[ {
 "class": "ObjectTile",
 "language": "GDScript",
 "path": "res://Scripts/ObjectTile.gd"
+}, {
+"base": "Reference",
+"class": "TileCollision",
+"language": "GDScript",
+"path": "res://Scripts/TileCollision.gd"
 } ]
 _global_script_class_icons={
 "GroundTile": "",
-"ObjectTile": ""
+"ObjectTile": "",
+"TileCollision": ""
 }
 
 [application]

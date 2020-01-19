@@ -2,6 +2,7 @@ extends Node2D
 
 const ObjectsTileMap = preload("res://Scenes/ObjectsTileMap.gd")
 const GroundTileMap = preload("res://Scenes/GroundTileMap.gd")
+const Rotation = preload("res://Scripts/Rotation.gd")
 
 var selected_option  # GroundTile or ObjectTile
 
@@ -25,7 +26,6 @@ func place(canvas_position: Vector2) -> void:
 
 # Places the current tile in a line of all given canvas positions
 func place_interpolated(canvas_position1: Vector2, canvas_position2: Vector2) -> void:
-    var distance = canvas_position1.distance_to(canvas_position2)
     var tilemap = null
     if self.selected_option is GroundTile:
         tilemap = $World/GroundTileMap
@@ -71,7 +71,8 @@ func _unhandled_input(event: InputEvent) -> void:
         # Finger released, clear previous position
         self._previous_touch_pos.erase(Global.Mouse.get_pointer_id(event))
         var objects = $World/ObjectsTileMap
-        print(objects.get_tile(objects.mouse_event_to_tile_pos(event)).name_id)
+        var tile = objects.get_tile(objects.mouse_event_to_tile_pos(event))
+        print(tile.name_id, " ", Rotation.to_string(tile.rotation))
     
 
 func _on_SideMenu_option_selected(selected_option):
