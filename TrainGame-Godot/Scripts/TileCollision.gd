@@ -46,17 +46,9 @@ func size() -> Vector2:
 
 # Checks if there is a collision at the relative tile coordinates.
 func collides(rotation: int, tile_dx: int, tile_dy: int) -> bool:
-    tile_dx += self._origin.x
-    tile_dy += self._origin.y
+    var unrotated = Rotation.unrotate(rotation, Vector2(tile_dx, tile_dy))
 
-    if rotation == Rotation.NONE:
-        return self._collides_without_rotation(tile_dx, tile_dy)
-    if rotation == Rotation.CLOCKWISE:
-        return self._collides_without_rotation(tile_dy, self._size.x - tile_dx - 1)
-    if rotation == Rotation.HALF:
-        return self._collides_without_rotation(self._size.x - tile_dx - 1, self._size.y - tile_dy - 1)
-    if rotation == Rotation.COUNTER_CLOCKWISE:
-        return self._collides_without_rotation(self._size.y - tile_dy - 1, tile_dx)
+    return self._collides_without_rotation(unrotated)
     push_error("Unknown rotation: " + str(rotation))
     return false    
 
@@ -93,12 +85,14 @@ func to_string() -> String:
                 value += "X"
     return value
 
-func _collides_without_rotation(tile_dx: int, tile_dy: int) -> bool:  
-    if tile_dx < 0:
+func _collides_without_rotation(tile_pos: Vector2) -> bool:  
+    tile_pos += self._origin
+
+    if tile_pos.x < 0:
         return false
-    if tile_dy < 0 or tile_dy >= self._lines.size():
+    if tile_pos.y < 0 or tile_pos.y >= self._lines.size():
         return false
-    var line: PoolByteArray = self._lines[tile_dy]
-    if tile_dx >= line.size():
+    var line: PoolByteArray = self._lines[tile_pos.y]
+    if tile_pos.x >= line.size():
         return false
-    return line[tile_dx] == 1
+    return line[tile_pos.x] == 1
