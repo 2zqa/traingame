@@ -55,17 +55,22 @@ var RAIL_CROSSING_ROAD := _register_object_tile(ObjectTile.new("rail_crossing_ro
 
 
 #warning-ignore:unused_class_variable
-var SPRING_TREE_SMALL := _register_object_tile(ObjectTile.new("spring_tree_small", [28, 28, 28, 28]))
+var TREE_SMALL := _register_object_tile(ObjectTile.new("tree_small", [28, 28, 28, 28]))
 #warning-ignore:unused_class_variable
-var SPRING_TREE := _register_object_tile(ObjectTile.new("spring_tree", [21, 21, 21, 21]))
+var TREE := _register_object_tile(ObjectTile.new("tree", [21, 21, 21, 21]))
 #warning-ignore:unused_class_variable
-var SPRING_TREE_LARGE := _register_object_tile(ObjectTile.new("spring_tree_large", [17, 17, 17, 17]))
+var TREE_LARGE := _register_object_tile(ObjectTile.new("tree_large", [17, 17, 17, 17]))
 #warning-ignore:unused_class_variable
-var AUTUMN_TREE_SMALL := _register_object_tile(ObjectTile.new("autumn_tree_small", [24, 24, 24, 24]))
+var TREE_GROUP := _register_object_tile(ObjectTile.new("tree_group", [25, 25, 25, 25]))
+
 #warning-ignore:unused_class_variable
-var AUTUMN_TREE := _register_object_tile(ObjectTile.new("autumn_tree", [23, 23, 23, 23]))
+var TREE_AUTUMN_SMALL := _register_object_tile(ObjectTile.new("tree_autumn_small", [24, 24, 24, 24]))
 #warning-ignore:unused_class_variable
-var AUTUMN_TREE_LARGE := _register_object_tile(ObjectTile.new("autumn_tree_large", [19, 19, 19, 19]))
+var TREE_AUTUMN := _register_object_tile(ObjectTile.new("tree_autumn", [23, 23, 23, 23]))
+#warning-ignore:unused_class_variable
+var TREE_AUTUMN_LARGE := _register_object_tile(ObjectTile.new("tree_autumn_large", [19, 19, 19, 19]))
+#warning-ignore:unused_class_variable
+var TREE_AUTUMN_GROUP := _register_object_tile(ObjectTile.new("tree_autumn_group", [26, 26, 26, 26]))
 
 # Ground tiles
 var GRASS := _register_ground_tile(GroundTile.new("grass", 0))

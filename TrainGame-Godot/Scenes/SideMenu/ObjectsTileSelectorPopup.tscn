@@ -55,6 +55,10 @@ tile_id = 21
 position = Vector2( 170, 120 )
 tile_id = 17
 
+[node name="TreeGroup" parent="." instance=ExtResource( 3 )]
+position = Vector2( 170, 170 )
+tile_id = 25
+
 [node name="TreeAutumnSmall" parent="." instance=ExtResource( 3 )]
 position = Vector2( 220, 20 )
 tile_id = 24
@@ -66,6 +70,10 @@ tile_id = 23
 [node name="TreeAutumnLarge" parent="." instance=ExtResource( 3 )]
 position = Vector2( 220, 120 )
 tile_id = 19
+
+[node name="TreeAutumnGroup" parent="." instance=ExtResource( 3 )]
+position = Vector2( 220, 170 )
+tile_id = 26
 
 [node name="RoadVertical" parent="." instance=ExtResource( 3 )]
 position = Vector2( 20, 120 )
