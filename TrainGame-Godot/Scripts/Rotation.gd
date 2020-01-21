@@ -42,4 +42,8 @@ static func unrotate(rotation: int, vector2: Vector2) -> Vector2:
         return Vector2(-vector2.y, vector2.x)
     push_error("Unknown rotation: " + str(rotation))
     return vector2   
+
+# Returns the next rotation: NONE -> CLOCKWISE -> HALF -> COUNTER_CLOCKWISE -> NONE
+static func next(rotation: int) -> int:
+    return (rotation + 1) % 4
     

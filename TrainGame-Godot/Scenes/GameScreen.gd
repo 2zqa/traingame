@@ -74,5 +74,9 @@ func _unhandled_input(event: InputEvent) -> void:
         print(tile.name_id, " ", Rotation.to_string(tile.rotation))
     
 
-func _on_SideMenu_option_selected(selected_option: InteractOption):
+func _on_SideMenu_option_selected(selected_option: InteractOption) -> void:
     self.selected_option = selected_option
+
+func _on_SideMenu_rotation_requested() -> void:
+    $World/GroundTileMap.rotate_clockwise()
+    $World/ObjectsTileMap.rotate_clockwise()

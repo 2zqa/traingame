@@ -19,3 +19,4 @@ tile_data = PoolIntArray( 7, 16, 0, 8, 16, 0, 9, 16, 0, 10, 16, 0, 11, 16, 0, 12
 [node name="SideMenu" parent="." instance=ExtResource( 4 )]
 
 [connection signal="option_selected" from="SideMenu" to="." method="_on_SideMenu_option_selected"]
+[connection signal="rotation_requested" from="SideMenu" to="." method="_on_SideMenu_rotation_requested"]
