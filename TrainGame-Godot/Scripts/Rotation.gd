@@ -1,3 +1,5 @@
+class_name Rotation
+
 const NONE := 0  # No rotation
 const CLOCKWISE := 1  # 90 degrees clockwise
 const HALF := 2  # 180 degrees

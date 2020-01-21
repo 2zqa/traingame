@@ -2,34 +2,33 @@ extends Node2D
 
 const ObjectsTileMap = preload("res://Scenes/ObjectsTileMap.gd")
 const GroundTileMap = preload("res://Scenes/GroundTileMap.gd")
-const Rotation = preload("res://Scripts/Rotation.gd")
 
-var selected_option  # GroundTile or ObjectTile
+var selected_option: InteractOption  # GroundTile or ObjectTile
 
 var _previous_touch_pos: Dictionary
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-    self.selected_option = null
     self._previous_touch_pos = Dictionary()
+    self.selected_option = InteractOption.new("move")
 
 # Places the current tile at the given canvas position
 func place(canvas_position: Vector2) -> void:
-    if self.selected_option is GroundTile:
+    if self.selected_option.ground_tile != null:
         var tilemap_grounds: GroundTileMap = $World/GroundTileMap
         var ground_pos = tilemap_grounds.viewport_pos_to_tile_pos(canvas_position)
-        tilemap_grounds.set_tile(ground_pos, self.selected_option)
-    if self.selected_option is ObjectTile:
+        tilemap_grounds.set_tile(ground_pos, self.selected_option.ground_tile)
+    if self.selected_option.object_tile != null:
         var tilemap_objects: ObjectsTileMap = $World/ObjectsTileMap
         var ground_pos = tilemap_objects.viewport_pos_to_tile_pos(canvas_position)
-        tilemap_objects.set_tile(ground_pos, self.selected_option)
+        tilemap_objects.set_tile(ground_pos, self.selected_option.object_tile)
 
 # Places the current tile in a line of all given canvas positions
 func place_interpolated(canvas_position1: Vector2, canvas_position2: Vector2) -> void:
     var tilemap = null
-    if self.selected_option is GroundTile:
+    if self.selected_option.ground_tile != null:
         tilemap = $World/GroundTileMap
-    elif self.selected_option is ObjectTile:
+    elif self.selected_option.object_tile != null:
         tilemap = $World/ObjectsTileMap
     
     if tilemap != null:
@@ -38,12 +37,12 @@ func place_interpolated(canvas_position1: Vector2, canvas_position2: Vector2) ->
         var interpolation_steps = tile_pos1.distance_to(tile_pos2)
         if interpolation_steps == 0:
             # No interpolation necessary
-            tilemap.set_tile(canvas_position2, self.selected_option)
+            place(canvas_position2)
         else:
             # Interpolate
             for i in range(interpolation_steps + 1):
-                var tile_pos = tile_pos1.linear_interpolate(tile_pos2, i / interpolation_steps)
-                tilemap.set_tile(tile_pos, self.selected_option)
+                var canvas_position = canvas_position1.linear_interpolate(canvas_position2, i / interpolation_steps)
+                place(canvas_position)
     else:
         place(canvas_position2)  # Cannot interpolate for this type
 
@@ -75,5 +74,5 @@ func _unhandled_input(event: InputEvent) -> void:
         print(tile.name_id, " ", Rotation.to_string(tile.rotation))
     
 
-func _on_SideMenu_option_selected(selected_option):
+func _on_SideMenu_option_selected(selected_option: InteractOption):
     self.selected_option = selected_option
