@@ -20,7 +20,7 @@ func _unhandled_input(event: InputEvent) -> void:
     # Screen dragging with mouse
     if active:
         if event is InputEventMouseMotion and event.get_button_mask() != 0:
-            self.offset -= event.relative
+            self.offset -= event.relative * self.zoom
             self.get_tree().set_input_as_handled()
 
     # Zooming and moving with mouse wheel
@@ -29,7 +29,7 @@ func _unhandled_input(event: InputEvent) -> void:
         self.get_tree().set_input_as_handled()
         var control = Input.is_key_pressed(KEY_CONTROL)
         var shift = Input.is_key_pressed(KEY_SHIFT)
-        
+
         if control and not shift:
             # Zooming
             if event.button_index == BUTTON_WHEEL_UP:
