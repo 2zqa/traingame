@@ -4,12 +4,14 @@ const ObjectTile = preload("res://Scripts/ObjectTile.gd")
 
 
 # Sets the tile at the given position
-func set_tile(tile_position: Vector2, tile: ObjectTile) -> void:
+func set_tile(tile_position: Vector2, tile: ObjectTile, overwrite: bool = true) -> void:
     # Make sure to remove existing tile(s)
     for delta in tile.get_occupied_tile_positions():
         var existing_tile_result = self._search_texture(tile_position.x + delta.x, tile_position.y + delta.y)
         if existing_tile_result[2] != Global.Registry.OBJECT_EMPTY:
-            # Found existing tile, remove
+            # Found existing tile, remove or abort
+            if not overwrite:
+                return
             self.set_cell(existing_tile_result[0], existing_tile_result[1], -1)       
     
     # Set a new tile

@@ -13,7 +13,7 @@ func _ready() -> void:
     self.selected_option = InteractOption.new("move")
 
 # Places the current tile at the given canvas position
-func place(canvas_position: Vector2) -> void:
+func place(canvas_position: Vector2, overwrite_objects: bool = false) -> void:
     if self.selected_option.ground_tile != null:
         var tilemap_grounds: GroundTileMap = $World/GroundTileMap
         var ground_pos = tilemap_grounds.viewport_pos_to_tile_pos(canvas_position)
@@ -21,7 +21,7 @@ func place(canvas_position: Vector2) -> void:
     if self.selected_option.object_tile != null:
         var tilemap_objects: ObjectsTileMap = $World/ObjectsTileMap
         var ground_pos = tilemap_objects.viewport_pos_to_tile_pos(canvas_position)
-        tilemap_objects.set_tile(ground_pos, self.selected_option.object_tile)
+        tilemap_objects.set_tile(ground_pos, self.selected_option.object_tile, overwrite_objects)
 
 # Places the current tile in a line of all given canvas positions
 func place_interpolated(canvas_position1: Vector2, canvas_position2: Vector2) -> void:
@@ -53,7 +53,7 @@ func _process(delta: float) -> void:
          
     
 func _unhandled_input(event: InputEvent) -> void:
-    if (Global.Mouse.is_left_released(event)) \
+    if (event is InputEventMouseButton and event.button_index == BUTTON_LEFT) \
             or event is InputEventScreenDrag\
             or (event is InputEventMouseMotion and event.get_button_mask() != 0):
         var pointer_id = Global.Mouse.get_pointer_id(event)
@@ -62,8 +62,13 @@ func _unhandled_input(event: InputEvent) -> void:
                 (event is InputEventScreenDrag or event is InputEventMouseMotion):
             self.place_interpolated(previous_position, event.position)
         else:
-            self.place(event.position)
-        self._previous_touch_pos[pointer_id] = event.position
+            self.place(event.position, event.is_pressed())
+        
+        # Record position
+        if event is InputEventMouseMotion or event is InputEventScreenDrag:
+            self._previous_touch_pos[pointer_id] = event.position
+        else:
+            self._previous_touch_pos.erase(pointer_id)
         self.get_tree().set_input_as_handled()
 
 
