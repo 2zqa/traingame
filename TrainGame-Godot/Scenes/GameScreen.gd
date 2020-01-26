@@ -76,6 +76,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _on_SideMenu_option_selected(selected_option: InteractOption) -> void:
     self.selected_option = selected_option
+    $WorldCamera.active = selected_option.move
+
 
 func _on_SideMenu_rotation_requested() -> void:
     $World/GroundTileMap.rotate_clockwise()
