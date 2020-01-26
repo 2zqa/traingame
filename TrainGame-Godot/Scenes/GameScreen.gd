@@ -58,7 +58,8 @@ func _unhandled_input(event: InputEvent) -> void:
             or (event is InputEventMouseMotion and event.get_button_mask() != 0):
         var pointer_id = Global.Mouse.get_pointer_id(event)
         var previous_position = self._previous_touch_pos.get(pointer_id)
-        if previous_position != null:
+        if previous_position != null and \
+                (event is InputEventScreenDrag or event is InputEventMouseMotion):
             self.place_interpolated(previous_position, event.position)
         else:
             self.place(event.position)
