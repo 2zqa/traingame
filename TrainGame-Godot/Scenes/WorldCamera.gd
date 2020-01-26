@@ -16,13 +16,12 @@ func _clip_zoom(vector: Vector2) -> Vector2:
         min(_MAXIMUM_ZOOM.y, max(_MINIMUM_ZOOM.y, vector.y)))
 
 func _unhandled_input(event: InputEvent) -> void:
-    if not active:
-        return
     
     # Screen dragging with mouse
-    if event is InputEventMouseMotion and Input.is_mouse_button_pressed(BUTTON_LEFT):
-        self.offset -= event.relative
-        self.get_tree().set_input_as_handled()
+    if active:
+        if event is InputEventMouseMotion and event.get_button_mask() != 0:
+            self.offset -= event.relative
+            self.get_tree().set_input_as_handled()
 
     # Zooming with mouse wheel
     if event is InputEventMouseButton and event.is_pressed():
