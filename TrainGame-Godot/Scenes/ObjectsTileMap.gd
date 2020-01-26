@@ -1,5 +1,7 @@
 extends TileMap
 
+class_name ObjectsTileMap
+
 const ObjectTile = preload("res://Scripts/ObjectTile.gd")
 
 
@@ -64,8 +66,7 @@ func rotate_clockwise() -> void:
     # Set tiles
     self.clear()
     var i = 0
-    while i < texture_id_array.size():
-        var texture_id = texture_id_array[i]
+    for texture_id in texture_id_array:
         var object_tile = Global.Registry.get_object_tile_from_texture_id(texture_id)
         var new_texture_id = object_tile.get_rotated_texture(Rotation.next(object_tile.rotation))
         var tile_pos = positions_array[i]

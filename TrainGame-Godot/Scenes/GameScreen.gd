@@ -3,6 +3,9 @@ extends Node2D
 const ObjectsTileMap = preload("res://Scenes/ObjectsTileMap.gd")
 const GroundTileMap = preload("res://Scenes/GroundTileMap.gd")
 
+const WORLD_RECTANGLE := Rect2(Vector2(-100, -100), Vector2(201, 201))
+
+
 var selected_option: InteractOption  # GroundTile or ObjectTile
 
 var _previous_touch_pos: Dictionary
@@ -11,17 +14,24 @@ var _previous_touch_pos: Dictionary
 func _ready() -> void:
     self._previous_touch_pos = Dictionary()
     self.selected_option = InteractOption.new("move")
+    
+    WorldPopulator.populate(WORLD_RECTANGLE, $World/ObjectsTileMap, $World/GroundTileMap)
 
 # Places the current tile at the given canvas position
 func place(canvas_position: Vector2, overwrite_objects: bool = false) -> void:
     if self.selected_option.ground_tile != null:
         var tilemap_grounds: GroundTileMap = $World/GroundTileMap
-        var ground_pos = tilemap_grounds.viewport_pos_to_tile_pos(canvas_position)
-        tilemap_grounds.set_tile(ground_pos, self.selected_option.ground_tile)
+        var tile_pos = tilemap_grounds.viewport_pos_to_tile_pos(canvas_position)
+        if self._is_in_bounds(tile_pos):
+            tilemap_grounds.set_tile(tile_pos, self.selected_option.ground_tile)
     if self.selected_option.object_tile != null:
         var tilemap_objects: ObjectsTileMap = $World/ObjectsTileMap
-        var ground_pos = tilemap_objects.viewport_pos_to_tile_pos(canvas_position)
-        tilemap_objects.set_tile(ground_pos, self.selected_option.object_tile, overwrite_objects)
+        var tile_pos = tilemap_objects.viewport_pos_to_tile_pos(canvas_position)
+        if self._is_in_bounds(tile_pos):
+            tilemap_objects.set_tile(tile_pos, self.selected_option.object_tile, overwrite_objects)
+
+func _is_in_bounds(tile_pos: Vector2) -> bool:
+    return WORLD_RECTANGLE.has_point(tile_pos)
 
 # Places the current tile in a line of all given canvas positions
 func place_interpolated(canvas_position1: Vector2, canvas_position2: Vector2) -> void:

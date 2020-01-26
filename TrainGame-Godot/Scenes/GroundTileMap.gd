@@ -1,5 +1,7 @@
 extends TileMap
 
+class_name GroundTileMap
+
 const GroundTile = preload("res://Scripts/GroundTile.gd")
 
 
