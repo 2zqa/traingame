@@ -88,8 +88,9 @@ func _input(event: InputEvent) -> void:
         # Finger released, clear previous position
         self._previous_touch_pos.erase(Global.Mouse.get_pointer_id(event))
         var objects = $World/ObjectsTileMap
-        var tile = objects.get_tile(objects.mouse_event_to_tile_pos(event))
-        print(tile.name_id, " ", Rotation.to_string(tile.rotation))
+        var tile_pos = objects.mouse_event_to_tile_pos(event)
+        var tile = objects.get_tile(tile_pos)
+        print(tile_pos, ": ", tile.name_id, " ", Rotation.to_string(tile.rotation))
 
 
 func _on_SideMenu_option_selected(selected_option: InteractOption) -> void:
