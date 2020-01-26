@@ -61,7 +61,7 @@ var TREE := _register_object_tile(ObjectTile.new("tree", [21, 21, 21, 21]))
 #warning-ignore:unused_class_variable
 var TREE_LARGE := _register_object_tile(ObjectTile.new("tree_large", [17, 17, 17, 17]))
 #warning-ignore:unused_class_variable
-var TREE_GROUP := _register_object_tile(ObjectTile.new("tree_group", [25, 25, 25, 25]))
+var TREE_GROUP := _register_object_tile(ObjectTile.new("tree_group", [25, 25, 25, 25], "XX OX"))
 
 #warning-ignore:unused_class_variable
 var TREE_AUTUMN_SMALL := _register_object_tile(ObjectTile.new("tree_autumn_small", [24, 24, 24, 24]))
@@ -70,7 +70,7 @@ var TREE_AUTUMN := _register_object_tile(ObjectTile.new("tree_autumn", [23, 23, 
 #warning-ignore:unused_class_variable
 var TREE_AUTUMN_LARGE := _register_object_tile(ObjectTile.new("tree_autumn_large", [19, 19, 19, 19]))
 #warning-ignore:unused_class_variable
-var TREE_AUTUMN_GROUP := _register_object_tile(ObjectTile.new("tree_autumn_group", [26, 26, 26, 26]))
+var TREE_AUTUMN_GROUP := _register_object_tile(ObjectTile.new("tree_autumn_group", [26, 26, 26, 26], "XX OX"))
 
 # Ground tiles
 var GRASS := _register_ground_tile(GroundTile.new("grass", 0))
