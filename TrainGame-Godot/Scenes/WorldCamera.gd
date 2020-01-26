@@ -1,7 +1,7 @@
 extends Camera2D
 
-const _MINIMUM_ZOOM = Vector2(0.5, 0.5)
-const _MAXIMUM_ZOOM = Vector2(4, 4)
+const _MINIMUM_ZOOM = Vector2(0.25, 0.25)
+const _MAXIMUM_ZOOM = Vector2(2, 2)
 const _MOVE_DISTANCE = 100
 
 var active: bool
