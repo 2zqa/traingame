@@ -65,7 +65,9 @@ func _unhandled_input(event: InputEvent) -> void:
             self.place(event.position)
         self._previous_touch_pos[pointer_id] = event.position
         self.get_tree().set_input_as_handled()
-    
+
+
+func _input(event: InputEvent) -> void:
     if (event is InputEventScreenTouch and not event.is_pressed()) or \
             Global.Mouse.is_left_released(event):
         # Finger released, clear previous position
@@ -73,7 +75,7 @@ func _unhandled_input(event: InputEvent) -> void:
         var objects = $World/ObjectsTileMap
         var tile = objects.get_tile(objects.mouse_event_to_tile_pos(event))
         print(tile.name_id, " ", Rotation.to_string(tile.rotation))
-    
+
 
 func _on_SideMenu_option_selected(selected_option: InteractOption) -> void:
     self.selected_option = selected_option
