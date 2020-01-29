@@ -2,8 +2,7 @@ extends Control
 
 signal tile_selected  # Supplies one argument of type ObjectsTile
 
-const ObjectTile = preload("res://Scripts/ObjectTile.gd")
-const SingleTileDisplay = preload("res://Scenes/SideMenu/SideMenu.gd")
+const SingleTileDisplay = preload("res://Scenes/SingleTileDisplay.gd")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

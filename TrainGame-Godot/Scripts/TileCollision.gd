@@ -1,8 +1,6 @@
 # Used to set tile collisions.
 class_name TileCollision
 
-var Rotation = preload("res://Scripts/Rotation.gd")
-
 var _lines: Array
 var _size: Vector2
 var _origin: Vector2

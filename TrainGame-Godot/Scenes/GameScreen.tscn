@@ -23,6 +23,5 @@ tile_data = PoolIntArray(  )
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="SideMenu" parent="CanvasLayer" instance=ExtResource( 5 )]
-
 [connection signal="option_selected" from="CanvasLayer/SideMenu" to="." method="_on_SideMenu_option_selected"]
 [connection signal="rotation_requested" from="CanvasLayer/SideMenu" to="." method="_on_SideMenu_rotation_requested"]

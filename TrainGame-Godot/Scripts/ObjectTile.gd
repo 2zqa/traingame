@@ -1,8 +1,5 @@
 class_name ObjectTile
 
-var TileCollision := preload("res://Scripts/TileCollision.gd")
-var Rotation := preload("res://Scripts/Rotation.gd")
-
 
 var name_id: String
 var rotation: int

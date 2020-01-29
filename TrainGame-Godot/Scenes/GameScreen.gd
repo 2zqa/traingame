@@ -90,7 +90,7 @@ func _input(event: InputEvent) -> void:
         var objects = $World/ObjectsTileMap
         var tile_pos = objects.mouse_event_to_tile_pos(event)
         var tile = objects.get_tile(tile_pos)
-        print(tile_pos, ": ", tile.name_id, " ", Rotation.to_string(tile.rotation))
+        print(tile_pos, ": ", tile.name_id, " ", Rotation.rotation_to_string(tile.rotation))
 
 
 func _on_SideMenu_option_selected(selected_option: InteractOption) -> void:
@@ -99,5 +99,6 @@ func _on_SideMenu_option_selected(selected_option: InteractOption) -> void:
 
 
 func _on_SideMenu_rotation_requested() -> void:
+    print("Rotating!")
     $World/GroundTileMap.rotate_clockwise()
     $World/ObjectsTileMap.rotate_clockwise()

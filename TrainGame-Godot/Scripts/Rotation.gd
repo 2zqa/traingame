@@ -6,7 +6,7 @@ const HALF := 2  # 180 degrees
 const COUNTER_CLOCKWISE := 3  # 270 degrees clockwise
 
 # Rotations are stored as numbers; this function gets the string, which is useful for debugging.
-static func to_string(rotation: int) -> String:
+static func rotation_to_string(rotation: int) -> String:
     if rotation == NONE:
         return "NONE"
     if rotation == CLOCKWISE:
