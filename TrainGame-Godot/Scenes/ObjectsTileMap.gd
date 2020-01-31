@@ -70,7 +70,9 @@ func rotate_clockwise() -> void:
         var object_tile = Global.Registry.get_object_tile_from_texture_id(texture_id)
         var new_texture_id = object_tile.get_rotated_texture(Rotation.next(object_tile.rotation))
         var tile_pos = positions_array[i]
-        self.set_cellv(Rotation.rotate(Rotation.CLOCKWISE, tile_pos), new_texture_id)
-        
+        var rotation_offset = object_tile.get_rotation_offset()
+        var rotated_tile_pos = Rotation.rotate(Rotation.CLOCKWISE, tile_pos + rotation_offset) - rotation_offset
+        self.set_cellv(rotated_tile_pos, new_texture_id)
+
         i += 1
     

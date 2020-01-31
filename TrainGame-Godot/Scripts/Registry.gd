@@ -41,15 +41,15 @@ var OBJECT_EMPTY := _register_object_tile(ObjectTile.new("object_empty", [-1, -1
 #warning-ignore:unused_class_variable
 var RAIL_STRAIGHT := _register_object_tile(ObjectTile.new("rail_straight", [0, 16, 0, 16]))
 #warning-ignore:unused_class_variable
-var RAIL_CORNER := _register_object_tile(ObjectTile.new("rail_corner", [1, 14, 15, 13], "XXX XOX XX."))
+var RAIL_CORNER := _register_object_tile(ObjectTile.new("rail_corner", [1, 14, 15, 13], "XXX\nXOX\nXX."))
 #warning-ignore:unused_class_variable
 var ROAD_STRAIGHT := _register_object_tile(ObjectTile.new("road_straight", [4, 3, 4, 3], "XOX"))
 #warning-ignore:unused_class_variable
-var ROAD_CORNER := _register_object_tile(ObjectTile.new("road_corner", [7, 9, 11, 12], "XXX XOX XXX"))
+var ROAD_CORNER := _register_object_tile(ObjectTile.new("road_corner", [7, 9, 11, 12], "XXX\nXOX\nXXX"))
 #warning-ignore:unused_class_variable
-var ROAD_CROSSING := _register_object_tile(ObjectTile.new("road_crossing", [2, 2, 2, 2], "XXX XOX XXX"))
+var ROAD_CROSSING := _register_object_tile(ObjectTile.new("road_crossing", [2, 2, 2, 2], "XXX\nXOX\nXXX"))
 #warning-ignore:unused_class_variable
-var ROAD_T := _register_object_tile(ObjectTile.new("road_t", [5, 6, 8, 10], "XXX XOX XXX"))
+var ROAD_T := _register_object_tile(ObjectTile.new("road_t", [5, 6, 8, 10], "XXX\nXOX\nXXX"))
 #warning-ignore:unused_class_variable
 var RAIL_CROSSING_ROAD := _register_object_tile(ObjectTile.new("rail_crossing_road", [36, 35, 36, 35], "XOX"))
 
@@ -61,7 +61,7 @@ var TREE := _register_object_tile(ObjectTile.new("tree", [21, 21, 21, 21]))
 #warning-ignore:unused_class_variable
 var TREE_LARGE := _register_object_tile(ObjectTile.new("tree_large", [17, 17, 17, 17]))
 #warning-ignore:unused_class_variable
-var TREE_GROUP := _register_object_tile(ObjectTile.new("tree_group", [25, 25, 25, 25], "XX XO"))
+var TREE_GROUP := _register_object_tile(ObjectTile.new("tree_group", [25, 25, 25, 25], "XX\ndX"))
 
 #warning-ignore:unused_class_variable
 var TREE_AUTUMN_SMALL := _register_object_tile(ObjectTile.new("tree_autumn_small", [24, 24, 24, 24]))
@@ -70,7 +70,7 @@ var TREE_AUTUMN := _register_object_tile(ObjectTile.new("tree_autumn", [23, 23, 
 #warning-ignore:unused_class_variable
 var TREE_AUTUMN_LARGE := _register_object_tile(ObjectTile.new("tree_autumn_large", [19, 19, 19, 19]))
 #warning-ignore:unused_class_variable
-var TREE_AUTUMN_GROUP := _register_object_tile(ObjectTile.new("tree_autumn_group", [26, 26, 26, 26], "XX OX"))
+var TREE_AUTUMN_GROUP := _register_object_tile(ObjectTile.new("tree_autumn_group", [26, 26, 26, 26], "XX\ndX"))
 
 # Ground tiles
 var GRASS := _register_ground_tile(GroundTile.new("grass", 0))

@@ -35,6 +35,12 @@ func with_rotation(rotation: int) -> ObjectTile:
 func get_rotated_texture(rotation: int) -> int:
     return self._texture_ids[rotation]
 
+# Most objects rotate around a single tile (their origin), "  O--" becomes "--O  " with a rotation of 180 degrees.
+# However, sometimes you want to rotate around a position in between tiles, for example "   OP--" becomes " --dO  "
+# instead of "--dO   " (note the amount of spaces). In that case you need a rotation offset.
+func get_rotation_offset() -> Vector2:
+    return self._collision.get_rotation_offset()
+
 # Checks if this tile collides at the tile relative to this tile
 func collides(tile_dx: int, tile_dy: int) -> bool:
     return self._collision.collides(self.rotation, tile_dx, tile_dy)
