@@ -55,12 +55,6 @@ func place_interpolated(canvas_position1: Vector2, canvas_position2: Vector2) ->
                 place(canvas_position)
     else:
         place(canvas_position2)  # Cannot interpolate for this type
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-    pass
-         
     
 func _unhandled_input(event: InputEvent) -> void:
     if (event is InputEventMouseButton and event.button_index == BUTTON_LEFT) \

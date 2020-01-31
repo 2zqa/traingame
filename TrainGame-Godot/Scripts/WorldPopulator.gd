@@ -21,8 +21,4 @@ static func populate(world_rect: Rect2, objects: ObjectsTileMap, ground: GroundT
                 objects.set_tile(world_pos, Global.Registry.TREE_GROUP)
             tile_pos.y += 1
         tile_pos.x += 1
- 
-
-    # Add trees
-    var x = 0
     

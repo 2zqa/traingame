@@ -46,9 +46,7 @@ func size() -> Vector2:
 func collides(rotation: int, tile_dx: int, tile_dy: int) -> bool:
     var unrotated = Rotation.unrotate(rotation, Vector2(tile_dx, tile_dy))
 
-    return self._collides_without_rotation(unrotated)
-    push_error("Unknown rotation: " + str(rotation))
-    return false    
+    return self._collides_without_rotation(unrotated) 
 
 # Gets a list of all positions occupied by this collision shape
 func get_occupied_positions(rotation: int) -> PoolVector2Array:
