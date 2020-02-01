@@ -18,17 +18,16 @@ func set_tile(tile_position: Vector2, tile: ObjectTile, overwrite: bool = true) 
     
     # Set a new tile
     self.set_cellv(tile_position, tile.get_texture_id())
-        
-# Gets the tile at the given position
-func get_tile(tile_position: Vector2) -> ObjectTile:
-    var tile_x = tile_position.x
-    var tile_y = tile_position.y
-    var result = self._search_texture(tile_x, tile_y)
-    tile_x = result[0]
-    tile_y = result[1]
+
+
+# Gets the tile at the given position.
+func get_tile(tile_pos: Vector2) -> ObjectTile:
+    var result = self._search_texture(int(tile_pos.x), int(tile_pos.y))
     return result[2]
 
-func _get_tile_no_search(tile_x: int, tile_y: int) -> ObjectTile:
+
+# Gets the tile with the origin at the given position, without looking at the full object.
+func get_tile_no_search(tile_x: int, tile_y: int) -> ObjectTile:
     var texture_id = self.get_cell(tile_x, tile_y)
     return Global.Registry.get_object_tile_from_texture_id(texture_id)
 
@@ -37,7 +36,7 @@ func _get_tile_no_search(tile_x: int, tile_y: int) -> ObjectTile:
 func _search_texture(tile_x: int, tile_y: int) -> Array:
     for dx in [1, 0, -1, -2]:
         for dy in [1, 0, -1, -2]:
-            var object_tile = _get_tile_no_search(tile_x + dx, tile_y + dy)
+            var object_tile = get_tile_no_search(tile_x + dx, tile_y + dy)
             if object_tile.equals(Global.Registry.OBJECT_EMPTY):
                 continue
 
@@ -45,6 +44,7 @@ func _search_texture(tile_x: int, tile_y: int) -> Array:
                 continue  # Outside texture
             return [tile_x + dx, tile_y + dy, object_tile]
     return [tile_x, tile_y, Global.Registry.OBJECT_EMPTY]
+
 
 # Gets the tile coordinate from the given mouse event
 func mouse_event_to_tile_pos(mouse: InputEvent) -> Vector2:

@@ -10,6 +10,11 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Reference",
+"class": "FileIO",
+"language": "GDScript",
+"path": "res://Scripts/FileIO.gd"
+}, {
+"base": "Reference",
 "class": "GroundTile",
 "language": "GDScript",
 "path": "res://Scripts/GroundTile.gd"
@@ -50,6 +55,7 @@ _global_script_classes=[ {
 "path": "res://Scripts/WorldPopulator.gd"
 } ]
 _global_script_class_icons={
+"FileIO": "",
 "GroundTile": "",
 "GroundTileMap": "",
 "InteractOption": "",
@@ -63,7 +69,7 @@ _global_script_class_icons={
 [application]
 
 config/name="TrainGame"
-run/main_scene="res://Scenes/GameScreen.tscn"
+run/main_scene="res://Scenes/TitleScreen.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -74,6 +80,15 @@ Global="*res://Scripts/Global.gd"
 
 gdscript/warnings/shadowed_variable=false
 
+[display]
+
+window/dpi/allow_hidpi=true
+window/energy_saving/keep_screen_on=false
+
+[gui]
+
+theme/use_hidpi=true
+
 [input]
 
 game_place={
@@ -81,6 +96,10 @@ game_place={
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
+
+[input_devices]
+
+pointing/emulate_mouse_from_touch=false
 
 [rendering]
 
