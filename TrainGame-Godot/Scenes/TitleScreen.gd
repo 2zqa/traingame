@@ -9,4 +9,6 @@ func _ready():
 
 
 func _on_StartButton_pressed():
-    get_tree().change_scene_to(gameScreen)
+    if get_tree().change_scene_to(gameScreen) != OK:
+        return
+    print(get_tree().root)

@@ -24,44 +24,44 @@ margin_right = 904.0
 margin_bottom = 520.0
 
 [node name="CenterContainer2" type="CenterContainer" parent="HBoxContainer"]
-margin_right = 135.0
+margin_right = 233.0
 margin_bottom = 440.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/CenterContainer2"]
-margin_top = 171.0
-margin_right = 135.0
-margin_bottom = 269.0
+margin_top = 148.0
+margin_right = 233.0
+margin_bottom = 291.0
 size_flags_horizontal = 3
 custom_constants/separation = 22
 
 [node name="TitleLabel" type="Label" parent="HBoxContainer/CenterContainer2/VBoxContainer"]
-margin_right = 135.0
-margin_bottom = 14.0
+margin_right = 233.0
+margin_bottom = 25.0
 text = "TrainGame"
 
 [node name="StartButton" type="Button" parent="HBoxContainer/CenterContainer2/VBoxContainer"]
-margin_top = 36.0
-margin_right = 135.0
-margin_bottom = 56.0
+margin_top = 47.0
+margin_right = 233.0
+margin_bottom = 84.0
 text = "Start new game"
 
 [node name="LoadButton" type="Button" parent="HBoxContainer/CenterContainer2/VBoxContainer"]
-margin_top = 78.0
-margin_right = 135.0
-margin_bottom = 98.0
+margin_top = 106.0
+margin_right = 233.0
+margin_bottom = 143.0
 text = "Load existing game"
 
 [node name="CenterContainer" type="CenterContainer" parent="HBoxContainer"]
-margin_left = 139.0
+margin_left = 241.0
 margin_right = 784.0
 margin_bottom = 440.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/CenterContainer"]
-margin_left = 232.0
+margin_left = 181.0
 margin_top = 149.0
-margin_right = 413.0
+margin_right = 362.0
 margin_bottom = 291.0
 texture = ExtResource( 1 )
 [connection signal="pressed" from="HBoxContainer/CenterContainer2/VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]

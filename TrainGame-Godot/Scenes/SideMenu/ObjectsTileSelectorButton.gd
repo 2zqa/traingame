@@ -10,7 +10,7 @@ func _ready() -> void:
 
 # Handles selection of tiles
 func _unhandled_input(event: InputEvent) -> void:  
-    if not Global.Mouse.is_left_released(event):
+    if not Mouse.is_left_released(event):
         return  # Ignore anything that is not a click release
 
     var display: SingleTileDisplay = $Display

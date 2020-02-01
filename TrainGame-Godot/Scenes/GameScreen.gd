@@ -60,7 +60,7 @@ func _unhandled_input(event: InputEvent) -> void:
     if (event is InputEventMouseButton and event.button_index == BUTTON_LEFT) \
             or event is InputEventScreenDrag\
             or (event is InputEventMouseMotion and event.get_button_mask() != 0):
-        var pointer_id = Global.Mouse.get_pointer_id(event)
+        var pointer_id = Mouse.get_pointer_id(event)
         var previous_position = self._previous_touch_pos.get(pointer_id)
         if previous_position != null and \
                 (event is InputEventScreenDrag or event is InputEventMouseMotion):
@@ -78,9 +78,9 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _input(event: InputEvent) -> void:
     if (event is InputEventScreenTouch and not event.is_pressed()) or \
-            Global.Mouse.is_left_released(event):
+            Mouse.is_left_released(event):
         # Finger released, clear previous position
-        self._previous_touch_pos.erase(Global.Mouse.get_pointer_id(event))
+        self._previous_touch_pos.erase(Mouse.get_pointer_id(event))
         var objects = $World/ObjectsTileMap
         var tile_pos = objects.mouse_event_to_tile_pos(event)
         var tile = objects.get_tile(tile_pos)

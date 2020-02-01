@@ -11,7 +11,7 @@ func _input(event: InputEvent) -> void:
     if not self.visible:
         return
 
-    if not Global.Mouse.is_left_released(event):
+    if not Mouse.is_left_released(event):
         return
 
     for child in self.get_children():

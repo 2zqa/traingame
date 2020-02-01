@@ -10,7 +10,7 @@ func _input(event: InputEvent) -> void:
     if not self.visible:
         return
 
-    if not Global.Mouse.is_left_released(event):
+    if not Mouse.is_left_released(event):
         return
         
     var tilemap_grounds: TileMap = $GroundTileMap
