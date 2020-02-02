@@ -1,0 +1,48 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scenes/PauseMenu.gd" type="Script" id=1]
+
+[node name="PauseMenu" type="PopupDialog"]
+margin_right = 393.0
+margin_bottom = 202.0
+popup_exclusive = true
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -127.0
+margin_top = -69.5
+margin_right = 127.0
+margin_bottom = 69.5
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TitleLabel" type="Label" parent="VBoxContainer"]
+margin_right = 254.0
+margin_bottom = 25.0
+text = "Game Paused"
+align = 1
+
+[node name="ContinueButton" type="Button" parent="VBoxContainer"]
+margin_top = 45.0
+margin_right = 254.0
+margin_bottom = 82.0
+text = "Continue Playing"
+
+[node name="SaveAndQuitButton" type="Button" parent="VBoxContainer"]
+margin_top = 102.0
+margin_right = 254.0
+margin_bottom = 139.0
+text = "Save and Quit to Title"
+[connection signal="pressed" from="VBoxContainer/ContinueButton" to="." method="_on_ContinueButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/SaveAndQuitButton" to="." method="_on_SaveAndQuitButton_pressed"]

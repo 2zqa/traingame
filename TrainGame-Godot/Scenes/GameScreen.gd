@@ -4,7 +4,7 @@ const ObjectsTileMap = preload("res://Scenes/ObjectsTileMap.gd")
 const GroundTileMap = preload("res://Scenes/GroundTileMap.gd")
 
 const WORLD_RECTANGLE := Rect2(Vector2(-100, -100), Vector2(201, 201))
-
+const _MENU_SCREEN := "res://Scenes/TitleScreen.tscn"
 
 var selected_option: InteractOption  # GroundTile or ObjectTile
 
@@ -96,3 +96,8 @@ func _on_SideMenu_rotation_requested() -> void:
     print("Rotating!")
     $World/GroundTileMap.rotate_clockwise()
     $World/ObjectsTileMap.rotate_clockwise()
+
+func _on_SideMenu_save_and_quit_requested() -> void:
+    FileIO.write(Global.world_save_location, WORLD_RECTANGLE, $World/ObjectsTileMap, $World/GroundTileMap)
+    if not get_tree().change_scene(_MENU_SCREEN):
+        push_error("Failed to change scene")

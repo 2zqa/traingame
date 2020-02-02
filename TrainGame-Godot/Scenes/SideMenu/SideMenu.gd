@@ -7,15 +7,16 @@ signal option_selected
 # Fired when the rotation button is pressed. Supplies no arguments.
 signal rotation_requested 
 
+# Fired when the "Save and Quit" button is pressed. Supplies no arguments.
+signal save_and_quit_requested
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     pass # Replace with function body.
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta: float) -> void:
-#    pass
 
+func _on_PauseButton_save_and_quit_requested() -> void:
+    emit_signal("save_and_quit_requested")  # Forwards
 
 
 func _on_GroundTileSelectorButton_tile_selected(tile: GroundTile):
