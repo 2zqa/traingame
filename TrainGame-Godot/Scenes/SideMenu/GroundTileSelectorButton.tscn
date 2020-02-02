@@ -2,19 +2,19 @@
 
 [ext_resource path="res://Scenes/SideMenu/GroundTileSelectorButton.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/SideMenu/GroundTileSelectorPopup.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/SingleTileDisplay.tscn" type="PackedScene" id=3]
-[ext_resource path="res://TileSets/Ground.tres" type="TileSet" id=4]
+[ext_resource path="res://Images/tilesheet_ground.png" type="Texture" id=3]
 
-[node name="GroundTileSelectorButton" type="Control"]
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 3 )
+region = Rect2( 16, 0, 16, 16 )
+
+[node name="GroundTileSelectorButton" type="TextureButton"]
+texture_normal = SubResource( 1 )
 script = ExtResource( 1 )
 __meta__ = {
-"_edit_group_": true
+"_edit_use_anchors_": false
 }
 
 [node name="GroundTileSelectorPopup" parent="." instance=ExtResource( 2 )]
-
-[node name="Display" parent="." instance=ExtResource( 3 )]
-tile_set = ExtResource( 4 )
-tile_id = 0
-
+[connection signal="pressed" from="." to="." method="_on_GroundTileSelectorButton_pressed"]
 [connection signal="tile_selected" from="GroundTileSelectorPopup" to="." method="_on_GroundSelector_tile_selected"]

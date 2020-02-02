@@ -43,8 +43,10 @@ expand = true
 [node name="GroundTileSelectorButton" parent="NinePatchRect" instance=ExtResource( 5 )]
 margin_left = 20.0
 margin_top = 140.0
-margin_right = 20.0
-margin_bottom = 20.0
+margin_right = 60.0
+margin_bottom = 180.0
+expand = true
+stretch_mode = 5
 
 [node name="ObjectsTileSelectorButton" parent="NinePatchRect" instance=ExtResource( 6 )]
 margin_left = 20.0
