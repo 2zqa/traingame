@@ -2,23 +2,8 @@ extends Control
 
 signal tile_selected  # Supplies one argument of type ObjectsTile
 
-const SingleTileDisplay = preload("res://Scenes/SingleTileDisplay.gd")
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-    pass
-
 # Handles selection of tiles
-func _unhandled_input(event: InputEvent) -> void:  
-    if not Mouse.is_left_released(event):
-        return  # Ignore anything that is not a click release
-
-    var display: SingleTileDisplay = $Display
-    var local_mouse_pos = display.make_input_local(event).position
-    if local_mouse_pos.x < 0 or local_mouse_pos.y < 0\
-            or local_mouse_pos.x > display.size.x or local_mouse_pos.y > display.size.y:
-        return  # Clicked outside the button
-
+func _on_ObjectsTileSelectorButton_pressed() -> void:  
     # Open popup
     var popup = $ObjectsTileSelectorPopup
     popup.popup()
@@ -29,8 +14,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _on_ObjectsTileSelectorPopup_tile_selected(tile: ObjectTile) -> void:
     # Update UI
-    var display : SingleTileDisplay = $Display
-    display.tile_id = tile.get_texture_id()
+    self.texture_normal = tile.create_texture()
 
     # Forward
     emit_signal("tile_selected", tile)

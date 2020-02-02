@@ -1,5 +1,6 @@
 class_name ObjectTile
 
+const _TILE_SET := preload("res://TileSets/Objects.tres")
 
 var name_id: String
 var rotation: int
@@ -45,9 +46,19 @@ func get_rotation_offset() -> Vector2:
 func collides(tile_dx: int, tile_dy: int) -> bool:
     return self._collision.collides(self.rotation, tile_dx, tile_dy)
 
+# Gets an array of all (relative) positions that are occupied by this tile (at the current rotation).
 func get_occupied_tile_positions() -> PoolVector2Array:
     return self._collision.get_occupied_positions(self.rotation)
 
+# Gets all possible rotations of this tile.
 func all_rotations() -> Array:
     return [self.with_rotation(Rotation.NONE), self.with_rotation(Rotation.CLOCKWISE),
             self.with_rotation(Rotation.HALF), self.with_rotation(Rotation.COUNTER_CLOCKWISE)]
+
+# Creates the texture of this tile
+func create_texture() -> Texture:
+    var atlas = AtlasTexture.new()
+    var texture_id = self.get_texture_id()
+    atlas.atlas = _TILE_SET.tile_get_texture(texture_id)
+    atlas.region = _TILE_SET.tile_get_region(texture_id)
+    return atlas
