@@ -1,4 +1,4 @@
-extends PopupDialog
+extends Popup
 
 signal save_and_quit_button_pressed  # Used when the "Save and Quit" button is pressed
 
