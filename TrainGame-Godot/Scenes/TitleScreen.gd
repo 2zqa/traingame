@@ -1,6 +1,6 @@
 extends MarginContainer
 
-export(PackedScene) var gameScreen;
+export(PackedScene) var newWorldScene;
 
 
 # Called when the node enters the scene tree for the first time.
@@ -9,6 +9,5 @@ func _ready():
 
 
 func _on_StartButton_pressed():
-    if get_tree().change_scene_to(gameScreen) != OK:
+    if get_tree().change_scene_to(newWorldScene) != OK:
         return
-    print(get_tree().root)

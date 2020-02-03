@@ -3,6 +3,7 @@
 [ext_resource path="res://Scenes/PauseMenu.gd" type="Script" id=1]
 
 [node name="PauseMenu" type="PopupDialog"]
+visible = true
 margin_right = 393.0
 margin_bottom = 202.0
 popup_exclusive = true
@@ -30,19 +31,19 @@ __meta__ = {
 [node name="TitleLabel" type="Label" parent="VBoxContainer"]
 margin_right = 254.0
 margin_bottom = 25.0
-text = "Game Paused"
+text = "Game paused"
 align = 1
 
 [node name="ContinueButton" type="Button" parent="VBoxContainer"]
 margin_top = 45.0
 margin_right = 254.0
 margin_bottom = 82.0
-text = "Continue Playing"
+text = "Continue playing"
 
 [node name="SaveAndQuitButton" type="Button" parent="VBoxContainer"]
 margin_top = 102.0
 margin_right = 254.0
 margin_bottom = 139.0
-text = "Save and Quit to Title"
+text = "Save and quit to title"
 [connection signal="pressed" from="VBoxContainer/ContinueButton" to="." method="_on_ContinueButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/SaveAndQuitButton" to="." method="_on_SaveAndQuitButton_pressed"]
