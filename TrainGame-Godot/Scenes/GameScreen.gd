@@ -99,5 +99,6 @@ func _on_SideMenu_rotation_requested() -> void:
 
 func _on_SideMenu_save_and_quit_requested() -> void:
     FileIO.write(Global.world_save_location, WORLD_RECTANGLE, $World/ObjectsTileMap, $World/GroundTileMap)
-    if not get_tree().change_scene(_MENU_SCREEN):
+    FileIO.write_name(Global.world_save_location, Global.world_name)
+    if get_tree().change_scene(_MENU_SCREEN) != OK:
         push_error("Failed to change scene")

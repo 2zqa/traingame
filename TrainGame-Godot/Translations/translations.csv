@@ -10,3 +10,9 @@ Cancel;Annuleren
 Game paused;Spel gepauzeerd
 Continue playing;Terug naar spel
 Save and quit to title;Opslaan en naar hoofdmenu
+Load an existing world;Kies een wereld om te laden
+Play selected world;Speel deze wereld
+Rename;Naam wijzigen
+Delete;Verwijderen
+<no worlds exist>;<geen werelden gevonden>
+Select a world:;Kies een wereld:
