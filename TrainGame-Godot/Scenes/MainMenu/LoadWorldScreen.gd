@@ -22,9 +22,19 @@ func _ready():
         i += 1
 
 
-func _on_CancelButton_pressed():
+func _on_CancelButton_pressed() -> void:
     if get_tree().change_scene("res://Scenes/MainMenu/TitleScreen.tscn") != OK:
         push_error("Failed to switch to TitleScreen")
+
+
+func _on_PlayButton_pressed() -> void:
+    var world_index = self._world_id - 1
+    if world_index < 0:
+        return
+    Global.world_save_location = self._world_files[world_index]
+    Global.world_name = self._world_names[world_index]
+    if get_tree().change_scene("res://Scenes/GameScreen.tscn") != OK:
+        push_error("Failed to switch to GameScreen")
 
 
 func _set_buttons_enabled(enabled: bool) -> void:

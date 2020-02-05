@@ -16,6 +16,7 @@ func _ready() -> void:
     self.selected_option = InteractOption.new("move")
     
     WorldPopulator.populate(WORLD_RECTANGLE, $World/ObjectsTileMap, $World/GroundTileMap)
+    var _unused = FileIO.load_world(Global.world_save_location, $World/ObjectsTileMap, $World/GroundTileMap)
 
 # Places the current tile at the given canvas position
 func place(canvas_position: Vector2, overwrite_objects: bool = false) -> void:

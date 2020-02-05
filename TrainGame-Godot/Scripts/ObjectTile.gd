@@ -62,3 +62,7 @@ func create_texture() -> Texture:
     atlas.atlas = _TILE_SET.tile_get_texture(texture_id)
     atlas.region = _TILE_SET.tile_get_region(texture_id)
     return atlas
+
+# Gets the name under which this tile is registered.
+func to_string() -> String:
+    return self.name_id + "." + Rotation.rotation_to_string(self.rotation)

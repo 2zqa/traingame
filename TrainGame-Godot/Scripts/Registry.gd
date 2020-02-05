@@ -2,14 +2,16 @@ const ObjectTile = preload("res://Scripts/ObjectTile.gd")
 const GroundTile = preload("res://Scripts/GroundTile.gd")
 const TileCollision = preload("res://Scripts/TileCollision.gd")
 
+
 var _texture_id_to_object_tile := {}
 var _texture_id_to_ground_tile := {}
-
+var _name_to_tile := {}
 
 # Registers an object tile from the Objects tile set, so that it can be found using get_object_tile_from_*
 func _register_object_tile(tile: ObjectTile) -> ObjectTile:
     for rotated_tile in tile.all_rotations():
         _texture_id_to_object_tile[rotated_tile.get_texture_id()] = rotated_tile
+        _name_to_tile[rotated_tile.to_string()] = rotated_tile
     
     return tile
 
@@ -17,6 +19,7 @@ func _register_object_tile(tile: ObjectTile) -> ObjectTile:
 # Registers a ground tile from the Objects tile set, so that it can be found using get_object_tile_from_*
 func _register_ground_tile(tile: GroundTile) -> GroundTile:
     _texture_id_to_ground_tile[tile.texture_id] = tile
+    _name_to_tile[tile.to_string()] = tile
     return tile
 
 
@@ -34,7 +37,12 @@ func get_ground_tile_from_texture_id(texture_id: int) -> GroundTile:
     if ground_tile == null:
         return GRASS
     return ground_tile
-    
+
+
+# Gets the tile with the given name, or null if none exists.
+func get_tile_by_name(name: String) -> Object:
+    return self._name_to_tile.get(name)
+
 
 # Object tiles
 var OBJECT_EMPTY := _register_object_tile(ObjectTile.new("object_empty", [-1, -1, -1, -1]))
