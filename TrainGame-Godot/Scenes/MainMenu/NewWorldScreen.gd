@@ -26,5 +26,5 @@ func _create_world_save_location() -> String:
     return "This value is never returned, since it's after a while true loop"
 
 func _on_CancelButton_pressed() -> void:
-    if get_tree().change_scene("res://Scenes/TitleScreen.tscn") != OK:
+    if get_tree().change_scene("res://Scenes/MainMenu/TitleScreen.tscn") != OK:
         push_error("Failed to change scene to TitleScreen")

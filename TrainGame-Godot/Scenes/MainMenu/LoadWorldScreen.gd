@@ -23,7 +23,7 @@ func _ready():
 
 
 func _on_CancelButton_pressed():
-    if get_tree().change_scene("res://Scenes/TitleScreen.tscn") != OK:
+    if get_tree().change_scene("res://Scenes/MainMenu/TitleScreen.tscn") != OK:
         push_error("Failed to switch to TitleScreen")
 
 

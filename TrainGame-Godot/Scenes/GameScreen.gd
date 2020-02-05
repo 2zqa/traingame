@@ -4,7 +4,7 @@ const ObjectsTileMap = preload("res://Scenes/ObjectsTileMap.gd")
 const GroundTileMap = preload("res://Scenes/GroundTileMap.gd")
 
 const WORLD_RECTANGLE := Rect2(Vector2(-100, -100), Vector2(201, 201))
-const _MENU_SCREEN := "res://Scenes/TitleScreen.tscn"
+const _MENU_SCREEN := "res://Scenes/MainMenu/TitleScreen.tscn"
 
 var selected_option: InteractOption  # GroundTile or ObjectTile
 
