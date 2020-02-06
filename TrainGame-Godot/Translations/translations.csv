@@ -16,3 +16,10 @@ Rename;Naam wijzigen
 Delete;Verwijderen
 <no worlds exist>;<geen werelden gevonden>
 Select a world:;Kies een wereld:
+World is deleted!;Wereld is verwijderd!
+Deleting a world;Wereld verwijderen
+"You are about to delete an entire world, which cannot be undone.
+
+Are you sure you want to continue?";"Je staat op het punt een wereld te verwijderen. Dit kan niet ongedaan gemaakt worden.
+
+Weet je zeker dat je wil doorgaan?"

@@ -66,6 +66,20 @@ margin_left = 462.0
 margin_right = 557.0
 margin_bottom = 37.0
 text = "Cancel"
+
+[node name="DeleteConfirmationDialog" type="ConfirmationDialog" parent="."]
+visible = true
+margin_left = 120.0
+margin_top = 80.0
+margin_right = 904.0
+margin_bottom = 520.0
+window_title = "Deleting a world"
+dialog_text = "You are about to delete an entire world, which cannot be undone.
+
+Are you sure you want to continue?"
+dialog_autowrap = true
 [connection signal="item_selected" from="Container/WorldSelector" to="." method="_on_WorldSelector_item_selected"]
 [connection signal="pressed" from="Container/ButtonsContainer/PlayButton" to="." method="_on_PlayButton_pressed"]
+[connection signal="pressed" from="Container/ButtonsContainer/DeleteButton" to="." method="_on_DeleteButton_pressed"]
 [connection signal="pressed" from="Container/ButtonsContainer/CancelButton" to="." method="_on_CancelButton_pressed"]
+[connection signal="confirmed" from="DeleteConfirmationDialog" to="." method="_on_DeleteConfirmationDialog_confirmed"]

@@ -156,6 +156,26 @@ static func write_name(world_file_name: String, world_name: String) -> int:
     return OK
 
 
+# Deletes a world and its meta file. Returns ERR_FILE_NOT_FOUND if the world doesn't exist,
+# returns FAILED if the world does exist but the file couldn't be removed and returns OK if
+# deletion succeeded.
+static func delete_world(world_file_name: String) -> int:
+    var file_handle = File.new()
+    var directory_handle = Directory.new()
+    if not file_handle.file_exists(world_file_name):
+        return ERR_FILE_NOT_FOUND
+    if file_handle.file_exists(world_file_name + _META_SUFFIX):
+        var result = directory_handle.remove(world_file_name + _META_SUFFIX)
+        if result != OK:
+            push_error("Failed to delete meta file " + world_file_name + _META_SUFFIX + ". Error " + str(result))
+            return FAILED
+    var result = directory_handle.remove(world_file_name)
+    if result != OK:
+        push_error("Failed to delete file " + world_file_name + ". Error " + str(result))
+        return FAILED
+    return OK
+
+
 # Used to keep track of id <==> key mappings. Ids are auto-incremented ints, keys are strings.
 class _IdRegistry:
     var _key_to_id: Dictionary
