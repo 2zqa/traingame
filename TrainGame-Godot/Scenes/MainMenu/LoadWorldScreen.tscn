@@ -68,18 +68,60 @@ margin_bottom = 37.0
 text = "Cancel"
 
 [node name="DeleteConfirmationDialog" type="ConfirmationDialog" parent="."]
-visible = true
 margin_left = 120.0
 margin_top = 80.0
 margin_right = 904.0
 margin_bottom = 520.0
 window_title = "Deleting a world"
-dialog_text = "You are about to delete an entire world, which cannot be undone.
-
-Are you sure you want to continue?"
+dialog_text = "<text set by code when the delete button is pressed>"
 dialog_autowrap = true
+
+[node name="RenameDialog" type="ConfirmationDialog" parent="."]
+visible = true
+margin_left = 120.0
+margin_top = 80.0
+margin_right = 904.0
+margin_bottom = 520.0
+window_title = "Renaming a world"
+
+[node name="MarginContainer" type="MarginContainer" parent="RenameDialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 16.0
+margin_right = -16.0
+margin_bottom = -69.0
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="RenameDialog/MarginContainer"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 732.0
+margin_bottom = 335.0
+
+[node name="Label" type="Label" parent="RenameDialog/MarginContainer/VBoxContainer"]
+margin_right = 712.0
+margin_bottom = 25.0
+text = "New name for world:"
+
+[node name="WorldNameEdit" type="LineEdit" parent="RenameDialog/MarginContainer/VBoxContainer"]
+margin_top = 33.0
+margin_right = 712.0
+margin_bottom = 78.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="item_selected" from="Container/WorldSelector" to="." method="_on_WorldSelector_item_selected"]
 [connection signal="pressed" from="Container/ButtonsContainer/PlayButton" to="." method="_on_PlayButton_pressed"]
+[connection signal="pressed" from="Container/ButtonsContainer/RenameButton" to="." method="_on_RenameButton_pressed"]
 [connection signal="pressed" from="Container/ButtonsContainer/DeleteButton" to="." method="_on_DeleteButton_pressed"]
 [connection signal="pressed" from="Container/ButtonsContainer/CancelButton" to="." method="_on_CancelButton_pressed"]
 [connection signal="confirmed" from="DeleteConfirmationDialog" to="." method="_on_DeleteConfirmationDialog_confirmed"]
+[connection signal="confirmed" from="RenameDialog" to="." method="_on_RenameDialog_confirmed"]
+[connection signal="text_changed" from="RenameDialog/MarginContainer/VBoxContainer/WorldNameEdit" to="." method="_on_WorldNameEdit_text_changed"]

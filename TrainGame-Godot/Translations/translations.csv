@@ -18,8 +18,9 @@ Delete;Verwijderen
 Select a world:;Kies een wereld:
 World is deleted!;Wereld is verwijderd!
 Deleting a world;Wereld verwijderen
-"You are about to delete an entire world, which cannot be undone.
-
-Are you sure you want to continue?";"Je staat op het punt een wereld te verwijderen. Dit kan niet ongedaan gemaakt worden.
-
-Weet je zeker dat je wil doorgaan?"
+"You are about to delete the entire world named ""%s"", which cannot be undone.";"Je staat op het punt de hele wereld genaamd ""%s"" te verwijderen. Dit kan niet ongedaan gemaakt worden."
+Are you sure you want to continue?;Weet je zeker dat je wil doorgaan?
+Renaming failed: world name cannot be empty.;Naam wijzigen mislukt: de naam mag niet leeg zijn.
+"World renamed to ""%s""!";"Gelukt! De wereld heet nu ""%s""!"
+Renaming a world;Naam wijzigen van een wereld
+New name for world:;Nieuwe naam voor de wereld:
