@@ -125,3 +125,4 @@ __meta__ = {
 [connection signal="confirmed" from="DeleteConfirmationDialog" to="." method="_on_DeleteConfirmationDialog_confirmed"]
 [connection signal="confirmed" from="RenameDialog" to="." method="_on_RenameDialog_confirmed"]
 [connection signal="text_changed" from="RenameDialog/MarginContainer/VBoxContainer/WorldNameEdit" to="." method="_on_WorldNameEdit_text_changed"]
+[connection signal="text_entered" from="RenameDialog/MarginContainer/VBoxContainer/WorldNameEdit" to="." method="_on_WorldNameEdit_text_entered"]

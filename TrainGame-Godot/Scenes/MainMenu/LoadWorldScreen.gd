@@ -25,7 +25,7 @@ func _initialize_world_list():
 
     var i = 1
     for world_name in self._world_names:
-        world_selector.add_item(world_name, i)
+        world_selector.add_item(world_name + " ", i)  # The space is added after the world name to prevent translation of it
         i += 1
 
 
@@ -88,6 +88,9 @@ func _on_RenameButton_pressed() -> void:
     self._new_world_name = ""  # Clear recorded text
     var rename_dialog: ConfirmationDialog = $RenameDialog
     rename_dialog.popup_centered()
+    var world_name_edit: LineEdit = rename_dialog.find_node("WorldNameEdit")
+    world_name_edit.text = ""
+    world_name_edit.grab_focus()
 
 
 func _on_WorldNameEdit_text_changed(new_text: String) -> void:
@@ -108,3 +111,9 @@ func _on_RenameDialog_confirmed() -> void:
         self._initialize_world_list()
         $Container/FeedbackLabel.text = tr("World renamed to \"%s\"!") % self._new_world_name
         $Container/WorldSelector.select(self._world_id)  # And select correct option again
+
+# Called when pressing Enter in the text field of the rename dialog.
+func _on_WorldNameEdit_text_entered(new_text: String) -> void:
+    self._new_world_name = new_text
+    $RenameDialog.hide()
+    self._on_RenameDialog_confirmed()
