@@ -1,215 +1,267 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Scenes/SideMenu/ObjectsTileSelectorPopup.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/PopupBackground.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/SingleTileDisplay.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/TileButton.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Images/tilesheet_objects.png" type="Texture" id=4]
+[ext_resource path="res://Images/menu_rotate.png" type="Texture" id=5]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 4 )
+region = Rect2( 16, 144, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 4 )
+region = Rect2( 208, 96, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 4 )
+region = Rect2( 176, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 4 )
+region = Rect2( 160, 0, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 4 )
+region = Rect2( 192, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 4 )
+region = Rect2( 176, 96, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 4 )
+region = Rect2( 176, 64, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 4 )
+region = Rect2( 160, 64, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 4 )
+region = Rect2( 192, 48, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 4 )
+region = Rect2( 64, 48, 48, 16 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 4 )
+region = Rect2( 64, 160, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 4 )
+region = Rect2( 112, 48, 48, 16 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 4 )
+region = Rect2( 112, 64, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 4 )
+region = Rect2( 64, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 4 )
+region = Rect2( 160, 112, 80, 80 )
 
 [node name="ObjectsTileSelectorPopup" type="Popup"]
-visible = true
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 8.0
-margin_bottom = 8.0
+margin_right = 227.0
+margin_bottom = 279.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="PopupBackground" parent="." instance=ExtResource( 2 )]
-margin_top = -1.0
-margin_right = 270.0
-margin_bottom = 329.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 0.0
+margin_bottom = 0.0
 
-[node name="RailHorizontal" parent="." instance=ExtResource( 3 )]
-position = Vector2( 20, 20 )
-tile_id = 0
-transposed = false
-x_flipped = false
-y_flipped = false
+[node name="MarginContainer" type="MarginContainer" parent="PopupBackground"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="RailVertical" parent="." instance=ExtResource( 3 )]
-position = Vector2( 20, 70 )
-tile_id = 16
-transposed = false
-x_flipped = false
-y_flipped = false
+[node name="GridContainer" type="GridContainer" parent="PopupBackground/MarginContainer"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 210.0
+margin_bottom = 279.0
+custom_constants/vseparation = 10
+custom_constants/hseparation = 10
+columns = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="RailCorner1" parent="." instance=ExtResource( 3 )]
-position = Vector2( 70, 20 )
+[node name="RailStraight" parent="PopupBackground/MarginContainer/GridContainer" groups=[
+"SideMenuSelectableObjects",
+] instance=ExtResource( 3 )]
+texture_normal = SubResource( 1 )
+
+[node name="RailCorner" parent="PopupBackground/MarginContainer/GridContainer" groups=[
+"SideMenuSelectableObjects",
+] instance=ExtResource( 3 )]
+margin_left = 50.0
+margin_right = 90.0
+texture_normal = SubResource( 2 )
 tile_id = 15
-transposed = false
-x_flipped = false
-y_flipped = false
 
-[node name="RailCorner2" parent="." instance=ExtResource( 3 )]
-position = Vector2( 70, 70 )
-tile_id = 14
-transposed = false
-x_flipped = false
-y_flipped = false
+[node name="EmptySpace1" type="Control" parent="PopupBackground/MarginContainer/GridContainer"]
+margin_left = 100.0
+margin_right = 140.0
+margin_bottom = 40.0
 
-[node name="RailCorner3" parent="." instance=ExtResource( 3 )]
-position = Vector2( 120, 20 )
-tile_id = 13
-transposed = false
-x_flipped = false
-y_flipped = false
+[node name="RotateButton" type="TextureButton" parent="PopupBackground/MarginContainer/GridContainer"]
+margin_left = 150.0
+margin_right = 190.0
+margin_bottom = 40.0
+texture_normal = ExtResource( 5 )
+expand = true
+stretch_mode = 5
 
-[node name="RailCorner4" parent="." instance=ExtResource( 3 )]
-position = Vector2( 120, 70 )
-tile_id = 1
-transposed = false
-x_flipped = false
-y_flipped = false
-
-[node name="TreeSmall" parent="." instance=ExtResource( 3 )]
-position = Vector2( 170, 20 )
+[node name="TreeSmall" parent="PopupBackground/MarginContainer/GridContainer" groups=[
+"SideMenuSelectableObjects",
+] instance=ExtResource( 3 )]
+margin_top = 50.0
+margin_bottom = 90.0
+texture_normal = SubResource( 3 )
 tile_id = 28
-transposed = false
-x_flipped = false
-y_flipped = false
 
-[node name="Tree" parent="." instance=ExtResource( 3 )]
-position = Vector2( 170, 70 )
+[node name="Tree" parent="PopupBackground/MarginContainer/GridContainer" groups=[
+"SideMenuSelectableObjects",
+] instance=ExtResource( 3 )]
+margin_left = 50.0
+margin_top = 50.0
+margin_right = 90.0
+margin_bottom = 90.0
+texture_normal = SubResource( 4 )
 tile_id = 21
-transposed = false
-x_flipped = false
-y_flipped = false
 
-[node name="TreeLarge" parent="." instance=ExtResource( 3 )]
-position = Vector2( 170, 120 )
+[node name="TreeLarge" parent="PopupBackground/MarginContainer/GridContainer" groups=[
+"SideMenuSelectableObjects",
+] instance=ExtResource( 3 )]
+margin_left = 100.0
+margin_top = 50.0
+margin_right = 140.0
+margin_bottom = 90.0
+texture_normal = SubResource( 5 )
 tile_id = 17
-transposed = false
-x_flipped = false
-y_flipped = false
 
-[node name="TreeGroup" parent="." instance=ExtResource( 3 )]
-position = Vector2( 170, 170 )
+[node name="TreeGroup" parent="PopupBackground/MarginContainer/GridContainer" groups=[
+"SideMenuSelectableObjects",
+] instance=ExtResource( 3 )]
+margin_left = 150.0
+margin_top = 50.0
+margin_right = 190.0
+margin_bottom = 90.0
+texture_normal = SubResource( 6 )
 tile_id = 25
-transposed = false
-x_flipped = false
-y_flipped = false
 
-[node name="TreeAutumnSmall" parent="." instance=ExtResource( 3 )]
-position = Vector2( 220, 20 )
+[node name="TreeAutumnSmall" parent="PopupBackground/MarginContainer/GridContainer" groups=[
+"SideMenuSelectableObjects",
+] instance=ExtResource( 3 )]
+margin_top = 100.0
+margin_bottom = 140.0
+texture_normal = SubResource( 7 )
 tile_id = 24
-transposed = false
-x_flipped = false
-y_flipped = false
 
-[node name="TreeAutumn" parent="." instance=ExtResource( 3 )]
-position = Vector2( 220, 70 )
+[node name="TreeAutumn" parent="PopupBackground/MarginContainer/GridContainer" groups=[
+"SideMenuSelectableObjects",
+] instance=ExtResource( 3 )]
+margin_left = 50.0
+margin_top = 100.0
+margin_right = 90.0
+margin_bottom = 140.0
+texture_normal = SubResource( 8 )
 tile_id = 23
-transposed = false
-x_flipped = false
-y_flipped = false
 
-[node name="TreeAutumnLarge" parent="." instance=ExtResource( 3 )]
-position = Vector2( 220, 120 )
+[node name="TreeAutumnLarge" parent="PopupBackground/MarginContainer/GridContainer" groups=[
+"SideMenuSelectableObjects",
+] instance=ExtResource( 3 )]
+margin_left = 100.0
+margin_top = 100.0
+margin_right = 140.0
+margin_bottom = 140.0
+texture_normal = SubResource( 9 )
 tile_id = 19
-transposed = false
-x_flipped = false
-y_flipped = false
 
-[node name="TreeAutumnGroup" parent="." instance=ExtResource( 3 )]
-position = Vector2( 220, 170 )
+[node name="TreeAutumnGroup" parent="PopupBackground/MarginContainer/GridContainer" groups=[
+"SideMenuSelectableObjects",
+] instance=ExtResource( 3 )]
+margin_left = 150.0
+margin_top = 100.0
+margin_right = 190.0
+margin_bottom = 140.0
+texture_normal = SubResource( 10 )
 tile_id = 26
-transposed = false
-x_flipped = false
-y_flipped = false
 
-[node name="RoadVertical" parent="." instance=ExtResource( 3 )]
-position = Vector2( 20, 120 )
+[node name="RoadStraight" parent="PopupBackground/MarginContainer/GridContainer" groups=[
+"SideMenuSelectableObjects",
+] instance=ExtResource( 3 )]
+margin_top = 150.0
+margin_bottom = 190.0
+texture_normal = SubResource( 11 )
 tile_id = 4
-transposed = false
-x_flipped = false
-y_flipped = false
 
-[node name="RoadHorizontal" parent="." instance=ExtResource( 3 )]
-position = Vector2( 20, 170 )
-tile_id = 3
-transposed = false
-x_flipped = false
-y_flipped = false
-
-[node name="RoadCorner1" parent="." instance=ExtResource( 3 )]
-position = Vector2( 70, 120 )
+[node name="RoadCorner" parent="PopupBackground/MarginContainer/GridContainer" groups=[
+"SideMenuSelectableObjects",
+] instance=ExtResource( 3 )]
+margin_left = 50.0
+margin_top = 150.0
+margin_right = 90.0
+margin_bottom = 190.0
+texture_normal = SubResource( 12 )
 tile_id = 9
-transposed = false
-x_flipped = false
-y_flipped = false
 
-[node name="RoadCorner2" parent="." instance=ExtResource( 3 )]
-position = Vector2( 120, 120 )
-tile_id = 12
-transposed = false
-x_flipped = false
-y_flipped = false
-
-[node name="RoadCorner3" parent="." instance=ExtResource( 3 )]
-position = Vector2( 120, 170 )
-tile_id = 7
-transposed = false
-x_flipped = false
-y_flipped = false
-
-[node name="RoadCorner4" parent="." instance=ExtResource( 3 )]
-position = Vector2( 70, 170 )
-tile_id = 11
-transposed = false
-x_flipped = false
-y_flipped = false
-
-[node name="RailCrossingRoadHorizontal" parent="." instance=ExtResource( 3 )]
-position = Vector2( 20, 220 )
+[node name="RailCrossingRoad" parent="PopupBackground/MarginContainer/GridContainer" groups=[
+"SideMenuSelectableObjects",
+] instance=ExtResource( 3 )]
+margin_left = 100.0
+margin_top = 150.0
+margin_right = 140.0
+margin_bottom = 190.0
+texture_normal = SubResource( 13 )
 tile_id = 36
-transposed = false
-x_flipped = false
-y_flipped = false
 
-[node name="RailCrossingRoadVertical" parent="." instance=ExtResource( 3 )]
-position = Vector2( 20, 270 )
-tile_id = 35
-transposed = false
-x_flipped = false
-y_flipped = false
-
-[node name="RoadT1" parent="." instance=ExtResource( 3 )]
-position = Vector2( 70, 220 )
-transposed = false
-x_flipped = false
-y_flipped = false
-
-[node name="RoadT2" parent="." instance=ExtResource( 3 )]
-position = Vector2( 120, 220 )
+[node name="RoadTIntersection" parent="PopupBackground/MarginContainer/GridContainer" groups=[
+"SideMenuSelectableObjects",
+] instance=ExtResource( 3 )]
+margin_left = 150.0
+margin_top = 150.0
+margin_right = 190.0
+margin_bottom = 190.0
+texture_normal = SubResource( 14 )
 tile_id = 6
-transposed = false
-x_flipped = false
-y_flipped = false
 
-[node name="RoadT3" parent="." instance=ExtResource( 3 )]
-position = Vector2( 120, 270 )
-tile_id = 5
-transposed = false
-x_flipped = false
-y_flipped = false
-
-[node name="RoadT4" parent="." instance=ExtResource( 3 )]
-position = Vector2( 70, 270 )
-tile_id = 8
-transposed = false
-x_flipped = false
-y_flipped = false
-
-[node name="RoadCrossing" parent="." instance=ExtResource( 3 )]
-position = Vector2( 170, 270 )
+[node name="RoadCrossing" parent="PopupBackground/MarginContainer/GridContainer" groups=[
+"SideMenuSelectableObjects",
+] instance=ExtResource( 3 )]
+margin_top = 200.0
+margin_bottom = 240.0
+texture_normal = SubResource( 15 )
 tile_id = 2
-transposed = false
-x_flipped = false
-y_flipped = false
 
-[node name="BuildingBank" parent="." instance=ExtResource( 3 )]
-position = Vector2( 170, 220 )
+[node name="BuildingBank" parent="PopupBackground/MarginContainer/GridContainer" groups=[
+"SideMenuSelectableObjects",
+] instance=ExtResource( 3 )]
+margin_left = 50.0
+margin_top = 200.0
+margin_right = 90.0
+margin_bottom = 240.0
+texture_normal = SubResource( 16 )
 tile_id = 37
-transposed = false
-x_flipped = false
-y_flipped = false
+[connection signal="pressed" from="PopupBackground/MarginContainer/GridContainer/RotateButton" to="." method="_on_RotateButton_pressed"]
