@@ -24,10 +24,11 @@ func _on_GroundTileSelectorButton_tile_selected(tile: GroundTile):
 
 
 func _on_ObjectsTileSelectorButton_tile_selected(tile: ObjectTile):
-    if tile == null:
-        emit_signal("option_selected", "delete")
-    else:
-        emit_signal("option_selected", InteractOption.new(tile))
+    emit_signal("option_selected", InteractOption.new(tile))
+    
+
+func _on_ObjectsTileSelectorButton_eraser_selected():
+    emit_signal("option_selected", InteractOption.new("erase"))
 
 
 func _on_MoveButton_pressed():

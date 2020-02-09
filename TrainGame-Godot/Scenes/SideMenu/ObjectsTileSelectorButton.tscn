@@ -1,16 +1,17 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/SideMenu/ObjectsTileSelectorButton.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/SideMenu/ObjectsTileSelectorPopup.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Images/tilesheet_objects.png" type="Texture" id=3]
+[ext_resource path="res://Images/menu_erase.png" type="Texture" id=4]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 16, 16 )
 
 [node name="ObjectsTileSelectorButton" type="TextureButton"]
-margin_right = 16.0
-margin_bottom = 16.0
+margin_right = 40.0
+margin_bottom = 40.0
 texture_normal = SubResource( 1 )
 expand = true
 stretch_mode = 5
@@ -18,8 +19,9 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+eraser_texture = ExtResource( 4 )
 
 [node name="ObjectsTileSelectorPopup" parent="." instance=ExtResource( 2 )]
-visible = false
 [connection signal="pressed" from="." to="." method="_on_ObjectsTileSelectorButton_pressed"]
+[connection signal="eraser_selected" from="ObjectsTileSelectorPopup" to="." method="_on_ObjectsTileSelectorPopup_eraser_selected"]
 [connection signal="tile_selected" from="ObjectsTileSelectorPopup" to="." method="_on_ObjectsTileSelectorPopup_tile_selected"]

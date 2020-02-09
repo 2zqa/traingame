@@ -75,11 +75,11 @@ stretch_mode = 5
 
 [node name="ObjectsTileSelectorButton" parent="NinePatchRect/VBoxContainer" instance=ExtResource( 6 )]
 margin_top = 240.0
-margin_right = 40.0
 margin_bottom = 280.0
 rect_min_size = Vector2( 40, 40 )
 [connection signal="save_and_quit_requested" from="NinePatchRect/VBoxContainer/PauseButton" to="." method="_on_PauseButton_save_and_quit_requested"]
 [connection signal="pressed" from="NinePatchRect/VBoxContainer/MoveButton" to="." method="_on_MoveButton_pressed"]
 [connection signal="pressed" from="NinePatchRect/VBoxContainer/RotateButton" to="." method="_on_RotateButton_pressed"]
 [connection signal="tile_selected" from="NinePatchRect/VBoxContainer/GroundTileSelectorButton" to="." method="_on_GroundTileSelectorButton_tile_selected"]
+[connection signal="eraser_selected" from="NinePatchRect/VBoxContainer/ObjectsTileSelectorButton" to="." method="_on_ObjectsTileSelectorButton_eraser_selected"]
 [connection signal="tile_selected" from="NinePatchRect/VBoxContainer/ObjectsTileSelectorButton" to="." method="_on_ObjectsTileSelectorButton_tile_selected"]

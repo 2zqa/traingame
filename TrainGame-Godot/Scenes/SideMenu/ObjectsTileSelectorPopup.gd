@@ -1,6 +1,7 @@
 extends Control
 
 signal tile_selected  # Provides one argument of ObjectTile
+signal eraser_selected  # Provides zero arguments.
 
 const ObjectTile = preload("res://Scripts/ObjectTile.gd")
 
@@ -13,6 +14,11 @@ func _ready():
 func _onSideMenuSelectableObject_pressed(tile_id: int) -> void:
     var tile: ObjectTile = Global.Registry.get_object_tile_from_texture_id(tile_id)
     emit_signal("tile_selected", tile)
+    self.hide()
+
+
+func _on_EraseButton_pressed() -> void:
+    emit_signal("eraser_selected")
     self.hide()
 
 

@@ -36,6 +36,10 @@ func _is_in_bounds(tile_pos: Vector2) -> bool:
 
 # Places the current tile in a line of all given canvas positions
 func place_interpolated(canvas_position1: Vector2, canvas_position2: Vector2) -> void:
+
+    # When placing in a line, only overwrite existing things if we're using the eraser tool
+    var overwrite = self.selected_option.erase
+
     var tilemap = null
     if self.selected_option.ground_tile != null:
         tilemap = $World/GroundTileMap
@@ -48,14 +52,14 @@ func place_interpolated(canvas_position1: Vector2, canvas_position2: Vector2) ->
         var interpolation_steps = tile_pos1.distance_to(tile_pos2)
         if interpolation_steps == 0:
             # No interpolation necessary
-            place(canvas_position2)
+            place(canvas_position2, overwrite)
         else:
             # Interpolate
             for i in range(interpolation_steps + 1):
                 var canvas_position = canvas_position1.linear_interpolate(canvas_position2, i / interpolation_steps)
-                place(canvas_position)
+                place(canvas_position, overwrite)
     else:
-        place(canvas_position2)  # Cannot interpolate for this type
+        place(canvas_position2, overwrite)  # Cannot interpolate for this type
     
 func _unhandled_input(event: InputEvent) -> void:
     if (event is InputEventMouseButton and event.button_index == BUTTON_LEFT) \
