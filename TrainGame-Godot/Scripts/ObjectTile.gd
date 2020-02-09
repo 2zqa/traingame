@@ -40,7 +40,8 @@ func get_rotated_texture(rotation: int) -> int:
 # However, sometimes you want to rotate around a position in between tiles, for example "   OP--" becomes " --dO  "
 # instead of "--dO   " (note the amount of spaces). In that case you need a rotation offset.
 func get_rotation_offset() -> Vector2:
-    return self._collision.get_rotation_offset()
+    return self._collision.get_rotation_offset(self.rotation)
+
 
 # Checks if this tile collides at the tile relative to this tile
 func collides(tile_dx: int, tile_dy: int) -> bool:

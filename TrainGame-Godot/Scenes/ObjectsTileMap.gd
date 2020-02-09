@@ -34,8 +34,8 @@ func get_tile_no_search(tile_x: int, tile_y: int) -> ObjectTile:
 
 # Searches for a tile that reaches this tile nearby. Returns [tile_x, tile_y, texture_id].
 func _search_texture(tile_x: int, tile_y: int) -> Array:
-    for dx in [1, 0, -1, -2]:
-        for dy in [1, 0, -1, -2]:
+    for dx in [0, -1, 1, -2, 2]:
+        for dy in [0, -1, 1, -2, 2]:
             var object_tile = get_tile_no_search(tile_x + dx, tile_y + dy)
             if object_tile.equals(Global.Registry.OBJECT_EMPTY):
                 continue
@@ -71,7 +71,8 @@ func rotate_clockwise() -> void:
         var new_texture_id = object_tile.get_rotated_texture(Rotation.next(object_tile.rotation))
         var tile_pos = positions_array[i]
         var rotation_offset = object_tile.get_rotation_offset()
-        var rotated_tile_pos = Rotation.rotate(Rotation.CLOCKWISE, tile_pos + rotation_offset) - rotation_offset
+        var rotation_offset_inverse = Vector2(rotation_offset.y, rotation_offset.x)
+        var rotated_tile_pos = Rotation.rotate(Rotation.CLOCKWISE, tile_pos + rotation_offset) + rotation_offset_inverse
         self.set_cellv(rotated_tile_pos, new_texture_id)
 
         i += 1

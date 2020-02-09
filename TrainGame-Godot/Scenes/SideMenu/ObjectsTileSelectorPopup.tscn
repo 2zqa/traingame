@@ -22,107 +22,194 @@ margin_bottom = 329.0
 [node name="RailHorizontal" parent="." instance=ExtResource( 3 )]
 position = Vector2( 20, 20 )
 tile_id = 0
+transposed = false
+x_flipped = false
+y_flipped = false
 
 [node name="RailVertical" parent="." instance=ExtResource( 3 )]
 position = Vector2( 20, 70 )
 tile_id = 16
+transposed = false
+x_flipped = false
+y_flipped = false
 
 [node name="RailCorner1" parent="." instance=ExtResource( 3 )]
 position = Vector2( 70, 20 )
 tile_id = 15
+transposed = false
+x_flipped = false
+y_flipped = false
 
 [node name="RailCorner2" parent="." instance=ExtResource( 3 )]
 position = Vector2( 70, 70 )
 tile_id = 14
+transposed = false
+x_flipped = false
+y_flipped = false
 
 [node name="RailCorner3" parent="." instance=ExtResource( 3 )]
 position = Vector2( 120, 20 )
 tile_id = 13
+transposed = false
+x_flipped = false
+y_flipped = false
 
 [node name="RailCorner4" parent="." instance=ExtResource( 3 )]
 position = Vector2( 120, 70 )
 tile_id = 1
+transposed = false
+x_flipped = false
+y_flipped = false
 
 [node name="TreeSmall" parent="." instance=ExtResource( 3 )]
 position = Vector2( 170, 20 )
 tile_id = 28
+transposed = false
+x_flipped = false
+y_flipped = false
 
 [node name="Tree" parent="." instance=ExtResource( 3 )]
 position = Vector2( 170, 70 )
 tile_id = 21
+transposed = false
+x_flipped = false
+y_flipped = false
 
 [node name="TreeLarge" parent="." instance=ExtResource( 3 )]
 position = Vector2( 170, 120 )
 tile_id = 17
+transposed = false
+x_flipped = false
+y_flipped = false
 
 [node name="TreeGroup" parent="." instance=ExtResource( 3 )]
 position = Vector2( 170, 170 )
 tile_id = 25
+transposed = false
+x_flipped = false
+y_flipped = false
 
 [node name="TreeAutumnSmall" parent="." instance=ExtResource( 3 )]
 position = Vector2( 220, 20 )
 tile_id = 24
+transposed = false
+x_flipped = false
+y_flipped = false
 
 [node name="TreeAutumn" parent="." instance=ExtResource( 3 )]
 position = Vector2( 220, 70 )
 tile_id = 23
+transposed = false
+x_flipped = false
+y_flipped = false
 
 [node name="TreeAutumnLarge" parent="." instance=ExtResource( 3 )]
 position = Vector2( 220, 120 )
 tile_id = 19
+transposed = false
+x_flipped = false
+y_flipped = false
 
 [node name="TreeAutumnGroup" parent="." instance=ExtResource( 3 )]
 position = Vector2( 220, 170 )
 tile_id = 26
+transposed = false
+x_flipped = false
+y_flipped = false
 
 [node name="RoadVertical" parent="." instance=ExtResource( 3 )]
 position = Vector2( 20, 120 )
 tile_id = 4
+transposed = false
+x_flipped = false
+y_flipped = false
 
 [node name="RoadHorizontal" parent="." instance=ExtResource( 3 )]
 position = Vector2( 20, 170 )
 tile_id = 3
+transposed = false
+x_flipped = false
+y_flipped = false
 
 [node name="RoadCorner1" parent="." instance=ExtResource( 3 )]
 position = Vector2( 70, 120 )
 tile_id = 9
+transposed = false
+x_flipped = false
+y_flipped = false
 
 [node name="RoadCorner2" parent="." instance=ExtResource( 3 )]
 position = Vector2( 120, 120 )
 tile_id = 12
+transposed = false
+x_flipped = false
+y_flipped = false
 
 [node name="RoadCorner3" parent="." instance=ExtResource( 3 )]
 position = Vector2( 120, 170 )
 tile_id = 7
+transposed = false
+x_flipped = false
+y_flipped = false
 
 [node name="RoadCorner4" parent="." instance=ExtResource( 3 )]
 position = Vector2( 70, 170 )
 tile_id = 11
+transposed = false
+x_flipped = false
+y_flipped = false
 
 [node name="RailCrossingRoadHorizontal" parent="." instance=ExtResource( 3 )]
 position = Vector2( 20, 220 )
 tile_id = 36
+transposed = false
+x_flipped = false
+y_flipped = false
 
 [node name="RailCrossingRoadVertical" parent="." instance=ExtResource( 3 )]
 position = Vector2( 20, 270 )
 tile_id = 35
+transposed = false
+x_flipped = false
+y_flipped = false
 
 [node name="RoadT1" parent="." instance=ExtResource( 3 )]
 position = Vector2( 70, 220 )
+transposed = false
+x_flipped = false
+y_flipped = false
 
 [node name="RoadT2" parent="." instance=ExtResource( 3 )]
 position = Vector2( 120, 220 )
 tile_id = 6
+transposed = false
+x_flipped = false
+y_flipped = false
 
 [node name="RoadT3" parent="." instance=ExtResource( 3 )]
 position = Vector2( 120, 270 )
 tile_id = 5
+transposed = false
+x_flipped = false
+y_flipped = false
 
 [node name="RoadT4" parent="." instance=ExtResource( 3 )]
 position = Vector2( 70, 270 )
 tile_id = 8
+transposed = false
+x_flipped = false
+y_flipped = false
 
 [node name="RoadCrossing" parent="." instance=ExtResource( 3 )]
 position = Vector2( 170, 270 )
 tile_id = 2
+transposed = false
+x_flipped = false
+y_flipped = false
 
+[node name="BuildingBank" parent="." instance=ExtResource( 3 )]
+position = Vector2( 170, 220 )
+tile_id = 37
+transposed = false
+x_flipped = false
+y_flipped = false

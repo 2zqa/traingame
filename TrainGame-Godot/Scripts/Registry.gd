@@ -10,9 +10,13 @@ var _name_to_tile := {}
 # Registers an object tile from the Objects tile set, so that it can be found using get_object_tile_from_*
 func _register_object_tile(tile: ObjectTile) -> ObjectTile:
     for rotated_tile in tile.all_rotations():
-        _texture_id_to_object_tile[rotated_tile.get_texture_id()] = rotated_tile
+        var texture_id = rotated_tile.get_texture_id()
+        if not _texture_id_to_ground_tile.has(texture_id):
+            # Don't overwrite existing texture ids in the map.
+            # In this way, if multiple rotations share the same texture, the first rotation (Rotation.NONE) wins.
+            _texture_id_to_object_tile[texture_id] = rotated_tile
         _name_to_tile[rotated_tile.to_string()] = rotated_tile
-    
+
     return tile
 
 
@@ -79,6 +83,8 @@ var TREE_AUTUMN := _register_object_tile(ObjectTile.new("tree_autumn", [23, 23, 
 var TREE_AUTUMN_LARGE := _register_object_tile(ObjectTile.new("tree_autumn_large", [19, 19, 19, 19]))
 #warning-ignore:unused_class_variable
 var TREE_AUTUMN_GROUP := _register_object_tile(ObjectTile.new("tree_autumn_group", [26, 26, 26, 26], "XX\ndX"))
+
+var BUILDING_BANK := _register_object_tile(ObjectTile.new("building_bank", [37, 39, 40, 38], "XXXXX\nXX^XX"))
 
 # Ground tiles
 var GRASS := _register_ground_tile(GroundTile.new("grass", 0))

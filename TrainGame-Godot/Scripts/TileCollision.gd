@@ -4,19 +4,22 @@ class_name TileCollision
 var _lines: Array
 var _size: Vector2
 var _origin: Vector2
-var _rotation_offset_to_origin: Vector2
+var _rotation_offset_to_origin_hor: Vector2
+var _rotation_offset_to_origin_vert: Vector2
 
-# Creates a tile collision map. collision_map must be a string like "XO\nX.". Here,
-# the O indicates the origin of the object, X indicates additional tiles that are
-# blocked off, . indicates free space and a " " starts a new line. There is also
-# a "d", which is the same as O, but indicates that the tile needs to be rotated
-# with the top right corner of the tile as the rotation center, instead of the
-# usual center of the tile.
+# Creates a tile collision map. collision_map must be a string like "XO\nX.". The
+# following symbols are supported:
+#   O indicates the origin of the object
+#   d also indicates the origin of the object, but the rotation origin is at the top right of the tile, instead of the center.
+#   ^ also indicates the origin of the object, but the rotation origin is at the top center of the tile.
+#   X indicates additional tiles that are blocked off
+#   . indicates free space 
+#   \n starts a new line
 func _init(collision_map: String):
     var lines = collision_map.split("\n")
     self._lines = Array()
     self._origin = Vector2(0, 0)
-    self._rotation_offset_to_origin = Vector2(0, 0)
+    self._rotation_offset_to_origin_hor = Vector2(0, 0)
     
     var line_number = 0
     for line in lines:
@@ -33,11 +36,16 @@ func _init(collision_map: String):
             elif letter == "d":
                 parsed.append(1)
                 self._origin = Vector2(i, line_number)
-                self._rotation_offset_to_origin = Vector2(0.5, -0.5)
+                self._rotation_offset_to_origin_hor = Vector2(0.5, -0.5)
+            elif letter == "^":
+                parsed.append(1)
+                self._origin = Vector2(i, line_number)
+                self._rotation_offset_to_origin_hor = Vector2(0, -0.5)
             else:
                 push_error("Invalid letter: " + letter + " (" + collision_map + ")")
         self._lines.append(parsed)
         line_number += 1
+    self._rotation_offset_to_origin_vert = Vector2(-self._rotation_offset_to_origin_vert.y, -self._rotation_offset_to_origin_vert.x)
  
     # Calculate size   
     var height = self._lines.size()
@@ -59,9 +67,13 @@ func collides(rotation: int, tile_dx: int, tile_dy: int) -> bool:
 
 # Most objects rotate around a single tile (their origin), "  O--" becomes "--O  " with a rotation of 180 degrees.
 # However, sometimes you want to rotate around a position in between tiles, for example "   OP--" becomes " --dO  "
-# instead of "--dO   " (note the amount of spaces). In that case you need a rotation offset.
-func get_rotation_offset() -> Vector2:
-    return self._rotation_offset_to_origin
+# instead of "--dO   " (note the amount of spaces). In that case you need a rotation offset. This rotation offset
+# depends on whether we are starting from 0 and 180 degrees, or 90 and 270 degrees.
+func get_rotation_offset(rotation: int) -> Vector2:
+    if rotation == Rotation.CLOCKWISE or rotation == Rotation.COUNTER_CLOCKWISE:
+        return self._rotation_offset_to_origin_vert
+    return self._rotation_offset_to_origin_hor
+
 
 # Gets a list of all positions occupied by this collision shape
 func get_occupied_positions(rotation: int) -> PoolVector2Array:
@@ -91,7 +103,9 @@ func to_string() -> String:
             if i == self._origin.x and line_number == self._origin.y:
                 # We're at the origin
                 if self._rotation_offset_to_origin.x != 0:
-                    value += "Q"  # We're using a rotation offset
+                    value += "d"  # We're using a rotation offset
+                elif self._rotation_offset_to_origin.y != 0:
+                    value += "^"  # We're using another ortation offset
                 else:
                     value += "O"  # Not using a rotation offset
             elif line[i] == 0:

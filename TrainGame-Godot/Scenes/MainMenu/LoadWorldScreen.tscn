@@ -77,7 +77,6 @@ dialog_text = "<text set by code when the delete button is pressed>"
 dialog_autowrap = true
 
 [node name="RenameDialog" type="ConfirmationDialog" parent="."]
-visible = true
 margin_left = 120.0
 margin_top = 80.0
 margin_right = 904.0
