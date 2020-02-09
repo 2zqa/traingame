@@ -2,7 +2,6 @@ extends Control
 
 signal tile_selected  # Supplies one argument of type GroundTile
 
-const SingleTileDisplay = preload("res://Scenes/SingleTileDisplay.gd")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
