@@ -98,12 +98,15 @@ func _on_SideMenu_option_selected(selected_option: InteractOption) -> void:
 
 
 func _on_SideMenu_rotation_requested() -> void:
-    print("Rotating!")
     $World/GroundTileMap.rotate_clockwise()
     $World/ObjectsTileMap.rotate_clockwise()
 
 func _on_SideMenu_save_and_quit_requested() -> void:
-    FileIO.write(Global.world_save_location, WORLD_RECTANGLE, $World/ObjectsTileMap, $World/GroundTileMap)
-    FileIO.write_name(Global.world_save_location, Global.world_name)
-    if get_tree().change_scene(_MENU_SCREEN) != OK:
-        push_error("Failed to change scene")
+    if FileIO.write(Global.world_save_location, WORLD_RECTANGLE, $World/ObjectsTileMap, $World/GroundTileMap) == OK:
+        if FileIO.write_name(Global.world_save_location, Global.world_name) == OK:
+            if get_tree().change_scene(_MENU_SCREEN) != OK:
+                push_error("Failed to change scene")
+        else:
+            push_error("Aborting world exit due to world name save failure.")
+    else:
+        push_error("Aborting world exit due to world data save failure.")
