@@ -82,7 +82,7 @@ static func _create_parent_directories(file_name: String) -> bool:
 static func read_world_names(directory_name: String) -> Dictionary:
     var directory = Directory.new()
     if directory.open(directory_name) != OK:
-        return directory  # Directory doesn't exist
+        return {}  # Directory doesn't exist, return empty dictionary
     directory.list_dir_begin(true)
 
     var return_value = Dictionary()

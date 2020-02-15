@@ -423,3 +423,4 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 0, 1, 2, 3 ), PoolIntArra
 40/navigation_offset = Vector2( 0, 0 )
 40/shapes = [  ]
 40/z_index = 0
+
