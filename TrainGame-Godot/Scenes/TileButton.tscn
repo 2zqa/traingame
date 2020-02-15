@@ -8,7 +8,7 @@
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 16, 16 )
 
-[node name="SingleTileDisplay" type="TextureButton"]
+[node name="TileButton" type="TextureButton"]
 margin_right = 40.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 40, 40 )
@@ -20,5 +20,4 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 tile_set = ExtResource( 2 )
-tile_id = 0
 [connection signal="pressed" from="." to="." method="_on_SingleTileDisplay_pressed"]

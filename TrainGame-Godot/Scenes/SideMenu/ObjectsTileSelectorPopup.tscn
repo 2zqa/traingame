@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Scenes/SideMenu/ObjectsTileSelectorPopup.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/PopupBackground.tscn" type="PackedScene" id=2]
@@ -7,74 +7,86 @@
 [ext_resource path="res://Images/menu_rotate.png" type="Texture" id=5]
 [ext_resource path="res://Images/menu_erase.png" type="Texture" id=6]
 
-[sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 4 )
-region = Rect2( 16, 144, 48, 48 )
-
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 4 )
 region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 4 )
-region = Rect2( 64, 48, 48, 16 )
+region = Rect2( 0, 32, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 4 )
-region = Rect2( 112, 48, 48, 16 )
+region = Rect2( 0, 192, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 4 )
-region = Rect2( 64, 160, 48, 48 )
+region = Rect2( 0, 384, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 4 )
-region = Rect2( 112, 64, 48, 48 )
+region = Rect2( 16, 0, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 4 )
-region = Rect2( 64, 0, 48, 48 )
+region = Rect2( 48, 48, 48, 16 )
 
 [sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 4 )
-region = Rect2( 160, 112, 80, 80 )
+region = Rect2( 96, 48, 48, 16 )
 
 [sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 4 )
-region = Rect2( 208, 96, 16, 16 )
+region = Rect2( 48, 160, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 4 )
-region = Rect2( 176, 0, 16, 32 )
+region = Rect2( 96, 64, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 4 )
-region = Rect2( 160, 0, 16, 32 )
+region = Rect2( 64, 0, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 4 )
-region = Rect2( 192, 0, 48, 48 )
+region = Rect2( 160, 112, 80, 80 )
 
 [sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 4 )
-region = Rect2( 176, 96, 16, 16 )
+region = Rect2( 208, 96, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=14]
 atlas = ExtResource( 4 )
-region = Rect2( 176, 64, 16, 32 )
+region = Rect2( 176, 0, 16, 32 )
 
 [sub_resource type="AtlasTexture" id=15]
 atlas = ExtResource( 4 )
-region = Rect2( 160, 64, 16, 32 )
+region = Rect2( 160, 0, 16, 32 )
 
 [sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 4 )
+region = Rect2( 192, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 4 )
+region = Rect2( 176, 96, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 4 )
+region = Rect2( 176, 64, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 4 )
+region = Rect2( 160, 64, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=20]
 atlas = ExtResource( 4 )
 region = Rect2( 192, 48, 48, 48 )
 
 [node name="ObjectsTileSelectorPopup" type="Popup"]
 visible = true
 margin_right = 227.0
-margin_bottom = 289.0
+margin_bottom = 334.0
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -101,7 +113,7 @@ __meta__ = {
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 210.0
-margin_bottom = 289.0
+margin_bottom = 334.0
 custom_constants/vseparation = 10
 custom_constants/hseparation = 10
 columns = 4
@@ -136,155 +148,183 @@ texture_normal = ExtResource( 5 )
 expand = true
 stretch_mode = 5
 
-[node name="RailCorner" parent="PopupBackground/MarginContainer/GridContainer" groups=[
+[node name="RailStraight" parent="PopupBackground/MarginContainer/GridContainer" groups=[
 "SideMenuSelectableObjects",
 ] instance=ExtResource( 3 )]
 margin_top = 50.0
 margin_bottom = 90.0
-texture_normal = SubResource( 1 )
-tile_id = 15
+texture_normal = SubResource( 2 )
 
-[node name="RailStraight" parent="PopupBackground/MarginContainer/GridContainer" groups=[
+[node name="RailCrossing" parent="PopupBackground/MarginContainer/GridContainer" groups=[
 "SideMenuSelectableObjects",
 ] instance=ExtResource( 3 )]
 margin_left = 50.0
 margin_top = 50.0
 margin_right = 90.0
 margin_bottom = 90.0
-texture_normal = SubResource( 2 )
+texture_normal = SubResource( 3 )
+tile_id = 41
 
-[node name="RoadStraight" parent="PopupBackground/MarginContainer/GridContainer" groups=[
+[node name="RailSwitch1" parent="PopupBackground/MarginContainer/GridContainer" groups=[
 "SideMenuSelectableObjects",
 ] instance=ExtResource( 3 )]
 margin_left = 100.0
 margin_top = 50.0
 margin_right = 140.0
 margin_bottom = 90.0
-texture_normal = SubResource( 3 )
+texture_normal = SubResource( 4 )
+tile_id = 42
+
+[node name="RailSwitch2" parent="PopupBackground/MarginContainer/GridContainer" groups=[
+"SideMenuSelectableObjects",
+] instance=ExtResource( 3 )]
+margin_left = 150.0
+margin_top = 50.0
+margin_right = 190.0
+margin_bottom = 90.0
+texture_normal = SubResource( 5 )
+tile_id = 46
+
+[node name="RailCorner" parent="PopupBackground/MarginContainer/GridContainer" groups=[
+"SideMenuSelectableObjects",
+] instance=ExtResource( 3 )]
+margin_top = 100.0
+margin_bottom = 140.0
+texture_normal = SubResource( 6 )
+tile_id = 1
+
+[node name="RoadStraight" parent="PopupBackground/MarginContainer/GridContainer" groups=[
+"SideMenuSelectableObjects",
+] instance=ExtResource( 3 )]
+margin_left = 50.0
+margin_top = 100.0
+margin_right = 90.0
+margin_bottom = 140.0
+texture_normal = SubResource( 7 )
 tile_id = 4
 
 [node name="RailCrossingRoad" parent="PopupBackground/MarginContainer/GridContainer" groups=[
 "SideMenuSelectableObjects",
 ] instance=ExtResource( 3 )]
-margin_left = 150.0
-margin_top = 50.0
-margin_right = 190.0
-margin_bottom = 90.0
-texture_normal = SubResource( 4 )
+margin_left = 100.0
+margin_top = 100.0
+margin_right = 140.0
+margin_bottom = 140.0
+texture_normal = SubResource( 8 )
 tile_id = 36
 
 [node name="RoadCorner" parent="PopupBackground/MarginContainer/GridContainer" groups=[
 "SideMenuSelectableObjects",
 ] instance=ExtResource( 3 )]
+margin_left = 150.0
 margin_top = 100.0
+margin_right = 190.0
 margin_bottom = 140.0
-texture_normal = SubResource( 5 )
+texture_normal = SubResource( 9 )
 tile_id = 9
 
 [node name="RoadTIntersection" parent="PopupBackground/MarginContainer/GridContainer" groups=[
 "SideMenuSelectableObjects",
 ] instance=ExtResource( 3 )]
-margin_left = 50.0
-margin_top = 100.0
-margin_right = 90.0
-margin_bottom = 140.0
-texture_normal = SubResource( 6 )
+margin_top = 150.0
+margin_bottom = 190.0
+texture_normal = SubResource( 10 )
 tile_id = 6
 
 [node name="RoadCrossing" parent="PopupBackground/MarginContainer/GridContainer" groups=[
 "SideMenuSelectableObjects",
 ] instance=ExtResource( 3 )]
-margin_left = 100.0
-margin_top = 100.0
-margin_right = 140.0
-margin_bottom = 140.0
-texture_normal = SubResource( 7 )
+margin_left = 50.0
+margin_top = 150.0
+margin_right = 90.0
+margin_bottom = 190.0
+texture_normal = SubResource( 11 )
 tile_id = 2
 
 [node name="BuildingBank" parent="PopupBackground/MarginContainer/GridContainer" groups=[
 "SideMenuSelectableObjects",
 ] instance=ExtResource( 3 )]
-margin_left = 150.0
-margin_top = 100.0
-margin_right = 190.0
-margin_bottom = 140.0
-texture_normal = SubResource( 8 )
+margin_left = 100.0
+margin_top = 150.0
+margin_right = 140.0
+margin_bottom = 190.0
+texture_normal = SubResource( 12 )
 tile_id = 37
 
 [node name="TreeSmall" parent="PopupBackground/MarginContainer/GridContainer" groups=[
 "SideMenuSelectableObjects",
 ] instance=ExtResource( 3 )]
+margin_left = 150.0
 margin_top = 150.0
+margin_right = 190.0
 margin_bottom = 190.0
-texture_normal = SubResource( 9 )
+texture_normal = SubResource( 13 )
 tile_id = 28
 
 [node name="Tree" parent="PopupBackground/MarginContainer/GridContainer" groups=[
 "SideMenuSelectableObjects",
 ] instance=ExtResource( 3 )]
-margin_left = 50.0
-margin_top = 150.0
-margin_right = 90.0
-margin_bottom = 190.0
-texture_normal = SubResource( 10 )
+margin_top = 200.0
+margin_bottom = 240.0
+texture_normal = SubResource( 14 )
 tile_id = 21
 
 [node name="TreeLarge" parent="PopupBackground/MarginContainer/GridContainer" groups=[
 "SideMenuSelectableObjects",
 ] instance=ExtResource( 3 )]
-margin_left = 100.0
-margin_top = 150.0
-margin_right = 140.0
-margin_bottom = 190.0
-texture_normal = SubResource( 11 )
+margin_left = 50.0
+margin_top = 200.0
+margin_right = 90.0
+margin_bottom = 240.0
+texture_normal = SubResource( 15 )
 tile_id = 17
 
 [node name="TreeGroup" parent="PopupBackground/MarginContainer/GridContainer" groups=[
 "SideMenuSelectableObjects",
 ] instance=ExtResource( 3 )]
-margin_left = 150.0
-margin_top = 150.0
-margin_right = 190.0
-margin_bottom = 190.0
-texture_normal = SubResource( 12 )
+margin_left = 100.0
+margin_top = 200.0
+margin_right = 140.0
+margin_bottom = 240.0
+texture_normal = SubResource( 16 )
 tile_id = 25
 
 [node name="TreeAutumnSmall" parent="PopupBackground/MarginContainer/GridContainer" groups=[
 "SideMenuSelectableObjects",
 ] instance=ExtResource( 3 )]
+margin_left = 150.0
 margin_top = 200.0
+margin_right = 190.0
 margin_bottom = 240.0
-texture_normal = SubResource( 13 )
+texture_normal = SubResource( 17 )
 tile_id = 24
 
 [node name="TreeAutumn" parent="PopupBackground/MarginContainer/GridContainer" groups=[
 "SideMenuSelectableObjects",
 ] instance=ExtResource( 3 )]
-margin_left = 50.0
-margin_top = 200.0
-margin_right = 90.0
-margin_bottom = 240.0
-texture_normal = SubResource( 14 )
+margin_top = 250.0
+margin_bottom = 290.0
+texture_normal = SubResource( 18 )
 tile_id = 23
 
 [node name="TreeAutumnLarge" parent="PopupBackground/MarginContainer/GridContainer" groups=[
 "SideMenuSelectableObjects",
 ] instance=ExtResource( 3 )]
-margin_left = 100.0
-margin_top = 200.0
-margin_right = 140.0
-margin_bottom = 240.0
-texture_normal = SubResource( 15 )
+margin_left = 50.0
+margin_top = 250.0
+margin_right = 90.0
+margin_bottom = 290.0
+texture_normal = SubResource( 19 )
 tile_id = 19
 
 [node name="TreeAutumnGroup" parent="PopupBackground/MarginContainer/GridContainer" groups=[
 "SideMenuSelectableObjects",
 ] instance=ExtResource( 3 )]
-margin_left = 150.0
-margin_top = 200.0
-margin_right = 190.0
-margin_bottom = 240.0
-texture_normal = SubResource( 16 )
+margin_left = 100.0
+margin_top = 250.0
+margin_right = 140.0
+margin_bottom = 290.0
+texture_normal = SubResource( 20 )
 tile_id = 26
 [connection signal="pressed" from="PopupBackground/MarginContainer/GridContainer/EraseButton" to="." method="_on_EraseButton_pressed"]
 [connection signal="pressed" from="PopupBackground/MarginContainer/GridContainer/RotateButton" to="." method="_on_RotateButton_pressed"]

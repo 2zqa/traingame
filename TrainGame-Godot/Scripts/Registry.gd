@@ -55,6 +55,12 @@ var RAIL_STRAIGHT := _register_object_tile(ObjectTile.new("rail_straight", [0, 1
 #warning-ignore:unused_class_variable
 var RAIL_CORNER := _register_object_tile(ObjectTile.new("rail_corner", [1, 14, 15, 13], "XXX\nXOX\nXX."))
 #warning-ignore:unused_class_variable
+var RAIL_SWITCH_1 := _register_object_tile(ObjectTile.new("rail_switch_1", [42, 44, 49, 48], "XXX\nXOX\nXX."))
+#warning-ignore:unused_class_variable
+var RAIL_SWITCH_2 := _register_object_tile(ObjectTile.new("rail_switch_2", [46, 47, 45, 43], "XXX\nXOX\nXX."))
+#warning-ignore:unused_class_variable
+var RAIL_CROSSING := _register_object_tile(ObjectTile.new("rail_crossing", [41, 41, 41, 41]))
+#warning-ignore:unused_class_variable
 var ROAD_STRAIGHT := _register_object_tile(ObjectTile.new("road_straight", [4, 3, 4, 3], "XOX"))
 #warning-ignore:unused_class_variable
 var ROAD_CORNER := _register_object_tile(ObjectTile.new("road_corner", [7, 11, 9, 12], "XXX\nXOX\nXXX"))

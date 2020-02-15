@@ -66,6 +66,5 @@ margin_top = 149.0
 margin_right = 362.0
 margin_bottom = 291.0
 texture = ExtResource( 4 )
-
 [connection signal="pressed" from="HBoxContainer/CenterContainer2/VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/CenterContainer2/VBoxContainer/LoadButton" to="." method="_on_LoadButton_pressed"]
