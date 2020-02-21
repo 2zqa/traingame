@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://Scenes/SideMenu/ObjectsTileSelectorPopup.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/PopupBackground.tscn" type="PackedScene" id=2]
@@ -65,54 +65,57 @@ region = Rect2( 160, 112, 80, 80 )
 
 [sub_resource type="AtlasTexture" id=15]
 atlas = ExtResource( 6 )
-region = Rect2( 208, 96, 16, 16 )
+region = Rect2( 96, 256, 32, 80 )
 
 [sub_resource type="AtlasTexture" id=16]
 atlas = ExtResource( 6 )
-region = Rect2( 176, 0, 16, 32 )
+region = Rect2( 208, 96, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=17]
 atlas = ExtResource( 6 )
-region = Rect2( 176, 32, 16, 32 )
+region = Rect2( 176, 0, 16, 32 )
 
 [sub_resource type="AtlasTexture" id=18]
 atlas = ExtResource( 6 )
-region = Rect2( 160, 0, 16, 32 )
+region = Rect2( 176, 32, 16, 32 )
 
 [sub_resource type="AtlasTexture" id=19]
 atlas = ExtResource( 6 )
-region = Rect2( 160, 32, 16, 32 )
+region = Rect2( 160, 0, 16, 32 )
 
 [sub_resource type="AtlasTexture" id=20]
 atlas = ExtResource( 6 )
-region = Rect2( 192, 0, 48, 48 )
+region = Rect2( 160, 32, 16, 32 )
 
 [sub_resource type="AtlasTexture" id=21]
 atlas = ExtResource( 6 )
-region = Rect2( 176, 96, 16, 16 )
+region = Rect2( 192, 0, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=22]
 atlas = ExtResource( 6 )
-region = Rect2( 176, 64, 16, 32 )
+region = Rect2( 176, 96, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=23]
 atlas = ExtResource( 6 )
-region = Rect2( 240, 32, 16, 32 )
+region = Rect2( 176, 64, 16, 32 )
 
 [sub_resource type="AtlasTexture" id=24]
 atlas = ExtResource( 6 )
-region = Rect2( 160, 64, 16, 32 )
+region = Rect2( 240, 32, 16, 32 )
 
 [sub_resource type="AtlasTexture" id=25]
 atlas = ExtResource( 6 )
-region = Rect2( 240, 64, 16, 32 )
+region = Rect2( 160, 64, 16, 32 )
 
 [sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 6 )
+region = Rect2( 240, 64, 16, 32 )
+
+[sub_resource type="AtlasTexture" id=27]
 atlas = ExtResource( 6 )
 region = Rect2( 192, 48, 48, 48 )
 
 [node name="ObjectsTileSelectorPopup" type="Popup"]
-visible = true
 anchor_bottom = 1.0
 margin_right = 238.0
 script = ExtResource( 1 )
@@ -186,6 +189,7 @@ stretch_mode = 5
 margin_top = 50.0
 margin_bottom = 90.0
 texture_normal = SubResource( 1 )
+tile_id = 0
 
 [node name="RailCrossing" parent="PopupBackground/MarginContainer/ScrollContainer/GridContainer" groups=[
 "SideMenuSelectableObjects",
@@ -311,7 +315,7 @@ margin_bottom = 240.0
 texture_normal = SubResource( 14 )
 tile_id = 37
 
-[node name="TreeSmall" parent="PopupBackground/MarginContainer/ScrollContainer/GridContainer" groups=[
+[node name="BuildingSimple" parent="PopupBackground/MarginContainer/ScrollContainer/GridContainer" groups=[
 "SideMenuSelectableObjects",
 ] instance=ExtResource( 5 )]
 margin_left = 100.0
@@ -319,9 +323,9 @@ margin_top = 200.0
 margin_right = 140.0
 margin_bottom = 240.0
 texture_normal = SubResource( 15 )
-tile_id = 28
+tile_id = 55
 
-[node name="Tree" parent="PopupBackground/MarginContainer/ScrollContainer/GridContainer" groups=[
+[node name="TreeSmall" parent="PopupBackground/MarginContainer/ScrollContainer/GridContainer" groups=[
 "SideMenuSelectableObjects",
 ] instance=ExtResource( 5 )]
 margin_left = 150.0
@@ -329,17 +333,17 @@ margin_top = 200.0
 margin_right = 190.0
 margin_bottom = 240.0
 texture_normal = SubResource( 16 )
-tile_id = 21
+tile_id = 28
 
-[node name="TreeCity" parent="PopupBackground/MarginContainer/ScrollContainer/GridContainer" groups=[
+[node name="Tree" parent="PopupBackground/MarginContainer/ScrollContainer/GridContainer" groups=[
 "SideMenuSelectableObjects",
 ] instance=ExtResource( 5 )]
 margin_top = 250.0
 margin_bottom = 290.0
 texture_normal = SubResource( 17 )
-tile_id = 22
+tile_id = 21
 
-[node name="TreeLarge" parent="PopupBackground/MarginContainer/ScrollContainer/GridContainer" groups=[
+[node name="TreeCity" parent="PopupBackground/MarginContainer/ScrollContainer/GridContainer" groups=[
 "SideMenuSelectableObjects",
 ] instance=ExtResource( 5 )]
 margin_left = 50.0
@@ -347,9 +351,9 @@ margin_top = 250.0
 margin_right = 90.0
 margin_bottom = 290.0
 texture_normal = SubResource( 18 )
-tile_id = 17
+tile_id = 22
 
-[node name="TreeCityLarge" parent="PopupBackground/MarginContainer/ScrollContainer/GridContainer" groups=[
+[node name="TreeLarge" parent="PopupBackground/MarginContainer/ScrollContainer/GridContainer" groups=[
 "SideMenuSelectableObjects",
 ] instance=ExtResource( 5 )]
 margin_left = 100.0
@@ -357,9 +361,9 @@ margin_top = 250.0
 margin_right = 140.0
 margin_bottom = 290.0
 texture_normal = SubResource( 19 )
-tile_id = 18
+tile_id = 17
 
-[node name="TreeGroup" parent="PopupBackground/MarginContainer/ScrollContainer/GridContainer" groups=[
+[node name="TreeCityLarge" parent="PopupBackground/MarginContainer/ScrollContainer/GridContainer" groups=[
 "SideMenuSelectableObjects",
 ] instance=ExtResource( 5 )]
 margin_left = 150.0
@@ -367,17 +371,17 @@ margin_top = 250.0
 margin_right = 190.0
 margin_bottom = 290.0
 texture_normal = SubResource( 20 )
-tile_id = 25
+tile_id = 18
 
-[node name="TreeAutumnSmall" parent="PopupBackground/MarginContainer/ScrollContainer/GridContainer" groups=[
+[node name="TreeGroup" parent="PopupBackground/MarginContainer/ScrollContainer/GridContainer" groups=[
 "SideMenuSelectableObjects",
 ] instance=ExtResource( 5 )]
 margin_top = 300.0
 margin_bottom = 340.0
 texture_normal = SubResource( 21 )
-tile_id = 24
+tile_id = 25
 
-[node name="TreeAutumn" parent="PopupBackground/MarginContainer/ScrollContainer/GridContainer" groups=[
+[node name="TreeAutumnSmall" parent="PopupBackground/MarginContainer/ScrollContainer/GridContainer" groups=[
 "SideMenuSelectableObjects",
 ] instance=ExtResource( 5 )]
 margin_left = 50.0
@@ -385,9 +389,9 @@ margin_top = 300.0
 margin_right = 90.0
 margin_bottom = 340.0
 texture_normal = SubResource( 22 )
-tile_id = 23
+tile_id = 24
 
-[node name="TreeAutumnCity" parent="PopupBackground/MarginContainer/ScrollContainer/GridContainer" groups=[
+[node name="TreeAutumn" parent="PopupBackground/MarginContainer/ScrollContainer/GridContainer" groups=[
 "SideMenuSelectableObjects",
 ] instance=ExtResource( 5 )]
 margin_left = 100.0
@@ -395,9 +399,9 @@ margin_top = 300.0
 margin_right = 140.0
 margin_bottom = 340.0
 texture_normal = SubResource( 23 )
-tile_id = 32
+tile_id = 23
 
-[node name="TreeAutumnLarge" parent="PopupBackground/MarginContainer/ScrollContainer/GridContainer" groups=[
+[node name="TreeAutumnCity" parent="PopupBackground/MarginContainer/ScrollContainer/GridContainer" groups=[
 "SideMenuSelectableObjects",
 ] instance=ExtResource( 5 )]
 margin_left = 150.0
@@ -405,17 +409,17 @@ margin_top = 300.0
 margin_right = 190.0
 margin_bottom = 340.0
 texture_normal = SubResource( 24 )
-tile_id = 19
+tile_id = 32
 
-[node name="TreeAutumnCityLarge" parent="PopupBackground/MarginContainer/ScrollContainer/GridContainer" groups=[
+[node name="TreeAutumnLarge" parent="PopupBackground/MarginContainer/ScrollContainer/GridContainer" groups=[
 "SideMenuSelectableObjects",
 ] instance=ExtResource( 5 )]
 margin_top = 350.0
 margin_bottom = 390.0
 texture_normal = SubResource( 25 )
-tile_id = 31
+tile_id = 19
 
-[node name="TreeAutumnGroup" parent="PopupBackground/MarginContainer/ScrollContainer/GridContainer" groups=[
+[node name="TreeAutumnCityLarge" parent="PopupBackground/MarginContainer/ScrollContainer/GridContainer" groups=[
 "SideMenuSelectableObjects",
 ] instance=ExtResource( 5 )]
 margin_left = 50.0
@@ -423,6 +427,16 @@ margin_top = 350.0
 margin_right = 90.0
 margin_bottom = 390.0
 texture_normal = SubResource( 26 )
+tile_id = 31
+
+[node name="TreeAutumnGroup" parent="PopupBackground/MarginContainer/ScrollContainer/GridContainer" groups=[
+"SideMenuSelectableObjects",
+] instance=ExtResource( 5 )]
+margin_left = 100.0
+margin_top = 350.0
+margin_right = 140.0
+margin_bottom = 390.0
+texture_normal = SubResource( 27 )
 tile_id = 26
 [connection signal="pressed" from="PopupBackground/MarginContainer/ScrollContainer/GridContainer/EraseButton" to="." method="_on_EraseButton_pressed"]
 [connection signal="pressed" from="PopupBackground/MarginContainer/ScrollContainer/GridContainer/RotateButton" to="." method="_on_RotateButton_pressed"]

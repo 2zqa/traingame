@@ -103,7 +103,10 @@ var TREE_AUTUMN_CITY_LARGE := _register_object_tile(ObjectTile.new("tree_autumn_
 #warning-ignore:unused_class_variable
 var TREE_AUTUMN_GROUP := _register_object_tile(ObjectTile.new("tree_autumn_group", [26, 26, 26, 26], "XX\ndX"))
 
+#warning-ignore:unused_class_variable
 var BUILDING_BANK := _register_object_tile(ObjectTile.new("building_bank", [37, 39, 40, 38], "XXXXX\nXX^XX"))
+#warning-ignore:unused_class_variable
+var BUILDING_SIMPLE := _register_object_tile(ObjectTile.new("building_simple", [55, 56, 55, 56], "XX\ndX"))
 
 # Ground tiles
 var GRASS := _register_ground_tile(GroundTile.new("grass", 0))
