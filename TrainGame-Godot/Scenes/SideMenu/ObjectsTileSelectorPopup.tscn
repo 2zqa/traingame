@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://Scenes/SideMenu/ObjectsTileSelectorPopup.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/PopupBackground.tscn" type="PackedScene" id=2]
@@ -30,10 +30,6 @@ region = Rect2( 16, 0, 48, 48 )
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 6 )
 region = Rect2( 96, 48, 48, 16 )
-
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 6 )
-region = Rect2( 144, 112, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 6 )
@@ -238,16 +234,6 @@ margin_right = 90.0
 margin_bottom = 140.0
 texture_normal = SubResource( 6 )
 tile_id = 36
-
-[node name="PathConcrete" parent="PopupBackground/MarginContainer/ScrollContainer/GridContainer" groups=[
-"SideMenuSelectableObjects",
-] instance=ExtResource( 5 )]
-margin_left = 100.0
-margin_top = 100.0
-margin_right = 140.0
-margin_bottom = 140.0
-texture_normal = SubResource( 7 )
-tile_id = 50
 
 [node name="RailCrossingPathConcrete" parent="PopupBackground/MarginContainer/ScrollContainer/GridContainer" groups=[
 "SideMenuSelectableObjects",

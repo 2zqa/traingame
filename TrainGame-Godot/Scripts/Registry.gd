@@ -71,8 +71,6 @@ var ROAD_T := _register_object_tile(ObjectTile.new("road_t", [5, 10, 6, 8], "XXX
 #warning-ignore:unused_class_variable
 var RAIL_CROSSING_ROAD := _register_object_tile(ObjectTile.new("rail_crossing_road", [36, 35, 36, 35], "XOX"))
 #warning-ignore:unused_class_variable
-var PATH_CONCRETE := _register_object_tile(ObjectTile.new("path_concrete", [50, 50, 50, 50]))
-#warning-ignore:unused_class_variable
 var RAIL_CROSSING_PATH_CONCRETE := _register_object_tile(ObjectTile.new("rail_crossing_path_concrete", [51, 52, 51, 52]))
 #warning-ignore:unused_class_variable
 var ROAD_CROSSING := _register_object_tile(ObjectTile.new("road_crossing", [54, 53, 54, 53], "XOX"))
@@ -120,4 +118,8 @@ var SNOW := _register_ground_tile(GroundTile.new("snow", 3))
 var DIRT := _register_ground_tile(GroundTile.new("dirt", 4))
 #warning-ignore:unused_class_variable
 var WATER := _register_ground_tile(GroundTile.new("water", 5))
+#warning-ignore:unused_class_variable
+var PATH_CONCRETE_GRAY := _register_ground_tile(GroundTile.new("path_concrete_gray", 6))
+#warning-ignore:unused_class_variable
+var PATH_CONCRETE_YELLOW := _register_ground_tile(GroundTile.new("path_concrete_yellow", 7))
 

@@ -5,6 +5,7 @@
 [ext_resource path="res://TileSets/Ground.tres" type="TileSet" id=3]
 
 [node name="GroundTileSelectorPopup" type="Popup"]
+visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 0.773804
@@ -12,9 +13,12 @@ margin_top = 16.2494
 margin_right = 8.7738
 margin_bottom = 24.2494
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="PopupBackground" parent="." instance=ExtResource( 2 )]
-margin_right = 255.0
+margin_right = 334.0
 margin_bottom = 180.0
 
 [node name="GroundTileMap" type="TileMap" parent="."]
@@ -25,5 +29,4 @@ cell_size = Vector2( 19, 19 )
 collision_layer = 0
 collision_mask = 0
 format = 1
-tile_data = PoolIntArray( 0, 0, 0, 1, 1, 0, 2, 2, 0, 65536, 3, 0, 65537, 4, 0, 65538, 5, 0 )
-
+tile_data = PoolIntArray( 0, 0, 0, 1, 1, 0, 2, 2, 0, 3, 6, 0, 65536, 3, 0, 65537, 4, 0, 65538, 5, 0, 65539, 7, 0 )
