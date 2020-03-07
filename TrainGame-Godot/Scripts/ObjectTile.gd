@@ -26,6 +26,10 @@ func get_texture_id() -> int:
 func equals(other: ObjectTile) -> bool:
     return self.get_texture_id() == other.get_texture_id()
 
+# Returns true if the other object tile is the same tile, ignoring rotaitons.
+func equals_ignore_rotation(other: ObjectTile) -> bool:
+    return self._texture_ids[Rotation.NONE] == other._texture_ids[Rotation.NONE]
+
 # Gets a tile with the given rotation. Does not modify this tile.
 func with_rotation(rotation: int) -> ObjectTile:
     if self._texture_ids[rotation] == self._texture_ids[self.rotation]:
