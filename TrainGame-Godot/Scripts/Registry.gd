@@ -71,7 +71,7 @@ var ROAD_T := _register_object_tile(ObjectTile.new("road_t", [5, 10, 6, 8], "XXX
 #warning-ignore:unused_class_variable
 var RAIL_CROSSING_ROAD := _register_object_tile(ObjectTile.new("rail_crossing_road", [36, 35, 36, 35], "XOX"))
 #warning-ignore:unused_class_variable
-var RAIL_CROSSING_PATH_CONCRETE := _register_object_tile(ObjectTile.new("rail_crossing_path_concrete", [51, 52, 51, 52]))
+var RAIL_WITHOUT_SLEEPERS := _register_object_tile(ObjectTile.new("rail_without_sleepers", [51, 52, 51, 52]))
 #warning-ignore:unused_class_variable
 var ROAD_CROSSING := _register_object_tile(ObjectTile.new("road_crossing", [54, 53, 54, 53], "XOX"))
 

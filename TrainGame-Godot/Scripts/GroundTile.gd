@@ -19,3 +19,8 @@ func create_texture() -> Texture:
 # Gets the name under which this tile is registered.
 func to_string() -> String:
     return self.name_id
+
+
+# Checks if the other ground tile is equal to this tile.
+func equals(other: GroundTile) -> bool:
+    return self.texture_id == other.texture_id

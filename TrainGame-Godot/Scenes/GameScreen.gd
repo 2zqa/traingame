@@ -17,6 +17,7 @@ func _ready() -> void:
     
     WorldPopulator.populate(WORLD_RECTANGLE, $World/ObjectsTileMap, $World/GroundTileMap)
     var _unused = FileIO.load_world(Global.world_save_location, $World/ObjectsTileMap, $World/GroundTileMap)
+    Global.paths = PathsInWorld.new(WORLD_RECTANGLE, $World/ObjectsTileMap, $World/GroundTileMap)
 
 # Places the current tile at the given canvas position
 func place(canvas_position: Vector2, overwrite_objects: bool = false) -> void:
@@ -104,9 +105,15 @@ func _on_SideMenu_rotation_requested() -> void:
 func _on_SideMenu_save_and_quit_requested() -> void:
     if FileIO.write(Global.world_save_location, WORLD_RECTANGLE, $World/ObjectsTileMap, $World/GroundTileMap) == OK:
         if FileIO.write_name(Global.world_save_location, Global.world_name) == OK:
-            if get_tree().change_scene(_MENU_SCREEN) != OK:
-                push_error("Failed to change scene")
+            self._exit()
         else:
             push_error("Aborting world exit due to world name save failure.")
     else:
         push_error("Aborting world exit due to world data save failure.")
+
+
+# Exits to the main menu without saving
+func _exit():
+    Global.paths = null
+    if get_tree().change_scene(_MENU_SCREEN) != OK:
+        push_error("Failed to change scene")
