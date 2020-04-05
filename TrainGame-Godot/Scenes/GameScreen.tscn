@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scenes/GameScreen.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/WorldCamera.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Scenes/ObjectsTileMap.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/SideMenu/SideMenu.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Inhabitant.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/TrainCar.tscn" type="PackedScene" id=7]
 
 [node name="GameScreen" type="Node2D"]
 script = ExtResource( 1 )
@@ -22,6 +23,10 @@ tile_data = PoolIntArray( 393225, 0, 0, 393226, 0, 0, 393227, 0, 0, 393230, 0, 0
 tile_data = PoolIntArray(  )
 
 [node name="Inhabitant" parent="World" instance=ExtResource( 6 )]
+frame = 3
+
+[node name="TrainCar" parent="World" instance=ExtResource( 7 )]
+position = Vector2( -112, -112 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
