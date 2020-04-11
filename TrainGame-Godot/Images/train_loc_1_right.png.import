@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/train_1_hor.png-bd89d3c09bb110d66e2a1a9b763ffaa2.stex"
+path="res://.import/train_loc_1_right.png-da07c29feca1799839cf01eadf2a361e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/train_1_hor.png"
-dest_files=[ "res://.import/train_1_hor.png-bd89d3c09bb110d66e2a1a9b763ffaa2.stex" ]
+source_file="res://Images/train_loc_1_right.png"
+dest_files=[ "res://.import/train_loc_1_right.png-da07c29feca1799839cf01eadf2a361e.stex" ]
 
 [params]
 
