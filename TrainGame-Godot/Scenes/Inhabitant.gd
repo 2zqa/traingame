@@ -21,6 +21,13 @@ func _process(delta: float) -> void:
     self.position += direction_vector * self._speed * delta
     self._update_animation()
 
+# Used when the world rotates
+func rotate_clockwise():
+    self._previous_position = Rotation.rotate(Rotation.CLOCKWISE, self._previous_position)
+    self.position = Rotation.rotate(Rotation.CLOCKWISE, self.position)
+    self._direction = Direction.right(self._direction)
+    self._update_animation()
+
 # Requires the inhabitant to be snapped to the grid. Changes the current direction if blocked
 # or (by chance) at a T-intersection or a normal crossing.
 func _reconsider_direction() -> void:

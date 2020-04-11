@@ -78,7 +78,7 @@ func _unhandled_input(event: InputEvent) -> void:
         if event is InputEventMouseMotion or event is InputEventScreenDrag:
             self._previous_touch_pos[pointer_id] = event.position
         else:
-            self._previous_touch_pos.erase(pointer_id)
+            var _u = self._previous_touch_pos.erase(pointer_id)
         self.get_tree().set_input_as_handled()
 
 
@@ -86,7 +86,7 @@ func _input(event: InputEvent) -> void:
     if (event is InputEventScreenTouch and not event.is_pressed()) or \
             Mouse.is_left_released(event):
         # Finger released, clear previous position
-        self._previous_touch_pos.erase(Mouse.get_pointer_id(event))
+        var _u = self._previous_touch_pos.erase(Mouse.get_pointer_id(event))
         var objects = $World/ObjectsTileMap
         var tile_pos = objects.mouse_event_to_tile_pos(event)
         var tile = objects.get_tile(tile_pos)
@@ -101,6 +101,8 @@ func _on_SideMenu_option_selected(selected_option: InteractOption) -> void:
 func _on_SideMenu_rotation_requested() -> void:
     $World/GroundTileMap.rotate_clockwise()
     $World/ObjectsTileMap.rotate_clockwise()
+    for entity in $World/Entities.get_children():
+        entity.rotate_clockwise()
 
 func _on_SideMenu_save_and_quit_requested() -> void:
     if FileIO.write(Global.world_save_location, WORLD_RECTANGLE, $World/ObjectsTileMap, $World/GroundTileMap) == OK:
