@@ -4,8 +4,7 @@ class_name TileCollision
 var _lines: Array
 var _size: Vector2
 var _origin: Vector2
-var _rotation_offset_to_origin_hor: Vector2
-var _rotation_offset_to_origin_vert: Vector2
+var _rotation_offset: Vector2
 
 # Creates a tile collision map. collision_map must be a string like "XO\nX.". The
 # following symbols are supported:
@@ -19,7 +18,7 @@ func _init(collision_map: String):
     var lines = collision_map.split("\n")
     self._lines = Array()
     self._origin = Vector2(0, 0)
-    self._rotation_offset_to_origin_hor = Vector2(0, 0)
+    self._rotation_offset = Vector2(0, 0)
     
     var line_number = 0
     for line in lines:
@@ -36,16 +35,15 @@ func _init(collision_map: String):
             elif letter == "d":
                 parsed.append(1)
                 self._origin = Vector2(i, line_number)
-                self._rotation_offset_to_origin_hor = Vector2(0.5, -0.5)
+                self._rotation_offset = Vector2(0.5, -0.5)
             elif letter == "^":
                 parsed.append(1)
                 self._origin = Vector2(i, line_number)
-                self._rotation_offset_to_origin_hor = Vector2(0, -0.5)
+                self._rotation_offset = Vector2(0, -0.5)
             else:
                 push_error("Invalid letter: " + letter + " (" + collision_map + ")")
         self._lines.append(parsed)
         line_number += 1
-    self._rotation_offset_to_origin_vert = Vector2(-self._rotation_offset_to_origin_vert.y, -self._rotation_offset_to_origin_vert.x)
  
     # Calculate size   
     var height = self._lines.size()
@@ -70,10 +68,11 @@ func collides(rotation: int, tile_dx: int, tile_dy: int) -> bool:
 # instead of "--dO   " (note the amount of spaces). In that case you need a rotation offset. This rotation offset
 # depends on whether we are starting from 0 and 180 degrees, or 90 and 270 degrees.
 func get_rotation_offset(rotation: int) -> Vector2:
-    if rotation == Rotation.CLOCKWISE or rotation == Rotation.COUNTER_CLOCKWISE:
-        return self._rotation_offset_to_origin_vert
-    return self._rotation_offset_to_origin_hor
+    return Rotation.rotate(rotation, self._rotation_offset)
 
+# Gets the origin, rotated to the given rotation.
+func get_origin(rotation: int) -> Vector2:
+    return Rotation.rotate(rotation, self._origin)
 
 # Gets a list of all positions occupied by this collision shape
 func get_occupied_positions(rotation: int) -> PoolVector2Array:

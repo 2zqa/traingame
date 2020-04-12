@@ -32,8 +32,6 @@ func equals_ignore_rotation(other: ObjectTile) -> bool:
 
 # Gets a tile with the given rotation. Does not modify this tile.
 func with_rotation(rotation: int) -> ObjectTile:
-    if self._texture_ids[rotation] == self._texture_ids[self.rotation]:
-        return self  # New tile will look exactly the same
     return get_script().new(self.name_id, self._texture_ids, self._collision, rotation)
 
 # Gets the texture a rotated variant of this tile would have
@@ -60,6 +58,18 @@ func all_rotations() -> Array:
     return [self.with_rotation(Rotation.NONE), self.with_rotation(Rotation.CLOCKWISE),
             self.with_rotation(Rotation.HALF), self.with_rotation(Rotation.COUNTER_CLOCKWISE)]
 
+func get_rotation_position_fix() -> Vector2:
+    var attempted_new_rotation = Rotation.next(self.rotation)
+    var actual_new_rotation = self._get_rotation_from_texture_id(self._texture_ids[attempted_new_rotation])
+    var attempted_offset = self._collision.get_rotation_offset(attempted_new_rotation)
+    var actual_offset = self._collision.get_rotation_offset(actual_new_rotation)
+    if attempted_offset != actual_offset:
+        # print(self.name_id, " ", Rotation.rotation_to_string(attempted_new_rotation), attempted_offset, " ", 
+        #      Rotation.rotation_to_string(actual_new_rotation), actual_offset, " RES ", attempted_offset - actual_offset)
+        return attempted_offset - actual_offset
+    return Vector2(0, 0)
+
+
 # Creates the texture of this tile
 func create_texture() -> Texture:
     var atlas = AtlasTexture.new()
@@ -71,3 +81,11 @@ func create_texture() -> Texture:
 # Gets the name under which this tile is registered.
 func to_string() -> String:
     return self.name_id + "." + Rotation.rotation_to_string(self.rotation)
+
+# Gets what the rotation would be if we would have the given texture. If multiple rotations share the
+# same texture, the first rotation is returned. Returns -1 if no rotation matches the given texture.
+func _get_rotation_from_texture_id(texture_id: int):
+    for i in range(self._texture_ids.size()):
+        if self._texture_ids[i] == texture_id:
+            return i
+    return -1
