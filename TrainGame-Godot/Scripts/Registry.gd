@@ -11,7 +11,7 @@ var _name_to_tile := {}
 func _register_object_tile(tile: ObjectTile) -> ObjectTile:
     for rotated_tile in tile.all_rotations():
         var texture_id = rotated_tile.get_texture_id()
-        if not _texture_id_to_ground_tile.has(texture_id):
+        if not _texture_id_to_object_tile.has(texture_id):
             # Don't overwrite existing texture ids in the map.
             # In this way, if multiple rotations share the same texture, the first rotation (Rotation.NONE) wins.
             _texture_id_to_object_tile[texture_id] = rotated_tile
