@@ -18,6 +18,7 @@ func _ready() -> void:
     WorldPopulator.populate(WORLD_RECTANGLE, $World/ObjectsTileMap, $World/GroundTileMap)
     var _unused = FileIO.load_world(Global.world_save_location, $World/ObjectsTileMap, $World/GroundTileMap)
     Global.paths = PathsInWorld.new(WORLD_RECTANGLE, $World/ObjectsTileMap, $World/GroundTileMap)
+    Global.rails = RailsInWorld.new($World/ObjectsTileMap)
 
 # Places the current tile at the given canvas position
 func place(canvas_position: Vector2, overwrite_objects: bool = false) -> void:
@@ -117,5 +118,6 @@ func _on_SideMenu_save_and_quit_requested() -> void:
 # Exits to the main menu without saving
 func _exit():
     Global.paths = null
+    Global.rails = null
     if get_tree().change_scene(_MENU_SCREEN) != OK:
         push_error("Failed to change scene")

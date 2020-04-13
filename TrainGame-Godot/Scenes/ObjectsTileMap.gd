@@ -9,7 +9,7 @@ const ObjectTile = preload("res://Scripts/ObjectTile.gd")
 func set_tile(tile_position: Vector2, tile: ObjectTile, overwrite: bool = true) -> void:
     # Make sure to remove existing tile(s)
     for delta in tile.get_occupied_tile_positions():
-        var existing_tile_result = self._search_texture(tile_position.x + delta.x, tile_position.y + delta.y)
+        var existing_tile_result = self.get_tile_and_coords(tile_position.x + delta.x, tile_position.y + delta.y)
         if existing_tile_result[2] != Global.Registry.OBJECT_EMPTY:
             # Found existing tile, remove or abort
             if not overwrite:
@@ -22,7 +22,7 @@ func set_tile(tile_position: Vector2, tile: ObjectTile, overwrite: bool = true) 
 
 # Gets the tile at the given position.
 func get_tile(tile_pos: Vector2) -> ObjectTile:
-    var result = self._search_texture(int(tile_pos.x), int(tile_pos.y))
+    var result = self.get_tile_and_coords(int(tile_pos.x), int(tile_pos.y))
     return result[2]
 
 
@@ -33,7 +33,7 @@ func get_tile_no_search(tile_x: int, tile_y: int) -> ObjectTile:
 
 
 # Searches for a tile that reaches this tile nearby. Returns [tile_x, tile_y, texture_id].
-func _search_texture(tile_x: int, tile_y: int) -> Array:
+func get_tile_and_coords(tile_x: int, tile_y: int) -> Array:
     for dx in [0, -1, 1, -2, 2]:
         for dy in [0, -1, 1, -2, 2]:
             var object_tile = get_tile_no_search(tile_x + dx, tile_y + dy)
