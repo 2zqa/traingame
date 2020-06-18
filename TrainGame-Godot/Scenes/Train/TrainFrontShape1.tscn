@@ -8,7 +8,9 @@ extents = Vector2( 30.5915, 16.1523 )
 [node name="TrainFront1" type="Area2D"]
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -8 )
 texture = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -8 )
 shape = SubResource( 1 )

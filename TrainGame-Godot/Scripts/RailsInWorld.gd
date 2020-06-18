@@ -22,8 +22,11 @@ func _init(objects: ObjectsTileMap):
     self._objects = objects
     self._straight_line = _curve([Vector2(0, 8), Vector2(0, -8)])
     self._straight_line_long = _curve([Vector2(0, 24), Vector2(0, -24)])
-    self._corner_south_west = _curve([Vector2(16, -24), Vector2(13, -12), Vector2(3, 3), Vector2(-5, 9), Vector2(-16, 14), Vector2(-24, 16)])
-    self._corner_east_north = _curve([Vector2(-24, 16), Vector2(-16, 14), Vector2(-5, 9), Vector2(3, 3), Vector2(13, -12), Vector2(16, -24)])
+    var corner_array = [Vector2(12, -20), Vector2(3, 3), Vector2(-20, 12)]
+    #var corner_array = [Vector2(18, -22), Vector2(3, 3), Vector2(-22, 18)]
+    self._corner_south_west = _curve(corner_array)
+    corner_array.invert()
+    self._corner_east_north = _curve(corner_array)
     self._sentinel = Curve2D.new()
 
 func _driving_curve(curve: Curve2D, rotation: int) -> Curve2D:
