@@ -27,3 +27,4 @@ position = Vector2( -64, 0 )
 position = Vector2( -128, 0 )
 
 [node name="TrainRear1" parent="TrainRear" instance=ExtResource( 1 )]
+[connection signal="derailed" from="TrainFront" to="." method="_on_TrainFront_derailed"]

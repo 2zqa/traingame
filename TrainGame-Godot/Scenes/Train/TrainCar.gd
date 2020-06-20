@@ -1,5 +1,6 @@
 extends Node2D
 
+signal derailed
 
 # These two must be kept in sync with other train cars, so only modify from the parent node
 var _speed: float = 20 
@@ -38,11 +39,11 @@ func _find_next_rail() -> void:
 
     self._derailed = path.curve.get_point_count() < 2
     if self._derailed:
-        print("Derailed at ", tile_pos, ": ", Global.rails._objects.get_tile(tile_pos).to_string())
+        emit_signal("derailed")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-    if Global.rails == null:
+    if Global.rails == null or self._speed == 0:
         return
 
     var path: Path2D = $Path2D
