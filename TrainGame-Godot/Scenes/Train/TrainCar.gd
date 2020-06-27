@@ -75,6 +75,8 @@ func _teleport_to(tile_pos: Vector2):
     self._set_relative_traincar_position(path_progress.position)
 
 func _set_relative_traincar_position(position: Vector2):
+    # Sets the location of the traincar (a child of type Area2D) to the given
+    # position.
     for node in self.get_children():
         if node is Area2D:
             node.position = position
@@ -93,3 +95,6 @@ func _update_sprite():
 func rotate_clockwise():
     self.position = Rotation.rotate(Rotation.CLOCKWISE, self.position)
     self._direction = Direction.right(self._direction)
+    var path: Path2D = $Path2D
+    path.curve = Global.rails.get_path(tile_pos, self._direction)
+    self._update_sprite()
