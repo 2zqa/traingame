@@ -25,7 +25,7 @@ tile_data = PoolIntArray(  )
 [node name="Entities" type="Node2D" parent="World"]
 
 [node name="Inhabitant" parent="World/Entities" instance=ExtResource( 6 )]
-frame = 3
+frame = 1
 
 [node name="Train" parent="World/Entities" instance=ExtResource( 8 )]
 position = Vector2( -141.488, -88.1735 )
@@ -33,7 +33,6 @@ position = Vector2( -141.488, -88.1735 )
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="SideMenu" parent="CanvasLayer" instance=ExtResource( 5 )]
-visible = false
 [connection signal="option_selected" from="CanvasLayer/SideMenu" to="." method="_on_SideMenu_option_selected"]
 [connection signal="rotation_requested" from="CanvasLayer/SideMenu" to="." method="_on_SideMenu_rotation_requested"]
 [connection signal="save_and_quit_requested" from="CanvasLayer/SideMenu" to="." method="_on_SideMenu_save_and_quit_requested"]

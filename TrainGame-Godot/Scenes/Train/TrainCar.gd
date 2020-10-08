@@ -96,5 +96,6 @@ func rotate_clockwise():
     self.position = Rotation.rotate(Rotation.CLOCKWISE, self.position)
     self._direction = Direction.right(self._direction)
     var path: Path2D = $Path2D
+    var tile_pos = Global.rails.to_tile_pos(self.to_global(Vector2(0, 0)))
     path.curve = Global.rails.get_path(tile_pos, self._direction)
     self._update_sprite()
