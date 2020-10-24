@@ -27,7 +27,6 @@ tile_data = PoolIntArray( -1, 16, 0, 65524, 16, 0, 65525, 16, 0, 65526, 16, 0, 6
 [node name="Entities" type="Node2D" parent="World"]
 
 [node name="Inhabitant" parent="World/Entities" instance=ExtResource( 6 )]
-frame = 3
 
 [node name="Train" parent="World/Entities" instance=ExtResource( 8 )]
 
