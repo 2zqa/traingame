@@ -1,4 +1,5 @@
 # Class that reprents all walkable tiles in the world.
+extends Reference
 class_name PathsInWorld
 
 var _objects: ObjectsTileMap

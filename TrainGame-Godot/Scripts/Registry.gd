@@ -1,3 +1,5 @@
+extends Reference
+
 const ObjectTile = preload("res://Scripts/ObjectTile.gd")
 const GroundTile = preload("res://Scripts/GroundTile.gd")
 const TileCollision = preload("res://Scripts/TileCollision.gd")

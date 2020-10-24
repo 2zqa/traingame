@@ -1,4 +1,5 @@
 # Used to specify the current way the player interacts with the world: placing a tile, moving the view, etc.
+extends Reference
 class_name InteractOption
 
 var ground_tile: GroundTile  # or null. Set to a value to place a ground tile.

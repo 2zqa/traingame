@@ -1,4 +1,5 @@
 # Class that represents all the rails in the world.
+extends Reference
 class_name RailsInWorld
 
 const _RAIL_STRAIGHT = 1

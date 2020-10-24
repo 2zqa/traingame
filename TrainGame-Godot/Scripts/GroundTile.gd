@@ -1,3 +1,4 @@
+extends Reference
 class_name GroundTile
 
 const _TILE_SET := preload("res://TileSets/Ground.tres")

@@ -1,4 +1,5 @@
 # Used to set tile collisions.
+extends Reference
 class_name TileCollision
 
 var _lines: Array

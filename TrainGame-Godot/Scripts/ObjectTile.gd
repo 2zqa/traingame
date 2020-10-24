@@ -1,3 +1,4 @@
+extends Reference
 class_name ObjectTile
 
 const _TILE_SET := preload("res://TileSets/Objects.tres")
