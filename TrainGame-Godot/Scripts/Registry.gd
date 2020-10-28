@@ -51,62 +51,62 @@ func get_tile_by_name(name: String) -> Object:
 
 
 # Object tiles
-var OBJECT_EMPTY := _register_object_tile(ObjectTile.new("object_empty", [-1, -1, -1, -1]))
+var OBJECT_EMPTY := _register_object_tile(ObjectTile.new("object_empty", {texture_ids=[-1, -1, -1, -1]}))
 #warning-ignore:unused_class_variable
-var RAIL_STRAIGHT := _register_object_tile(ObjectTile.new("rail_straight", [0, 16, 0, 16]))
+var RAIL_STRAIGHT := _register_object_tile(ObjectTile.new("rail_straight", {texture_ids=[0, 16, 0, 16]}))
 #warning-ignore:unused_class_variable
-var RAIL_CORNER := _register_object_tile(ObjectTile.new("rail_corner", [1, 14, 15, 13], "XXX\nXOX\nXX."))
+var RAIL_CORNER := _register_object_tile(ObjectTile.new("rail_corner", {texture_ids=[1, 14, 15, 13], shape="XXX\nXOX\nXX."}))
 #warning-ignore:unused_class_variable
-var RAIL_SWITCH_1 := _register_object_tile(ObjectTile.new("rail_switch_1", [42, 44, 49, 48], "XXX\nXOX\nXX."))
+var RAIL_SWITCH_1 := _register_object_tile(ObjectTile.new("rail_switch_1", {texture_ids=[42, 44, 49, 48], shape="XXX\nXOX\nXX."}))
 #warning-ignore:unused_class_variable
-var RAIL_SWITCH_2 := _register_object_tile(ObjectTile.new("rail_switch_2", [46, 47, 45, 43], "XXX\nXOX\nXX."))
+var RAIL_SWITCH_2 := _register_object_tile(ObjectTile.new("rail_switch_2", {texture_ids=[46, 47, 45, 43], shape="XXX\nXOX\nXX."}))
 #warning-ignore:unused_class_variable
-var RAIL_CROSSING := _register_object_tile(ObjectTile.new("rail_crossing", [41, 41, 41, 41]))
+var RAIL_CROSSING := _register_object_tile(ObjectTile.new("rail_crossing", {texture_ids=[41, 41, 41, 41]}))
 #warning-ignore:unused_class_variable
-var ROAD_STRAIGHT := _register_object_tile(ObjectTile.new("road_straight", [4, 3, 4, 3], "XOX"))
+var ROAD_STRAIGHT := _register_object_tile(ObjectTile.new("road_straight", {texture_ids=[4, 3, 4, 3], shape="XOX"}))
 #warning-ignore:unused_class_variable
-var ROAD_CORNER := _register_object_tile(ObjectTile.new("road_corner", [7, 11, 9, 12], "XXX\nXOX\nXXX"))
+var ROAD_CORNER := _register_object_tile(ObjectTile.new("road_corner", {texture_ids=[7, 11, 9, 12], shape="XXX\nXOX\nXXX"}))
 #warning-ignore:unused_class_variable
-var ROAD_INTERSECTION := _register_object_tile(ObjectTile.new("road_intersection", [2, 2, 2, 2], "XXX\nXOX\nXXX"))
+var ROAD_INTERSECTION := _register_object_tile(ObjectTile.new("road_intersection", {texture_ids=[2, 2, 2, 2], shape="XXX\nXOX\nXXX"}))
 #warning-ignore:unused_class_variable
-var ROAD_T := _register_object_tile(ObjectTile.new("road_t", [5, 10, 6, 8], "XXX\nXOX\nXXX"))
+var ROAD_T := _register_object_tile(ObjectTile.new("road_t", {texture_ids=[5, 10, 6, 8], shape="XXX\nXOX\nXXX"}))
 #warning-ignore:unused_class_variable
-var RAIL_CROSSING_ROAD := _register_object_tile(ObjectTile.new("rail_crossing_road", [36, 35, 36, 35], "XOX"))
+var RAIL_CROSSING_ROAD := _register_object_tile(ObjectTile.new("rail_crossing_road", {texture_ids=[36, 35, 36, 35], shape="XOX"}))
 #warning-ignore:unused_class_variable
-var RAIL_WITHOUT_SLEEPERS := _register_object_tile(ObjectTile.new("rail_without_sleepers", [51, 52, 51, 52]))
+var RAIL_WITHOUT_SLEEPERS := _register_object_tile(ObjectTile.new("rail_without_sleepers", {texture_ids=[51, 52, 51, 52]}))
 #warning-ignore:unused_class_variable
-var ROAD_CROSSING := _register_object_tile(ObjectTile.new("road_crossing", [54, 53, 54, 53], "XOX"))
+var ROAD_CROSSING := _register_object_tile(ObjectTile.new("road_crossing", {texture_ids=[54, 53, 54, 53], shape="XOX"}))
 
 #warning-ignore:unused_class_variable
-var TREE_SMALL := _register_object_tile(ObjectTile.new("tree_small", [28, 28, 28, 28]))
+var TREE_SMALL := _register_object_tile(ObjectTile.new("tree_small", {texture_ids=[28, 28, 28, 28]}))
 #warning-ignore:unused_class_variable
-var TREE := _register_object_tile(ObjectTile.new("tree", [21, 21, 21, 21]))
+var TREE := _register_object_tile(ObjectTile.new("tree", {texture_ids=[21, 21, 21, 21]}))
 #warning-ignore:unused_class_variable
-var TREE_CITY := _register_object_tile(ObjectTile.new("tree_city", [22, 22, 22, 22]))
+var TREE_CITY := _register_object_tile(ObjectTile.new("tree_city", {texture_ids=[22, 22, 22, 22]}))
 #warning-ignore:unused_class_variable
-var TREE_LARGE := _register_object_tile(ObjectTile.new("tree_large", [17, 17, 17, 17]))
+var TREE_LARGE := _register_object_tile(ObjectTile.new("tree_large", {texture_ids=[17, 17, 17, 17]}))
 #warning-ignore:unused_class_variable
-var TREE_CITY_LARGE := _register_object_tile(ObjectTile.new("tree_city_large", [18, 18, 18, 18]))
+var TREE_CITY_LARGE := _register_object_tile(ObjectTile.new("tree_city_large", {texture_ids=[18, 18, 18, 18]}))
 #warning-ignore:unused_class_variable
-var TREE_GROUP := _register_object_tile(ObjectTile.new("tree_group", [25, 25, 25, 25], "XX\ndX"))
+var TREE_GROUP := _register_object_tile(ObjectTile.new("tree_group", {texture_ids=[25, 25, 25, 25], shape="XX\ndX"}))
 
 #warning-ignore:unused_class_variable
-var TREE_AUTUMN_SMALL := _register_object_tile(ObjectTile.new("tree_autumn_small", [24, 24, 24, 24]))
+var TREE_AUTUMN_SMALL := _register_object_tile(ObjectTile.new("tree_autumn_small", {texture_ids=[24, 24, 24, 24]}))
 #warning-ignore:unused_class_variable
-var TREE_AUTUMN := _register_object_tile(ObjectTile.new("tree_autumn", [23, 23, 23, 23]))
+var TREE_AUTUMN := _register_object_tile(ObjectTile.new("tree_autumn", {texture_ids=[23, 23, 23, 23]}))
 #warning-ignore:unused_class_variable
-var TREE_AUTUMN_CITY := _register_object_tile(ObjectTile.new("tree_autumn_city", [32, 32, 32, 32]))
+var TREE_AUTUMN_CITY := _register_object_tile(ObjectTile.new("tree_autumn_city", {texture_ids=[32, 32, 32, 32]}))
 #warning-ignore:unused_class_variable
-var TREE_AUTUMN_LARGE := _register_object_tile(ObjectTile.new("tree_autumn_large", [19, 19, 19, 19]))
+var TREE_AUTUMN_LARGE := _register_object_tile(ObjectTile.new("tree_autumn_large", {texture_ids=[19, 19, 19, 19]}))
 #warning-ignore:unused_class_variable
-var TREE_AUTUMN_CITY_LARGE := _register_object_tile(ObjectTile.new("tree_autumn_city_large", [31, 31, 31, 31]))
+var TREE_AUTUMN_CITY_LARGE := _register_object_tile(ObjectTile.new("tree_autumn_city_large", {texture_ids=[31, 31, 31, 31]}))
 #warning-ignore:unused_class_variable
-var TREE_AUTUMN_GROUP := _register_object_tile(ObjectTile.new("tree_autumn_group", [26, 26, 26, 26], "XX\ndX"))
+var TREE_AUTUMN_GROUP := _register_object_tile(ObjectTile.new("tree_autumn_group", {texture_ids=[26, 26, 26, 26], shape="XX\ndX"}))
 
 #warning-ignore:unused_class_variable
-var BUILDING_BANK := _register_object_tile(ObjectTile.new("building_bank", [37, 39, 40, 38], "XXXXX\nXX^XX"))
+var BUILDING_BANK := _register_object_tile(ObjectTile.new("building_bank", {texture_ids=[37, 39, 40, 38], shape="XXXXX\nXX^XX"}))
 #warning-ignore:unused_class_variable
-var BUILDING_SIMPLE := _register_object_tile(ObjectTile.new("building_simple", [55, 56, 55, 56], "XX\ndX"))
+var BUILDING_SIMPLE := _register_object_tile(ObjectTile.new("building_simple", {texture_ids=[55, 56, 55, 56], shape="XX\ndX"}))
 
 # Ground tiles
 var GRASS := _register_ground_tile(GroundTile.new("grass", 0))

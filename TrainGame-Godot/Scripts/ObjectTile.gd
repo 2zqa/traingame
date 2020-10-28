@@ -6,18 +6,25 @@ const _TILE_SET := preload("res://TileSets/Objects.tres")
 var name_id: String
 var rotation: int
 var _texture_ids: Array
-var _collision: TileCollision
+var _shape: TileCollision
 
-# Creates a new instance. collision must be a string or a TileCollision instance.
-func _init(name_id: String, _texture_ids: Array, collision = "O", rotation: int = Rotation.NONE):
-    if _texture_ids.size() != 4:
-        push_error("_texture_ids.size() must be 4, was " + str(_texture_ids.size()))
+# Creates a new instance. Dictionary parameters:
+# texture_ids: array of four texture ids, one for each rotation
+# shape: must be a string or a TileCollision instance.
+func _init(name_id: String, args: Dictionary):
+    var texture_ids: Array = args.get("texture_ids", [-1, -1, -1, -1])
+    var shape = args.get("shape", "O")  # String or TileCollision
+    var rotation: int = args.get("rotation", Rotation.NONE)
+
+    if texture_ids.size() != 4:
+        push_error("_texture_ids.size() must be 4, was " + str(texture_ids.size()))
     self.name_id = name_id
-    self._texture_ids = _texture_ids
+    self._texture_ids = texture_ids
     self.rotation = rotation
-    if collision is String:
-        collision = TileCollision.new(collision)
-    self._collision = collision
+    if shape is String:
+        self._shape = TileCollision.new(shape)
+    else:
+        self._shape = shape
 
 # Gets the texture id for the current rotation.
 func get_texture_id() -> int:
@@ -33,7 +40,7 @@ func equals_ignore_rotation(other: ObjectTile) -> bool:
 
 # Gets a tile with the given rotation. Does not modify this tile.
 func with_rotation(rotation: int) -> ObjectTile:
-    return get_script().new(self.name_id, self._texture_ids, self._collision, rotation)
+    return get_script().new(self.name_id, {texture_ids=self._texture_ids, shape=self._shape, rotation=rotation})
 
 # Gets the texture a rotated variant of this tile would have
 func get_rotated_texture(rotation: int) -> int:
@@ -43,16 +50,16 @@ func get_rotated_texture(rotation: int) -> int:
 # However, sometimes you want to rotate around a position in between tiles, for example "   OP--" becomes " --dO  "
 # instead of "--dO   " (note the amount of spaces). In that case you need a rotation offset.
 func get_rotation_offset() -> Vector2:
-    return self._collision.get_rotation_offset(self.rotation)
+    return self._shape.get_rotation_offset(self.rotation)
 
 
 # Checks if this tile collides at the tile relative to this tile
 func collides(tile_dx: int, tile_dy: int) -> bool:
-    return self._collision.collides(self.rotation, tile_dx, tile_dy)
+    return self._shape.collides(self.rotation, tile_dx, tile_dy)
 
 # Gets an array of all (relative) positions that are occupied by this tile (at the current rotation).
 func get_occupied_tile_positions() -> PoolVector2Array:
-    return self._collision.get_occupied_positions(self.rotation)
+    return self._shape.get_occupied_positions(self.rotation)
 
 # Gets all possible rotations of this tile.
 func all_rotations() -> Array:
@@ -62,8 +69,8 @@ func all_rotations() -> Array:
 func get_rotation_position_fix() -> Vector2:
     var attempted_new_rotation = Rotation.next(self.rotation)
     var actual_new_rotation = self._get_rotation_from_texture_id(self._texture_ids[attempted_new_rotation])
-    var attempted_offset = self._collision.get_rotation_offset(attempted_new_rotation)
-    var actual_offset = self._collision.get_rotation_offset(actual_new_rotation)
+    var attempted_offset = self._shape.get_rotation_offset(attempted_new_rotation)
+    var actual_offset = self._shape.get_rotation_offset(actual_new_rotation)
     if attempted_offset != actual_offset:
         # print(self.name_id, " ", Rotation.rotation_to_string(attempted_new_rotation), attempted_offset, " ", 
         #      Rotation.rotation_to_string(actual_new_rotation), actual_offset, " RES ", attempted_offset - actual_offset)
