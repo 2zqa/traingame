@@ -7,6 +7,7 @@ var name_id: String
 var rotation: int
 var _texture_ids: Array
 var _shape: TileCollision
+var _rail: Rails.RailPathSegment
 
 # Creates a new instance. Dictionary parameters:
 # texture_ids: array of four texture ids, one for each rotation
@@ -25,6 +26,7 @@ func _init(name_id: String, args: Dictionary):
         self._shape = TileCollision.new(shape)
     else:
         self._shape = shape
+    self._rail = args.get("rail", Rails.no_rail())
 
 # Gets the texture id for the current rotation.
 func get_texture_id() -> int:

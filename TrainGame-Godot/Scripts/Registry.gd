@@ -1,10 +1,5 @@
 extends Reference
 
-const ObjectTile = preload("res://Scripts/ObjectTile.gd")
-const GroundTile = preload("res://Scripts/GroundTile.gd")
-const TileCollision = preload("res://Scripts/TileCollision.gd")
-
-
 var _texture_id_to_object_tile := {}
 var _texture_id_to_ground_tile := {}
 var _name_to_tile := {}
@@ -53,7 +48,9 @@ func get_tile_by_name(name: String) -> Object:
 # Object tiles
 var OBJECT_EMPTY := _register_object_tile(ObjectTile.new("object_empty", {texture_ids=[-1, -1, -1, -1]}))
 #warning-ignore:unused_class_variable
-var RAIL_STRAIGHT := _register_object_tile(ObjectTile.new("rail_straight", {texture_ids=[0, 16, 0, 16]}))
+var RAIL_STRAIGHT := _register_object_tile(ObjectTile.new("rail_straight", {
+    texture_ids=[0, 16, 0, 16], 
+    rail=Rails.short_straight_rail()}))
 #warning-ignore:unused_class_variable
 var RAIL_CORNER := _register_object_tile(ObjectTile.new("rail_corner", {texture_ids=[1, 14, 15, 13], shape="XXX\nXOX\nXX."}))
 #warning-ignore:unused_class_variable

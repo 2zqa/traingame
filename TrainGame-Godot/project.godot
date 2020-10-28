@@ -55,6 +55,11 @@ _global_script_classes=[ {
 "path": "res://Scripts/PathsInWorld.gd"
 }, {
 "base": "Reference",
+"class": "Rails",
+"language": "GDScript",
+"path": "res://Scripts/Rails.gd"
+}, {
+"base": "Reference",
 "class": "RailsInWorld",
 "language": "GDScript",
 "path": "res://Scripts/RailsInWorld.gd"
@@ -84,6 +89,7 @@ _global_script_class_icons={
 "ObjectTile": "",
 "ObjectsTileMap": "",
 "PathsInWorld": "",
+"Rails": "",
 "RailsInWorld": "",
 "Rotation": "",
 "TileCollision": "",
