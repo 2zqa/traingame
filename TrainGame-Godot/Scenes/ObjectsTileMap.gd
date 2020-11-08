@@ -55,10 +55,17 @@ func mouse_event_to_tile_pos(mouse: InputEvent) -> Vector2:
 func viewport_pos_to_tile_pos(position: Vector2) -> Vector2:
     return self.world_to_map(self.make_canvas_position_local(position))
 
-# Gets the offset (in viewport pixels) from the top left of the given tile.
+func world_pos_to_tile_pos(position: Vector2) -> Vector2:
+    return self.world_to_map(position)
+
+# Gets the offset (in viewport pixels) for the top left of the given tile.
 func tile_pos_to_viewport_pos(position: Vector2) -> Vector2:
     var local_to_global_matrix = get_canvas_transform() * get_global_transform();
     return local_to_global_matrix.xform(self.map_to_world(position));
+
+# Gets the offset (in world pixels) for the top left of the given tile.
+func tile_pos_to_world_pos(position: Vector2) -> Vector2:
+    return self.map_to_world(position);
 
 # Rotates all tiles 90 degrees clockwise
 func rotate_clockwise() -> void:

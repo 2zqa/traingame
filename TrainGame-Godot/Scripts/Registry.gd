@@ -70,7 +70,9 @@ var ROAD_T := _register_object_tile(ObjectTile.new("road_t", {texture_ids=[5, 10
 #warning-ignore:unused_class_variable
 var RAIL_CROSSING_ROAD := _register_object_tile(ObjectTile.new("rail_crossing_road", {texture_ids=[36, 35, 36, 35], shape="XOX"}))
 #warning-ignore:unused_class_variable
-var RAIL_WITHOUT_SLEEPERS := _register_object_tile(ObjectTile.new("rail_without_sleepers", {texture_ids=[51, 52, 51, 52]}))
+var RAIL_WITHOUT_SLEEPERS := _register_object_tile(ObjectTile.new("rail_without_sleepers", {
+    texture_ids=[51, 52, 51, 52],
+    rail=Rails.short_straight_rail()}))
 #warning-ignore:unused_class_variable
 var ROAD_CROSSING := _register_object_tile(ObjectTile.new("road_crossing", {texture_ids=[54, 53, 54, 53], shape="XOX"}))
 

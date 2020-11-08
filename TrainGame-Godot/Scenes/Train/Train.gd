@@ -20,15 +20,16 @@ func _process(delta: float) -> void:
         return
 
     var previous_position = self.position
-    var next_position = Global.rails.add_to_position(previous_position, self._direction, self._speed * delta)
-    self._direction = Global.rails.to_updated_direction(self._direction, previous_position, next_position)
+    var addition_result = Global.rails.add_to_position(previous_position, self._direction, self._speed * delta)
+    var next_position = addition_result[0]
+    self._direction = addition_result[1]
     self.position = next_position
 
     for train_car in self.get_children():
-        var new_position = Global.rails.add_to_position(self.position, self._direction, train_car.in_train_offset)
-        var new_position_relative = new_position - self.position
-        train_car.direction = Global.rails.to_updated_direction(train_car.direction, train_car.position, new_position_relative)
-        train_car.position = new_position_relative
+        addition_result = Global.rails.add_to_position(self.position, self._direction, train_car.in_train_offset)
+        train_car.position = addition_result[0] - self.position
+        train_car.direction = addition_result[1]
+
 
 func _on_TrainFront_derailed() -> void:
     print("Train derailed")

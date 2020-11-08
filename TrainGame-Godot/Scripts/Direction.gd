@@ -37,6 +37,35 @@ static func opposite(direction: int) -> int:
     return -1
 
 
+# Rotates a direction. NORTH rotated CLOCKWISE becomes EAST.
+static func rotate(direction: int, rotation: int) -> int:
+    if rotation == Rotation.NONE:
+        return direction
+    if rotation == Rotation.CLOCKWISE:
+        return right(direction)
+    if rotation == Rotation.HALF:
+        return opposite(direction)
+    if rotation == Rotation.COUNTER_CLOCKWISE:
+        return left(direction)
+    push_error("Invalid rotation in Direction.rotate(...): " + str(rotation))
+    return -1
+
+
+# Removes the rotation from a direction. EAST that was rotated CLOCKWISE
+# becomes NORTH.
+static func unrotate(direction: int, rotation: int) -> int:
+    if rotation == Rotation.NONE:
+        return direction
+    if rotation == Rotation.CLOCKWISE:
+        return left(direction)
+    if rotation == Rotation.HALF:
+        return opposite(direction)
+    if rotation == Rotation.COUNTER_CLOCKWISE:
+        return right(direction)
+    push_error("Invalid rotation in Direction.unrotate(...): " + str(rotation))
+    return -1
+
+
 # Gets the directions left, right and opposite to the given direction, in that
 # order.
 static func left_right_opposite(direction: int) -> PoolIntArray:

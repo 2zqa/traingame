@@ -12,24 +12,26 @@ func _init(objects: ObjectsTileMap):
     self._objects = objects
 
 # Gets the rail position X px away from the current position. Use amount=0 to
-# get only an aligned position.
-func add_to_position(position: Vector2, direction: int, amount: float) -> Vector2:
-    var tile_pos_train = self._objects.viewport_pos_to_tile_pos(position)
+# get only an aligned position. Returns [new_position, new_direction]
+func add_to_position(position: Vector2, direction: int, amount: float) -> Array:
+    var tile_pos_train = self._objects.world_pos_to_tile_pos(position)
     var tile_and_coords = self._objects.get_tile_and_coords(int(tile_pos_train.x), int(tile_pos_train.y))
 
     var rail_tile: ObjectTile = tile_and_coords[2]
-    var rail_pos_in_viewport = self._objects.tile_pos_to_viewport_pos(Vector2(tile_and_coords[0], tile_and_coords[1]))
-    var position_relative_to_rail = position - rail_pos_in_viewport
-    var rail: Rails.RailPathSegment = rail_tile.get_rail()
+    var rail_pos_in_world = self._objects.tile_pos_to_world_pos(Vector2(tile_and_coords[0], tile_and_coords[1]))
+    var position_relative_to_rail = position - rail_pos_in_world
+    var rail = rail_tile.get_rail()
 
     var movement_result = rail.get_increased_position(position_relative_to_rail, direction, amount)
-    var new_position = movement_result[0] + rail_pos_in_viewport
+    var new_position = movement_result[0] + rail_pos_in_world
     var new_direction = movement_result[1]
     var new_amount = movement_result[2]
-    if new_amount > 0:
+    if abs(new_amount) > abs(amount):
+        push_error("Remaining amount increased")
+    if new_amount != 0:
         # Recurse, not yet done
         return add_to_position(new_position, new_direction, new_amount)
-    return new_position
+    return [new_position, new_direction]
 
 # Gets the updated direciton, based on relative movement. Direction will remain unchanged if no movement occurs.
 func to_updated_direction(old_direction: int, old_position: Vector2, new_position: Vector2):
