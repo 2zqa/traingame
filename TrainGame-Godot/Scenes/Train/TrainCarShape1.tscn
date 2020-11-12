@@ -17,10 +17,10 @@ extents = Vector2( 30.5915, 16.1523 )
 [node name="TrainCar1" type="Area2D"]
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 0, -19 )
+position = Vector2( 0, -11 )
 frames = SubResource( 1 )
 frame = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -18 )
+position = Vector2( 0, -10 )
 shape = SubResource( 2 )

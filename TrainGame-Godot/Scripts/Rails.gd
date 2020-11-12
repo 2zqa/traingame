@@ -27,12 +27,14 @@ class _ShortVerticalSegment extends RailPathSegment:
         if direction != Direction.NORTH and direction != Direction.SOUTH:
             return [position, direction, 0]  # Derailed, driving in wrong direction
 
+        # Calculate new position without restrictions
         var new_position
         if direction == Direction.NORTH:
-            new_position = Vector2(_TILE_LENGTH / 2, position.y - amount)
+            new_position = Vector2(_TILE_LENGTH / 2.0, position.y - amount)
         else:
-            new_position = Vector2(_TILE_LENGTH / 2, position.y + amount)
+            new_position = Vector2(_TILE_LENGTH / 2.0, position.y + amount)
 
+        # Apply restrictions
         var remaining_amount = 0
         if new_position.y < 0:
             # Need to continue on north neighbor tile
@@ -49,13 +51,50 @@ class _ShortVerticalSegment extends RailPathSegment:
                 remaining_amount = overflow_amount
             else:
                 remaining_amount = -overflow_amount
-            new_position.y = _TILE_LENGTH  # Limit y
+            new_position.y = _TILE_LENGTH + _SMALL_VALUE  # Limit y
         # Stop within bounds
         return [new_position, direction, remaining_amount]
 
     func _to_string() -> String:
         return "ShortVerticalSegment"
 
+
+class _CornerRailSegment extends RailPathSegment:
+    #                      __
+    # Corner orientation: |
+    
+    func get_increased_position(position: Vector2, direction: int, amount: float) -> Array:
+        # We're driving on a circle with R = 2.5 * _TILE_LENGTH
+        var amount_anticlockwise = amount
+        if direction == Direction.EAST or direction == Direction.NORTH:
+            amount_anticlockwise *= -1
+        # Entire circle (2 PI radians) is 2 * pi * r in length. 
+        var r = 2.5 * _TILE_LENGTH
+        var amount_radians_anticlockwise = amount_anticlockwise / r
+        
+        var dx_to_center_of_circle_px = position.x - 2 * _TILE_LENGTH 
+        var current_angle = acos(clamp(dx_to_center_of_circle_px / r, -1, 0))
+        # current_angle will range from 0.5pi to pi
+        var next_angle = current_angle + amount_radians_anticlockwise
+        if next_angle >= PI:
+            # Exit to the bottom, making sure sign(amount) matches
+            var remaining_amount = (next_angle - PI) * r
+            if amount > 0:
+                return [Vector2(-0.5 * _TILE_LENGTH, _TILE_LENGTH * 2 + _SMALL_VALUE), Direction.SOUTH, remaining_amount]
+            else:
+                return [Vector2(-0.5 * _TILE_LENGTH, _TILE_LENGTH * 2 + _SMALL_VALUE), Direction.NORTH, -remaining_amount]
+        if next_angle < 0.5 * PI:
+            # Exit to the right, making sure sign(amount) matches
+            var remaining_amount = (0.5 * PI - next_angle) * r
+            if amount > 0:
+                return [Vector2(_TILE_LENGTH * 2 + _SMALL_VALUE, -0.5 * _TILE_LENGTH), Direction.EAST, remaining_amount]
+            else:
+                return [Vector2(_TILE_LENGTH * 2 + _SMALL_VALUE, -0.5 * _TILE_LENGTH), Direction.WEST, -remaining_amount]
+        # Withing range
+        return [Vector2(cos(next_angle) * r + 2 * _TILE_LENGTH, 2 * _TILE_LENGTH - sin(next_angle) * r), direction, 0]
+
+    func _to_string() -> String:
+        return "CornerRailSegment"
 
 class _RotatedSegment extends RailPathSegment:
 
@@ -67,11 +106,11 @@ class _RotatedSegment extends RailPathSegment:
         self._rotation = rotation
 
     func get_increased_position(position: Vector2, direction: int, amount: float) -> Array:
-        var rotated_position = self._rotate(position)
-        var rotated_direction = Direction.rotate(direction, self._rotation)
+        var rotated_position = self._unrotate(position)
+        var rotated_direction = Direction.unrotate(direction, self._rotation)
         var result = self._original_segment.get_increased_position(rotated_position, rotated_direction, amount)
-        result[0] = self._unrotate(result[0])
-        result[1] = Direction.unrotate(result[1], self._rotation)
+        result[0] = self._rotate(result[0])
+        result[1] = Direction.rotate(result[1], self._rotation)
         return result
 
     func _rotate(position: Vector2) -> Vector2:
@@ -97,6 +136,11 @@ static func no_rail() -> RailPathSegment:
 # Gets the short, straight, vertical rail.
 static func short_straight_rail() -> RailPathSegment:
     return _ShortVerticalSegment.new()
+
+# Gets the corner rail, oriented as:  __
+# Occupies 3x3 tiles                 |
+static func corner_rail() -> RailPathSegment:
+    return _CornerRailSegment.new()
 
 # Gets a rotated version of the given rail.
 static func with_rotation(rail: RailPathSegment, rotation: int) -> RailPathSegment:

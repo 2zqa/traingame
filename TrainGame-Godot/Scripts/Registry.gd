@@ -52,7 +52,10 @@ var RAIL_STRAIGHT := _register_object_tile(ObjectTile.new("rail_straight", {
     texture_ids=[0, 16, 0, 16], 
     rail=Rails.short_straight_rail()}))
 #warning-ignore:unused_class_variable
-var RAIL_CORNER := _register_object_tile(ObjectTile.new("rail_corner", {texture_ids=[1, 14, 15, 13], shape="XXX\nXOX\nXX."}))
+var RAIL_CORNER := _register_object_tile(ObjectTile.new("rail_corner", {
+    texture_ids=[1, 14, 15, 13],
+    shape="XXX\nXOX\nXX.",
+    rail=Rails.corner_rail()}))
 #warning-ignore:unused_class_variable
 var RAIL_SWITCH_1 := _register_object_tile(ObjectTile.new("rail_switch_1", {texture_ids=[42, 44, 49, 48], shape="XXX\nXOX\nXX."}))
 #warning-ignore:unused_class_variable

@@ -14,6 +14,11 @@ func _init(objects: ObjectsTileMap):
 # Gets the rail position X px away from the current position. Use amount=0 to
 # get only an aligned position. Returns [new_position, new_direction]
 func add_to_position(position: Vector2, direction: int, amount: float) -> Array:
+    if amount == 0:
+        return [position, direction]  # Skip when standing still
+    assert(amount != INF)
+    assert(amount != -INF)
+
     var tile_pos_train = self._objects.world_pos_to_tile_pos(position)
     var tile_and_coords = self._objects.get_tile_and_coords(int(tile_pos_train.x), int(tile_pos_train.y))
 
@@ -26,11 +31,13 @@ func add_to_position(position: Vector2, direction: int, amount: float) -> Array:
     var new_position = movement_result[0] + rail_pos_in_world
     var new_direction = movement_result[1]
     var new_amount = movement_result[2]
-    if abs(new_amount) > abs(amount):
-        push_error("Remaining amount increased")
     if new_amount != 0:
         # Recurse, not yet done
-        return add_to_position(new_position, new_direction, new_amount)
+        var new_tile_pos_train = self._objects.world_pos_to_tile_pos(new_position)
+        if new_tile_pos_train == tile_pos_train:
+            push_error("Failed to advance to new tile when amount != 0. ")
+        else:
+            return add_to_position(new_position, new_direction, new_amount)
     return [new_position, new_direction]
 
 # Gets the updated direciton, based on relative movement. Direction will remain unchanged if no movement occurs.

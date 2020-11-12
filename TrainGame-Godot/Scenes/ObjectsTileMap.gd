@@ -56,7 +56,7 @@ func viewport_pos_to_tile_pos(position: Vector2) -> Vector2:
     return self.world_to_map(self.make_canvas_position_local(position))
 
 func world_pos_to_tile_pos(position: Vector2) -> Vector2:
-    return self.world_to_map(position)
+    return self.world_to_map(position - self.position)
 
 # Gets the offset (in viewport pixels) for the top left of the given tile.
 func tile_pos_to_viewport_pos(position: Vector2) -> Vector2:
@@ -65,7 +65,7 @@ func tile_pos_to_viewport_pos(position: Vector2) -> Vector2:
 
 # Gets the offset (in world pixels) for the top left of the given tile.
 func tile_pos_to_world_pos(position: Vector2) -> Vector2:
-    return self.map_to_world(position);
+    return self.map_to_world(position) + self.position;
 
 # Rotates all tiles 90 degrees clockwise
 func rotate_clockwise() -> void:

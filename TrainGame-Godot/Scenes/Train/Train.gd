@@ -1,7 +1,7 @@
 extends Node2D
 
 var _speed := 20
-var _direction := Direction.EAST
+var _direction := Direction.WEST
 
 func rotate_clockwise():
     if Global.rails == null:
@@ -36,4 +36,4 @@ func _on_TrainFront_derailed() -> void:
     self.set_speed(0)
 
 func _draw():
-    self.draw_circle(Vector2(0, 0), 20, Color.black)
+    self.draw_circle(Vector2(0, 0), 10, Color.black)
