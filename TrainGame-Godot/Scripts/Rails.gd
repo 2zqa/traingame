@@ -12,7 +12,7 @@ class RailPathSegment extends Reference:
         pass
     
     # Requires a position (in pixels, relative to the top left of the object)
-    # and the amount to increase (also in pixels, can be positive)
+    # and the amount to increase (also in pixels, can only be positive)
     # Returns three values: (new_position, new_direction, remaining_amount)
     # If remaining_amount is not 0, then you'll need to find out in which tile you are now,
     # what object is there, recalculate the offset position and check again for the increased position
@@ -28,32 +28,20 @@ class _ShortVerticalSegment extends RailPathSegment:
             return [position, direction, 0]  # Derailed, driving in wrong direction
 
         # Calculate new position without restrictions
-        var new_position
+        var new_x = _TILE_LENGTH / 2.0
+        var new_y = position.y
         if direction == Direction.NORTH:
-            new_position = Vector2(_TILE_LENGTH / 2.0, position.y - amount)
+            new_y -= amount
         else:
-            new_position = Vector2(_TILE_LENGTH / 2.0, position.y + amount)
+            new_y += amount
 
-        # Apply restrictions
-        var remaining_amount = 0
-        if new_position.y < 0:
-            # Need to continue on north neighbor tile
-            var overflow_amount = abs(new_position.y)
-            if direction == Direction.NORTH:
-                remaining_amount = overflow_amount
-            else:
-                remaining_amount = -overflow_amount
-            new_position.y = -_SMALL_VALUE  # Limit y
-        if new_position.y >= _TILE_LENGTH:
-            # Need to continue on south neighbor tile
-            var overflow_amount = new_position.y - _TILE_LENGTH
-            if direction == Direction.SOUTH:
-                remaining_amount = overflow_amount
-            else:
-                remaining_amount = -overflow_amount
-            new_position.y = _TILE_LENGTH + _SMALL_VALUE  # Limit y
+        # Check whether we need to jump to a new tile
+        if new_y < 0:
+            return [Vector2(new_x, -_SMALL_VALUE), Direction.NORTH, -new_y]
+        if new_y >= _TILE_LENGTH:
+            return [Vector2(new_x, _TILE_LENGTH + _SMALL_VALUE), Direction.SOUTH, new_y - _TILE_LENGTH]
         # Stop within bounds
-        return [new_position, direction, remaining_amount]
+        return [Vector2(new_x, new_y), direction, 0]
 
     func _to_string() -> String:
         return "ShortVerticalSegment"
@@ -64,9 +52,12 @@ class _CornerRailSegment extends RailPathSegment:
     # Corner orientation: |
     
     func get_increased_position(position: Vector2, direction: int, amount: float) -> Array:
+        if direction != Direction.NORTH and direction != Direction.WEST:
+            return [position, direction, 0]  # Derailed, driving in wrong direction
+
         # We're driving on a circle with R = 2.5 * _TILE_LENGTH
         var amount_anticlockwise = amount
-        if direction == Direction.EAST or direction == Direction.NORTH:
+        if direction == Direction.NORTH:
             amount_anticlockwise *= -1
         # Entire circle (2 PI radians) is 2 * pi * r in length. 
         var r = 2.5 * _TILE_LENGTH
@@ -79,18 +70,12 @@ class _CornerRailSegment extends RailPathSegment:
         if next_angle >= PI:
             # Exit to the bottom, making sure sign(amount) matches
             var remaining_amount = (next_angle - PI) * r
-            if amount > 0:
-                return [Vector2(-0.5 * _TILE_LENGTH, _TILE_LENGTH * 2 + _SMALL_VALUE), Direction.SOUTH, remaining_amount]
-            else:
-                return [Vector2(-0.5 * _TILE_LENGTH, _TILE_LENGTH * 2 + _SMALL_VALUE), Direction.NORTH, -remaining_amount]
+            return [Vector2(-0.5 * _TILE_LENGTH, _TILE_LENGTH * 2 + _SMALL_VALUE), Direction.SOUTH, remaining_amount]
         if next_angle < 0.5 * PI:
             # Exit to the right, making sure sign(amount) matches
             var remaining_amount = (0.5 * PI - next_angle) * r
-            if amount > 0:
-                return [Vector2(_TILE_LENGTH * 2 + _SMALL_VALUE, -0.5 * _TILE_LENGTH), Direction.EAST, remaining_amount]
-            else:
-                return [Vector2(_TILE_LENGTH * 2 + _SMALL_VALUE, -0.5 * _TILE_LENGTH), Direction.WEST, -remaining_amount]
-        # Withing range
+            return [Vector2(_TILE_LENGTH * 2 + _SMALL_VALUE, -0.5 * _TILE_LENGTH), Direction.EAST, remaining_amount]
+        # Within range
         return [Vector2(cos(next_angle) * r + 2 * _TILE_LENGTH, 2 * _TILE_LENGTH - sin(next_angle) * r), direction, 0]
 
     func _to_string() -> String:

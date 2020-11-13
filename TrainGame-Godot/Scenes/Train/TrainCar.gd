@@ -7,7 +7,8 @@ var _speed: float = 20
 var _derailed: bool
 
 var in_train_offset: int = 0
-var direction: int = Direction.EAST
+var driving_direction: int = Direction.EAST
+var _driving_backwards: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -27,18 +28,18 @@ func _process(_delta: float) -> void:
         emit_signal("derailed")
     self._update_sprite()
 
-func rotate_clockwise():
-    self.direction = Direction.right(direction)
+func rotate_clockwise() -> void:
+    self.driving_direction = Direction.right(driving_direction)
     self.position = Rotation.rotate(Rotation.CLOCKWISE, self.position)
 
-func _set_relative_traincar_position(position: Vector2):
-    # Sets the location of the traincar (a child of type Area2D) to the given
-    # position.
-    for node in self.get_children():
-        if node is Area2D:
-            node.position = position
+func set_speed(speed: float, driving_backwards: bool) -> void:
+    self._speed = speed
+    self._driving_backwards = driving_backwards
 
-func _update_sprite():
+func _update_sprite() -> void:
+    var facing_direction = self.driving_direction
+    if self._driving_backwards:
+        facing_direction = Direction.opposite(facing_direction)
     for node in self.get_children():
         if node is Area2D and node.has_node("AnimatedSprite"):
-            node.get_node("AnimatedSprite").frame = self.direction
+            node.get_node("AnimatedSprite").frame = facing_direction
