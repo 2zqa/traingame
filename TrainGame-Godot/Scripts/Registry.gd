@@ -50,7 +50,7 @@ var OBJECT_EMPTY := _register_object_tile(ObjectTile.new("object_empty", {textur
 #warning-ignore:unused_class_variable
 var RAIL_STRAIGHT := _register_object_tile(ObjectTile.new("rail_straight", {
     texture_ids=[0, 16, 0, 16], 
-    rail=Rails.short_straight_rail()}))
+    rail=Rails.short_vertical_rail()}))
 #warning-ignore:unused_class_variable
 var RAIL_CORNER := _register_object_tile(ObjectTile.new("rail_corner", {
     texture_ids=[1, 14, 15, 13],
@@ -61,7 +61,9 @@ var RAIL_SWITCH_1 := _register_object_tile(ObjectTile.new("rail_switch_1", {text
 #warning-ignore:unused_class_variable
 var RAIL_SWITCH_2 := _register_object_tile(ObjectTile.new("rail_switch_2", {texture_ids=[46, 47, 45, 43], shape="XXX\nXOX\nXX."}))
 #warning-ignore:unused_class_variable
-var RAIL_CROSSING := _register_object_tile(ObjectTile.new("rail_crossing", {texture_ids=[41, 41, 41, 41]}))
+var RAIL_CROSSING := _register_object_tile(ObjectTile.new("rail_crossing", {
+    texture_ids=[41, 41, 41, 41],
+    rail=Rails.crossing_rail()}))
 #warning-ignore:unused_class_variable
 var ROAD_STRAIGHT := _register_object_tile(ObjectTile.new("road_straight", {texture_ids=[4, 3, 4, 3], shape="XOX"}))
 #warning-ignore:unused_class_variable
@@ -71,11 +73,14 @@ var ROAD_INTERSECTION := _register_object_tile(ObjectTile.new("road_intersection
 #warning-ignore:unused_class_variable
 var ROAD_T := _register_object_tile(ObjectTile.new("road_t", {texture_ids=[5, 10, 6, 8], shape="XXX\nXOX\nXXX"}))
 #warning-ignore:unused_class_variable
-var RAIL_CROSSING_ROAD := _register_object_tile(ObjectTile.new("rail_crossing_road", {texture_ids=[36, 35, 36, 35], shape="XOX"}))
+var RAIL_CROSSING_ROAD := _register_object_tile(ObjectTile.new("rail_crossing_road", {
+    texture_ids=[36, 35, 36, 35], 
+    shape="XOX",
+    rail=Rails.rotate(Rails.long_vertical_rail(), Rotation.CLOCKWISE)}))
 #warning-ignore:unused_class_variable
 var RAIL_WITHOUT_SLEEPERS := _register_object_tile(ObjectTile.new("rail_without_sleepers", {
     texture_ids=[51, 52, 51, 52],
-    rail=Rails.short_straight_rail()}))
+    rail=Rails.short_vertical_rail()}))
 #warning-ignore:unused_class_variable
 var ROAD_CROSSING := _register_object_tile(ObjectTile.new("road_crossing", {texture_ids=[54, 53, 54, 53], shape="XOX"}))
 

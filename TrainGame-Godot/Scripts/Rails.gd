@@ -20,15 +20,23 @@ class RailPathSegment extends Reference:
     func get_increased_position(position: Vector2, direction: int, amount: float) -> Array:
         return [position, direction, 0]  # This derails the train. Overridden in subclasses.    
 
-
-class _ShortVerticalSegment extends RailPathSegment:
+class _VerticalRailSegment extends RailPathSegment:
+    
+    var _rail_length: int
+    var _rail_offset_x: int
+    var _rail_offset_y: int
+    
+    func _init(tile_offset: Vector2, tile_size: int):
+        self._rail_offset_x = int(tile_offset.x * _TILE_LENGTH)
+        self._rail_offset_y = int(tile_offset.y * _TILE_LENGTH)
+        self._rail_length = tile_size * _TILE_LENGTH
     
     func get_increased_position(position: Vector2, direction: int, amount: float) -> Array:
         if direction != Direction.NORTH and direction != Direction.SOUTH:
             return [position, direction, 0]  # Derailed, driving in wrong direction
 
         # Calculate new position without restrictions
-        var new_x = _TILE_LENGTH / 2.0
+        var new_x = self._rail_offset_x + _TILE_LENGTH / 2.0
         var new_y = position.y
         if direction == Direction.NORTH:
             new_y -= amount
@@ -36,10 +44,12 @@ class _ShortVerticalSegment extends RailPathSegment:
             new_y += amount
 
         # Check whether we need to jump to a new tile
-        if new_y < 0:
-            return [Vector2(new_x, -_SMALL_VALUE), Direction.NORTH, -new_y]
-        if new_y >= _TILE_LENGTH:
-            return [Vector2(new_x, _TILE_LENGTH + _SMALL_VALUE), Direction.SOUTH, new_y - _TILE_LENGTH]
+        if new_y < self._rail_offset_y:
+            return [Vector2(new_x, self._rail_offset_y - _SMALL_VALUE), Direction.NORTH,
+             self._rail_offset_y - new_y]
+        if new_y >= self._rail_offset_y + self._rail_length:
+            return [Vector2(new_x, self._rail_offset_y + self._rail_length + _SMALL_VALUE), Direction.SOUTH,
+             new_y - self._rail_offset_y - self._rail_length]
         # Stop within bounds
         return [Vector2(new_x, new_y), direction, 0]
 
@@ -47,17 +57,15 @@ class _ShortVerticalSegment extends RailPathSegment:
         return "ShortVerticalSegment"
 
 
+
 class _CornerRailSegment extends RailPathSegment:
     #                      __
     # Corner orientation: |
     
     func get_increased_position(position: Vector2, direction: int, amount: float) -> Array:
-        if direction != Direction.NORTH and direction != Direction.WEST:
-            return [position, direction, 0]  # Derailed, driving in wrong direction
-
         # We're driving on a circle with R = 2.5 * _TILE_LENGTH
         var amount_anticlockwise = amount
-        if direction == Direction.NORTH:
+        if direction == Direction.NORTH or direction == Direction.EAST:
             amount_anticlockwise *= -1
         # Entire circle (2 PI radians) is 2 * pi * r in length. 
         var r = 2.5 * _TILE_LENGTH
@@ -80,6 +88,8 @@ class _CornerRailSegment extends RailPathSegment:
 
     func _to_string() -> String:
         return "CornerRailSegment"
+
+
 
 class _RotatedSegment extends RailPathSegment:
 
@@ -114,24 +124,56 @@ class _RotatedSegment extends RailPathSegment:
         return "RotatedSegment(" + str(self._original_segment) + ", " + \
                 Rotation.rotation_to_string(self._rotation) + ")"
 
+    
+class _CrossingRailSegment extends RailPathSegment:
+    
+    var _horizontal_rail: RailPathSegment
+    var _vertical_rail: RailPathSegment
+    
+    func _init():
+        self._vertical_rail = _VerticalRailSegment.new(Vector2(0, 0), 1)
+        self._horizontal_rail = _RotatedSegment.new(self._vertical_rail, Rotation.CLOCKWISE)
+    
+    func get_increased_position(position: Vector2, direction: int, amount: float) -> Array:
+        if direction == Direction.NORTH or direction == Direction.SOUTH:
+            return self._vertical_rail.get_increased_position(position, direction, amount)
+        return self._horizontal_rail.get_increased_position(position, direction, amount)
+
 static func no_rail() -> RailPathSegment:
     # Used when no rail is present.
     return RailPathSegment.new()
 
 # Gets the short, straight, vertical rail.
-static func short_straight_rail() -> RailPathSegment:
-    return _ShortVerticalSegment.new()
+static func short_vertical_rail() -> RailPathSegment:
+    return _VerticalRailSegment.new(Vector2(0, 0), 1)
+
+# Gets a straight, vertical rail that is three tiles long and one tile wide.
+static func long_vertical_rail() -> RailPathSegment:
+    return _VerticalRailSegment.new(Vector2(0, -1), 3)
 
 # Gets the corner rail, oriented as:  __
 # Occupies 3x3 tiles                 |
 static func corner_rail() -> RailPathSegment:
     return _CornerRailSegment.new()
 
-# Gets a rotated version of the given rail.
-static func with_rotation(rail: RailPathSegment, rotation: int) -> RailPathSegment:
+# Gets the crossing rail, oriented as +. Occupies 1x1 tile.
+static func crossing_rail() -> RailPathSegment:
+    return _CrossingRailSegment.new()
+
+# Gets a rotated version of the given rail. If the rail is already rotated, it
+# is rotated further.
+static func rotate(rail: RailPathSegment, rotation: int) -> RailPathSegment:
     if rail is _RotatedSegment:
-        rail = rail._original_segment  # Don't stack multiple objects
+        # Don't stack multiple objects
+        rotation = Rotation.sum(rotation, rail._rotation)
+        rail = rail._original_segment
     if rotation == Rotation.NONE:
         return rail  # Don't need special transformations here
     return _RotatedSegment.new(rail, rotation)
 
+# Gets all possible rotations of the rail.
+static func all_rotations(rail: RailPathSegment) -> Array:
+    return [rail, rotate(rail, Rotation.CLOCKWISE),
+        rotate(rail, Rotation.HALF),
+        rotate(rail, Rotation.COUNTER_CLOCKWISE)]
+    

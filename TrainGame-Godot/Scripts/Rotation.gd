@@ -46,4 +46,7 @@ static func unrotate(rotation: int, vector2: Vector2) -> Vector2:
 # Returns the next rotation: NONE -> CLOCKWISE -> HALF -> COUNTER_CLOCKWISE -> NONE
 static func next(rotation: int) -> int:
     return (rotation + 1) % 4
-    
+
+# Returns the sum of both rotations. CLOCKWISE + COUNTER_CLOCKWISE = NONE
+static func sum(rotation1: int, rotation2: int) -> int:
+    return (rotation1 + rotation2) % 4

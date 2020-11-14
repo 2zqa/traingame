@@ -7,7 +7,7 @@ var name_id: String
 var rotation: int
 var _texture_ids: Array
 var _shape: TileCollision
-var _rail: Rails.RailPathSegment
+var _rails: Array  # Array of Rails.RailPathSegment, one per rotation
 
 # Creates a new instance. Dictionary parameters:
 # texture_ids: array of four texture ids, one for each rotation
@@ -27,7 +27,10 @@ func _init(name_id: String, args: Dictionary):
         self._shape = TileCollision.new(shape)
     else:
         self._shape = shape
-    self._rail = Rails.with_rotation(args.get("rail", Rails.no_rail()), rotation)
+    if args.has("rails"):
+        self._rails = args.get("rails")
+    else:
+        self._rails = Rails.all_rotations(args.get("rail", Rails.no_rail()))
 
 # Gets the texture id for the current rotation.
 func get_texture_id() -> int:
@@ -44,7 +47,7 @@ func equals_ignore_rotation(other: ObjectTile) -> bool:
 # Gets a tile with the given rotation. Does not modify this tile.
 func with_rotation(rotation: int) -> ObjectTile:
     return get_script().new(self.name_id, {
-        texture_ids=self._texture_ids, shape=self._shape, rotation=rotation, rail=self._rail})
+        texture_ids=self._texture_ids, shape=self._shape, rotation=rotation, rails=self._rails})
 
 # Gets the texture a rotated variant of this tile would have
 func get_rotated_texture(rotation: int) -> int:
@@ -52,7 +55,7 @@ func get_rotated_texture(rotation: int) -> int:
 
 # Gets the rail associated with this tile.
 func get_rail() -> Rails.RailPathSegment:
-    return self._rail
+    return self._rails[self.rotation]
 
 # Most objects rotate around a single tile (their origin), "  O--" becomes "--O  " with a rotation of 180 degrees.
 # However, sometimes you want to rotate around a position in between tiles, for example "   OP--" becomes " --dO  "

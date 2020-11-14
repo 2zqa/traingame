@@ -8,7 +8,7 @@ func rotate_clockwise():
     if Global.rails == null:
         return
     self.position = Rotation.rotate(Rotation.CLOCKWISE, self.position)
-    self._direction = Direction.right(self._direction)
+    self._driving_direction = Direction.right(self._driving_direction)
     for train_car in self.get_children():
         train_car.rotate_clockwise()
 
@@ -26,9 +26,21 @@ func _process(delta: float) -> void:
     self.position = next_position
 
     for train_car in self.get_children():
-        addition_result = Global.rails.add_to_position(self.position, train_car.driving_direction, train_car.in_train_offset)
+        # Find direction of train car towards train
+        var relative_direction = self._driving_direction
+        if train_car.in_train_offset < 0:
+            relative_direction = Direction.opposite(self._driving_direction)
+        
+        # Move the train car
+        addition_result = Global.rails.add_to_position(self.position, relative_direction, abs(train_car.in_train_offset))
         train_car.position = addition_result[0] - self.position
-        train_car.driving_direction = addition_result[1]
+        
+        # Get the driving direction correct (depending on the direction from the middle of the train)
+        var train_car_direction = addition_result[1]
+        if train_car.in_train_offset < 0:
+            train_car.driving_direction = Direction.opposite(train_car_direction)
+        else:
+            train_car.driving_direction = train_car_direction
 
         # Sync up
         train_car.set_speed(self._speed, self._driving_backwards)
