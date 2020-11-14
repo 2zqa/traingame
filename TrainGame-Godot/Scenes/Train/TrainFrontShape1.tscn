@@ -1,12 +1,13 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Images/train_loc_1_right.png" type="Texture" id=1]
 [ext_resource path="res://Images/train_loc_1_left.png" type="Texture" id=2]
-[ext_resource path="res://Images/train_1_vert.png" type="Texture" id=3]
+[ext_resource path="res://Images/train_1_loc_1_down.png" type="Texture" id=3]
+[ext_resource path="res://Images/train_1_loc_1_up.png" type="Texture" id=4]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 1 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 3 ) ],
+"frames": [ ExtResource( 1 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 4 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
@@ -20,6 +21,7 @@ extents = Vector2( 30.5915, 16.1523 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -11 )
 frames = SubResource( 1 )
+frame = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -10 )
