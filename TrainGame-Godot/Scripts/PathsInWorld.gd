@@ -2,25 +2,25 @@
 extends Reference
 class_name PathsInWorld
 
-var _objects: ObjectsTileMap
-var _ground: GroundTileMap
+var _surface: ObjectsTileMap
+var _ground: ObjectsTileMap
 var _world_tile_area: Rect2
 
-func _init(world_tile_area: Rect2, objects: ObjectsTileMap, ground: GroundTileMap):
-    self._objects = objects
+func _init(world_tile_area: Rect2, surface: ObjectsTileMap, ground: ObjectsTileMap):
+    self._surface = surface
     self._ground = ground
     self._world_tile_area = world_tile_area
 
 # Gets whether the player can walk on the given tile position.
 func can_walk_on(tile_pos: Vector2) -> bool:
     var ground_tile = self._ground.get_tile(tile_pos)
-    var object_tile = self._objects.get_tile(tile_pos)
+    var object_tile = self._surface.get_tile(tile_pos)
 
     if ground_tile.equals(Global.Registry.PATH_CONCRETE_GRAY) \
         or ground_tile.equals(Global.Registry.PATH_CONCRETE_YELLOW):
         # Walking on a plain path, check if no object is blocking it
 
-        if object_tile.equals_ignore_rotation(Global.Registry.OBJECT_EMPTY):
+        if object_tile.equals_ignore_rotation(Global.Registry.EMPTY):
             return true
         if object_tile.equals_ignore_rotation(Global.Registry.RAIL_WITHOUT_SLEEPERS):
             return true

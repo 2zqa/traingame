@@ -9,7 +9,7 @@ const _META_SUFFIX = ".meta.txt"
 # "object_ids": PoolIntArray, ids of objects, rows first. The length of this array depends on the world size.
 
 # Reads a safe file. Returns OK or ERR_DOES_NOT_EXIST
-static func load_world(file_name: String, objects: ObjectsTileMap, ground: GroundTileMap) -> int:
+static func load_world(file_name: String, world: GameWorld) -> int:
     print("Loading " + file_name)
     var file_handle = File.new()
     if not file_handle.file_exists(file_name):
@@ -25,24 +25,29 @@ static func load_world(file_name: String, objects: ObjectsTileMap, ground: Groun
     # Check types
     if not dictionary.get("registry") is Array\
          or not dictionary.get("saved_area") is Rect2\
-         or not dictionary.get("ground_ids") is PoolByteArray\
-         or not dictionary.get("object_ids") is PoolIntArray:
+         or not dictionary.get("ground_ids") is PoolIntArray\
+         or not dictionary.get("surface_ids") is PoolIntArray\
+         or not dictionary.get("entity_ids") is PoolIntArray:
          push_error("Failed to load: " + file_name + " failed a type check")
          return ERR_FILE_CORRUPT
     var registry : Array = _create_index_to_texture_id_map(dictionary["registry"])
     var saved_area : Rect2 = dictionary["saved_area"]
-    var ground_ids : PoolByteArray = dictionary["ground_ids"]
-    var object_ids : PoolIntArray = dictionary["object_ids"]
+    var ground_ids : PoolIntArray = dictionary["ground_ids"]
+    var surface_ids : PoolIntArray = dictionary["surface_ids"]
+    var entity_ids : PoolIntArray = dictionary["entity_ids"]
     var x = saved_area.position.x
-    if ground_ids.size() < saved_area.get_area() or object_ids.size() < saved_area.get_area():
+    if ground_ids.size() < saved_area.get_area()\
+            or surface_ids.size() < saved_area.get_area()\
+            or entity_ids.size() < saved_area.get_area():
         push_error("Failed to load: " + file_name + " has not enough entries")
         return ERR_FILE_CORRUPT
     var i = 0
     while x < saved_area.end.x:
         var y = saved_area.position.y
         while y < saved_area.end.y:
-            objects.set_cell(x, y, registry[object_ids[i]])
-            ground.set_cell(x, y, registry[ground_ids[i]])
+            world.set_raw_texture(ObjectType.ENTITY, x, y, registry[entity_ids[i]])
+            world.set_raw_texture(ObjectType.SURFACE, x, y, registry[surface_ids[i]])
+            world.set_raw_texture(ObjectType.GROUND, x, y, registry[ground_ids[i]])
             i += 1
             y += 1
         x += 1
@@ -55,10 +60,10 @@ static func load_world(file_name: String, objects: ObjectsTileMap, ground: Groun
 static func _create_index_to_texture_id_map(id_to_key: Array) -> PoolIntArray:
     var output = PoolIntArray()
     for key in id_to_key:
+        if not "." in key:  # Fix for old save files
+            key = key + ".NONE"
         var tile = Global.Registry.get_tile_by_name(key)
-        if tile is GroundTile:
-            output.append(tile.texture_id)
-        elif tile is ObjectTile:
+        if tile is ObjectTile:
             output.append(tile.get_texture_id())
         else:
             output.append(-1)
@@ -105,23 +110,26 @@ static func read_world_names(directory_name: String) -> Dictionary:
 # Writes all data of the level to the given file. Returns ERR_FILE_BAD_PATH
 # if the parent directory does not exist and could not be created. Returns
 # ERR_FILE_CANT_WRITE if writing fails. Returns OK on succes.
-static func write(file_name: String, save_area: Rect2, objects: ObjectsTileMap, ground: GroundTileMap) -> int:
+static func write(file_name: String, save_area: Rect2, entities: ObjectsTileMap,
+                  surface: ObjectsTileMap, ground: ObjectsTileMap) -> int:
     if not _create_parent_directories(file_name):
         return ERR_FILE_BAD_PATH
     var id_registry = _IdRegistry.new()
 
     var object_ids = PoolIntArray()
-    var ground_ids = PoolByteArray()
+    var ground_ids = PoolIntArray()
+    var entity_ids = PoolIntArray()
     var x = save_area.position.x
     while x < save_area.end.x:
         var y = save_area.position.y
         while y < save_area.end.y:
             var tile_pos = Vector2(x, y)
-            var object_tile = objects.get_tile_no_search(x, y)
-            var ground_tile = ground.get_tile(tile_pos)
-            var object_key = object_tile.to_string()
-            object_ids.append(id_registry.get_or_assign_id(object_key))
-            ground_ids.append(id_registry.get_or_assign_id(ground_tile.name_id))
+            var entity_tile = entities.get_tile_no_search(x, y)
+            var surface_tile = surface.get_tile_no_search(x, y)
+            var ground_tile = ground.get_tile_no_search(x, y)
+            entity_ids.append(id_registry.get_or_assign_id(entity_tile.to_string()))
+            object_ids.append(id_registry.get_or_assign_id(surface_tile.to_string()))
+            ground_ids.append(id_registry.get_or_assign_id(ground_tile.to_string()))
             y += 1
         x += 1
 
@@ -135,7 +143,8 @@ static func write(file_name: String, save_area: Rect2, objects: ObjectsTileMap, 
         "registry": id_registry.get_id_to_key_array(),
         "saved_area": save_area,
         "ground_ids": ground_ids,
-        "object_ids": object_ids
+        "surface_ids": object_ids,
+        "entity_ids": entity_ids
     })
     file.close()
     return OK

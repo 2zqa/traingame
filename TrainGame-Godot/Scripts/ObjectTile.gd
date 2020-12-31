@@ -8,12 +8,13 @@ var rotation: int
 var _texture_ids: Array
 var _shape: TileCollision
 var _rails: Array  # Array of Rails.RailPathSegment, one per rotation
+var _type: int  # ObjectType
 
-# Creates a new instance. Dictionary parameters:
+# Creates a new instance. type is an ObjectType. Dictionary parameters:
 # texture_ids: array of four texture ids, one for each rotation
 # shape: must be a string or a TileCollision instance.
 # rail: a rail, will be rotated to the current rotation using Rails.with_rotation
-func _init(name_id: String, args: Dictionary):
+func _init(name_id: String, type: int, args: Dictionary):
     var texture_ids: Array = args.get("texture_ids", [-1, -1, -1, -1])
     var shape = args.get("shape", "O")  # String or TileCollision
     var rotation: int = args.get("rotation", Rotation.NONE)
@@ -21,6 +22,7 @@ func _init(name_id: String, args: Dictionary):
     if texture_ids.size() != 4:
         push_error("_texture_ids.size() must be 4, was " + str(texture_ids.size()))
     self.name_id = name_id
+    self._type = type
     self._texture_ids = texture_ids
     self.rotation = rotation
     if shape is String:
@@ -46,7 +48,7 @@ func equals_ignore_rotation(other: ObjectTile) -> bool:
 
 # Gets a tile with the given rotation. Does not modify this tile.
 func with_rotation(rotation: int) -> ObjectTile:
-    return get_script().new(self.name_id, {
+    return get_script().new(self.name_id, self._type, {
         texture_ids=self._texture_ids, shape=self._shape, rotation=rotation, rails=self._rails})
 
 # Gets the texture a rotated variant of this tile would have
@@ -56,6 +58,10 @@ func get_rotated_texture(rotation: int) -> int:
 # Gets the rail associated with this tile.
 func get_rail() -> Rails.RailPathSegment:
     return self._rails[self.rotation]
+
+# Gets the type of this object. Returns an ObjectType.
+func get_type() -> int:
+    return self._type
 
 # Most objects rotate around a single tile (their origin), "  O--" becomes "--O  " with a rotation of 180 degrees.
 # However, sometimes you want to rotate around a position in between tiles, for example "   OP--" becomes " --dO  "

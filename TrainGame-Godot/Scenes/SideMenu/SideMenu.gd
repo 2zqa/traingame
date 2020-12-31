@@ -19,7 +19,7 @@ func _on_PauseButton_save_and_quit_requested() -> void:
     emit_signal("save_and_quit_requested")  # Forwards
 
 
-func _on_GroundTileSelectorButton_tile_selected(tile: GroundTile):
+func _on_GroundTileSelectorButton_tile_selected(tile: ObjectTile):
     emit_signal("option_selected", InteractOption.new(tile))
 
 

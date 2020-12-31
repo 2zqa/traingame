@@ -1,12 +1,8 @@
 extends Node2D
 
-const ObjectsTileMap = preload("res://Scenes/ObjectsTileMap.gd")
-const GroundTileMap = preload("res://Scenes/GroundTileMap.gd")
-
-const WORLD_RECTANGLE := Rect2(Vector2(-100, -100), Vector2(201, 201))
 const _MENU_SCREEN := "res://Scenes/MainMenu/TitleScreen.tscn"
 
-var selected_option: InteractOption  # GroundTile or ObjectTile
+var selected_option: InteractOption
 
 var _previous_touch_pos: Dictionary
 
@@ -14,27 +10,22 @@ var _previous_touch_pos: Dictionary
 func _ready() -> void:
     self._previous_touch_pos = Dictionary()
     self.selected_option = InteractOption.new("move")
-    
-    WorldPopulator.populate(WORLD_RECTANGLE, $World/ObjectsTileMap, $World/GroundTileMap)
-    var _unused = FileIO.load_world(Global.world_save_location, $World/ObjectsTileMap, $World/GroundTileMap)
-    Global.paths = PathsInWorld.new(WORLD_RECTANGLE, $World/ObjectsTileMap, $World/GroundTileMap)
-    Global.rails = RailsInWorld.new($World/ObjectsTileMap)
+    WorldPopulator.populate($World.WORLD_RECTANGLE, $World)
+
+    var _unused = FileIO.load_world(Global.world_save_location, $World)
+    Global.paths = PathsInWorld.new($World.WORLD_RECTANGLE, $World/SurfaceTileMap, $World/GroundTileMap)
+    Global.rails = RailsInWorld.new($World/SurfaceTileMap)
 
 # Places the current tile at the given canvas position
 func place(canvas_position: Vector2, overwrite_objects: bool = false) -> void:
-    if self.selected_option.ground_tile != null:
-        var tilemap_grounds: GroundTileMap = $World/GroundTileMap
-        var tile_pos = tilemap_grounds.viewport_pos_to_tile_pos(canvas_position)
-        if self._is_in_bounds(tile_pos):
-            tilemap_grounds.set_tile(tile_pos, self.selected_option.ground_tile)
     if self.selected_option.object_tile != null:
-        var tilemap_objects: ObjectsTileMap = $World/ObjectsTileMap
-        var tile_pos = tilemap_objects.viewport_pos_to_tile_pos(canvas_position)
+        var world: GameWorld = $World
+        var tile_pos = world.viewport_pos_to_tile_pos(canvas_position)
         if self._is_in_bounds(tile_pos):
-            tilemap_objects.set_tile(tile_pos, self.selected_option.object_tile, overwrite_objects)
+            world.set_tile(tile_pos, self.selected_option.object_tile, overwrite_objects)
 
 func _is_in_bounds(tile_pos: Vector2) -> bool:
-    return WORLD_RECTANGLE.has_point(tile_pos)
+    return $World.WORLD_RECTANGLE.has_point(tile_pos)
 
 # Places the current tile in a line of all given canvas positions
 func place_interpolated(canvas_position1: Vector2, canvas_position2: Vector2) -> void:
@@ -42,15 +33,10 @@ func place_interpolated(canvas_position1: Vector2, canvas_position2: Vector2) ->
     # When placing in a line, only overwrite existing things if we're using the eraser tool
     var overwrite = self.selected_option.erase
 
-    var tilemap = null
-    if self.selected_option.ground_tile != null:
-        tilemap = $World/GroundTileMap
-    elif self.selected_option.object_tile != null:
-        tilemap = $World/ObjectsTileMap
-    
-    if tilemap != null:
-        var tile_pos1 = tilemap.viewport_pos_to_tile_pos(canvas_position1)
-        var tile_pos2 = tilemap.viewport_pos_to_tile_pos(canvas_position2)
+    if self.selected_option.object_tile != null:
+        var world: GameWorld = $World
+        var tile_pos1 = world.viewport_pos_to_tile_pos(canvas_position1)
+        var tile_pos2 = world.viewport_pos_to_tile_pos(canvas_position2)
         var interpolation_steps = tile_pos1.distance_to(tile_pos2)
         if interpolation_steps == 0:
             # No interpolation necessary
@@ -60,9 +46,7 @@ func place_interpolated(canvas_position1: Vector2, canvas_position2: Vector2) ->
             for i in range(interpolation_steps + 1):
                 var canvas_position = canvas_position1.linear_interpolate(canvas_position2, i / interpolation_steps)
                 place(canvas_position, overwrite)
-    else:
-        place(canvas_position2, overwrite)  # Cannot interpolate for this type
-    
+
 func _unhandled_input(event: InputEvent) -> void:
     if (event is InputEventMouseButton and event.button_index == BUTTON_LEFT) \
             or event is InputEventScreenDrag\
@@ -88,10 +72,11 @@ func _input(event: InputEvent) -> void:
             Mouse.is_left_released(event):
         # Finger released, clear previous position
         var _u = self._previous_touch_pos.erase(Mouse.get_pointer_id(event))
-        var objects = $World/ObjectsTileMap
-        var tile_pos = objects.mouse_event_to_tile_pos(event)
-        var tile = objects.get_tile(tile_pos)
-        print(tile_pos, ": ", tile.name_id, " ", Rotation.rotation_to_string(tile.rotation))
+        var world: GameWorld = $World
+        var tile_pos = world.mouse_event_to_tile_pos(event)
+        print(tile_pos, " ground: ", world.get_tile(tile_pos, ObjectType.GROUND).to_string(),
+                        " surface: ", world.get_tile(tile_pos, ObjectType.SURFACE).to_string(),
+                        " entity: ", world.get_tile(tile_pos, ObjectType.ENTITY).to_string())
 
 
 func _on_SideMenu_option_selected(selected_option: InteractOption) -> void:
@@ -100,13 +85,11 @@ func _on_SideMenu_option_selected(selected_option: InteractOption) -> void:
 
 
 func _on_SideMenu_rotation_requested() -> void:
-    $World/GroundTileMap.rotate_clockwise()
-    $World/ObjectsTileMap.rotate_clockwise()
-    for entity in $World/Entities.get_children():
-        entity.rotate_clockwise()
+    $World.rotate_clockwise()
 
 func _on_SideMenu_save_and_quit_requested() -> void:
-    if FileIO.write(Global.world_save_location, WORLD_RECTANGLE, $World/ObjectsTileMap, $World/GroundTileMap) == OK:
+    if FileIO.write(Global.world_save_location, $World.WORLD_RECTANGLE,
+            $World/EntitiesTileMap, $World/SurfaceTileMap, $World/GroundTileMap) == OK:
         if FileIO.write_name(Global.world_save_location, Global.world_name) == OK:
             self._exit()
         else:

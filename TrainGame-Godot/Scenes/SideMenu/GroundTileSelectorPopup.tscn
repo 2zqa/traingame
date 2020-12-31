@@ -2,10 +2,9 @@
 
 [ext_resource path="res://Scenes/SideMenu/GroundTileSelectorPopup.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/PopupBackground.tscn" type="PackedScene" id=2]
-[ext_resource path="res://TileSets/Ground.tres" type="TileSet" id=3]
+[ext_resource path="res://TileSets/Objects.tres" type="TileSet" id=3]
 
 [node name="GroundTileSelectorPopup" type="Popup"]
-visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 0.773804
@@ -29,4 +28,4 @@ cell_size = Vector2( 19, 19 )
 collision_layer = 0
 collision_mask = 0
 format = 1
-tile_data = PoolIntArray( 0, 0, 0, 1, 1, 0, 2, 2, 0, 3, 6, 0, 65536, 3, 0, 65537, 4, 0, 65538, 5, 0, 65539, 7, 0 )
+tile_data = PoolIntArray( 0, 59, 0, 1, 57, 0, 2, 58, 0, 3, 60, 0, 65536, 61, 0, 65537, 62, 0, 65538, 63, 0 )

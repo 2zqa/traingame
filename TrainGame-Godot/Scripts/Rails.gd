@@ -79,7 +79,7 @@ class _CornerRailSegment extends RailPathSegment:
             # Exit to the bottom, making sure sign(amount) matches
             var remaining_amount = (next_angle - PI) * r
             return [Vector2(-0.5 * _TILE_LENGTH, _TILE_LENGTH * 2 + _SMALL_VALUE), Direction.SOUTH, remaining_amount]
-        if next_angle < 0.5 * PI:
+        if next_angle <= 0.5 * PI:
             # Exit to the right, making sure sign(amount) matches
             var remaining_amount = (0.5 * PI - next_angle) * r
             return [Vector2(_TILE_LENGTH * 2 + _SMALL_VALUE, -0.5 * _TILE_LENGTH), Direction.EAST, remaining_amount]

@@ -1,6 +1,6 @@
 extends Control
 
-signal tile_selected  # Supplies one argument of type GroundTile
+signal tile_selected  # Supplies one argument of type ObjectTile
 
 
 # Called when the node enters the scene tree for the first time.
@@ -17,7 +17,7 @@ func _on_GroundTileSelectorButton_pressed() -> void:
     self.get_tree().set_input_as_handled()
 
 
-func _on_GroundSelector_tile_selected(tile: GroundTile) -> void:
+func _on_GroundSelector_tile_selected(tile: ObjectTile) -> void:
     # Update UI
     self.texture_normal = tile.create_texture()
 

@@ -3,7 +3,6 @@ extends Control
 signal tile_selected
 signal cancelled
 
-const GroundTile = preload("res://Scripts/GroundTile.gd")
 
 # Handles selection of tiles
 func _input(event: InputEvent) -> void:
@@ -20,7 +19,7 @@ func _input(event: InputEvent) -> void:
         emit_signal("cancelled")
         self.hide()
     else:
-        var tile = Global.Registry.get_ground_tile_from_texture_id(texture_id)
+        var tile = Global.Registry.get_object_tile_from_texture_id(texture_id)
         emit_signal("tile_selected", tile)
         self.hide()
     self.get_tree().set_input_as_handled()
