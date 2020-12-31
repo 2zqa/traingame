@@ -15,36 +15,14 @@ func _ready():
 
 func set_tile(tile_pos: Vector2, tile: ObjectTile, overwrite: bool = true) -> void:
     var object_type = tile.get_type()
-    if object_type == ObjectType.GROUND:
-        self._ground.set_tile(tile_pos, tile, overwrite)
-    elif object_type == ObjectType.SURFACE:
-        self._surface.set_tile(tile_pos, tile, overwrite)
-    elif object_type == ObjectType.ENTITY:
-        self._entities.set_tile(tile_pos, tile, overwrite)
-    else:
-        push_error("Unknown object type in: " + str(tile))
+    get_tile_map(object_type).set_tile(tile_pos, tile, overwrite)
 
 func get_tile(tile_pos: Vector2, object_type: int) -> ObjectTile:
-    if object_type == ObjectType.GROUND:
-        return self._ground.get_tile(tile_pos)
-    elif object_type == ObjectType.SURFACE:
-        return self._surface.get_tile(tile_pos)
-    elif object_type == ObjectType.ENTITY:
-        return self._entities.get_tile(tile_pos)
-    else:
-        push_error("Unknown object type: " + str(object_type))
-        return self._ground.get_tile(tile_pos)
+    return self.get_tile_map(object_type).get_tile(tile_pos)
 
 # Low-level method to change a tile.
 func set_raw_texture(object_type: int, tile_x: int, tile_y: int, texture_id: int) -> void:
-    if object_type == ObjectType.GROUND:
-        self._ground.set_cell(tile_x, tile_y, texture_id)
-    elif object_type == ObjectType.SURFACE:
-        self._surface.set_cell(tile_x, tile_y, texture_id)
-    elif object_type == ObjectType.ENTITY:
-        self._entities.set_cell(tile_x, tile_y, texture_id)
-    else:
-        push_error("Unknown object type: " + str(object_type))
+    self.get_tile_map(object_type).set_cell(tile_x, tile_y, texture_id)
 
 # Gets the tile coordinate from the given mouse event
 func mouse_event_to_tile_pos(mouse: InputEvent) -> Vector2:
@@ -56,6 +34,18 @@ func viewport_pos_to_tile_pos(position: Vector2) -> Vector2:
 
 func local_pos_to_tile_pos(position: Vector2) -> Vector2:
     return self._surface.local_pos_to_tile_pos(position)
+
+# Gets the tile map of the given kind.
+func get_tile_map(object_type: int) -> ObjectsTileMap:
+    if object_type == ObjectType.GROUND:
+        return self._ground
+    elif object_type == ObjectType.SURFACE:
+        return self._surface
+    elif object_type == ObjectType.ENTITY:
+        return self._entities
+    else:
+        push_error("Unknown object type: " + str(object_type))
+        return self._ground
 
 func rotate_clockwise():
     $GroundTileMap.rotate_clockwise()

@@ -127,6 +127,7 @@ static func write(file_name: String, save_area: Rect2, entities: ObjectsTileMap,
             var entity_tile = entities.get_tile_no_search(x, y)
             var surface_tile = surface.get_tile_no_search(x, y)
             var ground_tile = ground.get_tile_no_search(x, y)
+
             entity_ids.append(id_registry.get_or_assign_id(entity_tile.to_string()))
             object_ids.append(id_registry.get_or_assign_id(surface_tile.to_string()))
             ground_ids.append(id_registry.get_or_assign_id(ground_tile.to_string()))

@@ -10,16 +10,22 @@ static func populate(world_rect: Rect2, world: GameWorld) -> void:
     var no_tree_rect = world_rect.grow(2)
     var grass_rect = world_rect.grow(4)
 
-    # Add grass
+    # Cached values (much vaster than world.set_tile()
+    var entities: ObjectsTileMap = world.get_tile_map(ObjectType.ENTITY)
+    var ground: ObjectsTileMap = world.get_tile_map(ObjectType.GROUND)
+    var grass_id = Global.Registry.GRASS.get_texture_id()
+    var tree_group_id = Global.Registry.TREE_GROUP.get_texture_id()
+
+    # Add grass and trees
     var tile_pos = Vector2(0, 0)
     while tile_pos.x < tree_rect.size.x:
         tile_pos.y = 0
         while tile_pos.y < tree_rect.size.y:
             var world_pos = tile_pos + world_rect.position - tree_offset
             if grass_rect.has_point(world_pos):
-                world.set_tile(world_pos, Global.Registry.GRASS)
+                ground.set_cellv(world_pos, grass_id)
             if not no_tree_rect.has_point(world_pos) and int(tile_pos.x) % 2 == 0 and int(tile_pos.y) % 2 == 0:
-                world.set_tile(world_pos, Global.Registry.TREE_GROUP)
+                entities.set_cellv(world_pos, tree_group_id)
             tile_pos.y += 1
         tile_pos.x += 1
     

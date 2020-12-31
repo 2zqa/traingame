@@ -102,7 +102,7 @@ map_type = 2
 [node name="Inhabitant" parent="EntitiesTileMap" instance=ExtResource( 8 )]
 position = Vector2( 8, 8 )
 frames = SubResource( 13 )
-frame = 0
+frame = 2
 
 [node name="Controllers" type="Node2D" parent="."]
 __meta__ = {
