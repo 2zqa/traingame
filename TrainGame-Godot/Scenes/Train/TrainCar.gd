@@ -1,4 +1,4 @@
-extends Node2D
+extends Area2D
 
 signal derailed
 
@@ -15,7 +15,7 @@ func _ready():
     self._derailed = false
     
     # Change position into offset
-    self.in_train_offset = int(self.position.x)
+    self.in_train_offset = -int(self.position.x)
     self.position.x = 0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -40,6 +40,4 @@ func _update_sprite() -> void:
     var facing_direction = self.driving_direction
     if self._driving_backwards:
         facing_direction = Direction.opposite(facing_direction)
-    for node in self.get_children():
-        if node is Area2D and node.has_node("AnimatedSprite"):
-            node.get_node("AnimatedSprite").frame = facing_direction
+    $AnimatedSprite.frame = facing_direction

@@ -88,4 +88,17 @@ static func to_vector(direction: int) -> Vector2:
     else:
         push_error("Invalid direction in to_vector(...): " + str(direction))
         return Vector2(-1, -1)
-    
+
+# Turns the direction into a string. For example Direction.NORTH becomes "NORTH".
+static func direction_to_string(direction: int) -> String:
+    if direction == EAST:
+        return "EAST"
+    elif direction == SOUTH:
+        return "SOUTH"
+    elif direction == WEST:
+        return "WEST"
+    elif direction == NORTH:
+        return "NORTH"
+    else:
+        push_error("Invalid direction in direction_to_string(...): " + str(direction))
+        return "~~INVALID~~"
