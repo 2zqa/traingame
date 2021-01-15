@@ -61,6 +61,14 @@ var RAIL_CROSSING := _register_object_tile(ObjectTile.new("rail_crossing", Objec
     texture_ids=[41, 41, 41, 41],
     rail=Rails.crossing_rail()}))
 #warning-ignore:unused_class_variable
+var RAIL_CROSSING_CONCRETE_GRAY := _register_object_tile(ObjectTile.new("rail_crossing_concrete_gray", ObjectType.SURFACE, {
+    texture_ids=[51, 52, 51, 52],
+    rail=Rails.short_vertical_rail()}))
+#warning-ignore:unused_class_variable
+var RAIL_CROSSING_CONCRETE_YELLOW := _register_object_tile(ObjectTile.new("rail_crossing_concrete_yellow", ObjectType.SURFACE, {
+    texture_ids=[65, 66, 65, 66],
+    rail=Rails.short_vertical_rail()}))
+#warning-ignore:unused_class_variable
 var ROAD_STRAIGHT := _register_object_tile(ObjectTile.new("road_straight", ObjectType.SURFACE, {texture_ids=[4, 3, 4, 3], shape="XOX"}))
 #warning-ignore:unused_class_variable
 var ROAD_CORNER := _register_object_tile(ObjectTile.new("road_corner", ObjectType.SURFACE, {texture_ids=[7, 11, 9, 12], shape="XXX\nXOX\nXXX"}))
@@ -74,11 +82,14 @@ var RAIL_CROSSING_ROAD := _register_object_tile(ObjectTile.new("rail_crossing_ro
     shape="XOX",
     rail=Rails.rotate(Rails.long_vertical_rail(), Rotation.CLOCKWISE)}))
 #warning-ignore:unused_class_variable
-var RAIL_WITHOUT_SLEEPERS := _register_object_tile(ObjectTile.new("rail_without_sleepers", ObjectType.SURFACE, {
-    texture_ids=[51, 52, 51, 52],
-    rail=Rails.short_vertical_rail()}))
-#warning-ignore:unused_class_variable
 var ROAD_CROSSING := _register_object_tile(ObjectTile.new("road_crossing", ObjectType.SURFACE, {texture_ids=[54, 53, 54, 53], shape="XOX"}))
+
+#warning-ignore:unused_class_variable
+var PATH_CONCRETE_GRAY := _register_object_tile(ObjectTile.new("path_concrete_gray", ObjectType.SURFACE, {texture_ids=[63, 63, 63, 63]}))
+#warning-ignore:unused_class_variable
+var PATH_CONCRETE_YELLOW := _register_object_tile(ObjectTile.new("path_concrete_yellow", ObjectType.SURFACE, {texture_ids=[64, 64, 64, 64]}))
+
+
 
 #warning-ignore:unused_class_variable
 var TREE_SMALL := _register_object_tile(ObjectTile.new("tree_small", ObjectType.ENTITY, {texture_ids=[28, 28, 28, 28]}))
@@ -123,8 +134,3 @@ var SNOW := _register_ground_tile("snow", 60)
 var DIRT := _register_ground_tile("dirt", 61)
 #warning-ignore:unused_class_variable
 var WATER := _register_ground_tile("water", 62)
-#warning-ignore:unused_class_variable
-var PATH_CONCRETE_GRAY := _register_ground_tile("path_concrete_gray", 63)
-#warning-ignore:unused_class_variable
-var PATH_CONCRETE_YELLOW := _register_ground_tile("path_concrete_yellow", 64)
-
