@@ -29,25 +29,29 @@ func _is_in_bounds(tile_pos: Vector2) -> bool:
 
 # Places the current tile in a line of all given canvas positions
 func place_interpolated(canvas_position1: Vector2, canvas_position2: Vector2) -> void:
+    if self.selected_option.object_tile == null:
+        return
 
-    # When placing in a line, only overwrite existing things if we're using the eraser tool
-    var overwrite = self.selected_option.erase
+    # When placing in a line, only overwrite existing things if we're using the
+    # eraser tool, or if we're working on the ground layer
+    var overwrite = self.selected_option.erase\
+        or self.selected_option.object_tile.get_type() == ObjectType.GROUND
 
-    if self.selected_option.object_tile != null:
-        var world: GameWorld = $World
-        var tile_pos1 = world.viewport_pos_to_tile_pos(canvas_position1)
-        var tile_pos2 = world.viewport_pos_to_tile_pos(canvas_position2)
-        var interpolation_steps = tile_pos1.distance_to(tile_pos2)
-        if interpolation_steps == 0:
-            # No interpolation necessary
-            place(canvas_position2, overwrite)
-        else:
-            # Interpolate
-            for i in range(interpolation_steps + 1):
-                var canvas_position = canvas_position1.linear_interpolate(canvas_position2, i / interpolation_steps)
-                place(canvas_position, overwrite)
+    var world: GameWorld = $World
+    var tile_pos1 = world.viewport_pos_to_tile_pos(canvas_position1)
+    var tile_pos2 = world.viewport_pos_to_tile_pos(canvas_position2)
+    var interpolation_steps = tile_pos1.distance_to(tile_pos2)
+    if interpolation_steps == 0:
+        # No interpolation necessary
+        place(canvas_position2, overwrite)
+    else:
+        # Interpolate
+        for i in range(interpolation_steps + 1):
+            var canvas_position = canvas_position1.linear_interpolate(canvas_position2, i / interpolation_steps)
+            place(canvas_position, overwrite)
 
 func _unhandled_input(event: InputEvent) -> void:
+    # Placing and recording of position
     if (event is InputEventMouseButton and event.button_index == BUTTON_LEFT) \
             or event is InputEventScreenDrag\
             or (event is InputEventMouseMotion and event.get_button_mask() != 0):
