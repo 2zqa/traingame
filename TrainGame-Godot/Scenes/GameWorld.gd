@@ -14,6 +14,18 @@ func _ready():
     self._entities = $EntitiesTileMap
 
 func set_tile(tile_pos: Vector2, tile: ObjectTile, overwrite: bool = true) -> void:
+    if tile.equals_ignore_rotation(Global.Registry.EMPTY):
+        # Removing a tile - special case the layer
+        var entity_tiles = get_tile_map(ObjectType.ENTITY)
+        if entity_tiles.get_tile(tile_pos).equals_ignore_rotation(Global.Registry.EMPTY):
+            # Nothing on entity layer, delete on surface layer
+            get_tile_map(ObjectType.SURFACE).set_tile(tile_pos, tile, overwrite)
+        else:
+            # Delete on entity layer
+            entity_tiles.set_tile(tile_pos, tile, overwrite)
+        return
+    
+    # Normale placement
     var object_type = tile.get_type()
     get_tile_map(object_type).set_tile(tile_pos, tile, overwrite)
 
