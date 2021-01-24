@@ -121,6 +121,8 @@ var TREE_AUTUMN_GROUP := _register_object_tile(ObjectTile.new("tree_autumn_group
 var BUILDING_BANK := _register_object_tile(ObjectTile.new("building_bank", ObjectType.ENTITY, {texture_ids=[37, 39, 40, 38], shape="XXXXX\nXX^XX"}))
 #warning-ignore:unused_class_variable
 var BUILDING_SIMPLE := _register_object_tile(ObjectTile.new("building_simple", ObjectType.ENTITY, {texture_ids=[55, 56, 55, 56], shape="XX\ndX"}))
+#warning-ignore:unused_class_variable
+var BUILDING_TRAIN_SHED := _register_object_tile(ObjectTile.new("building_train_shed", ObjectType.ENTITY, {texture_ids=[67, 68, 67, 68], shape="XXXXX\nXXOXX\nXXXXX"}))
 
 # Ground tiles
 var GRASS := _register_ground_tile("grass", 59)
